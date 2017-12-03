@@ -1,3 +1,14 @@
 {
-  "presets": ["react-native"]
+  "presets": ["react-native"],
+  "plugins": [
+    "transform-decorators-legacy",
+    ["module-resolver", {
+      "root": ["./app"],
+      "alias": {
+        "screens": "./screens",
+        "components": "./components",
+        "utils": "./utils"
+      }
+    }]
+  ]
 }
