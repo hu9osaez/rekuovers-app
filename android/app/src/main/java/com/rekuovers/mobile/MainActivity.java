@@ -1,4 +1,4 @@
-package com.rekuovers;
+package com.rekuovers.mobile;
 
 import com.facebook.react.ReactActivity;
 
