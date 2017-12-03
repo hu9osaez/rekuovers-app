@@ -4,9 +4,6 @@ import {
   View
 } from 'react-native';
 import {
-  Grid,
-  Col,
-  Row,
   Text,
   Icon,
   Slider
@@ -78,34 +75,6 @@ class SongScreen extends React.Component {
 
           style={styles.youtubePlayer}
         />
-        <Grid containerStyle={styles.contentContainer}>
-          <Row>
-            <Text>{this.state.status}</Text>
-          </Row>
-          <Row>
-            <Text>{isPlaying ? 'Reproduciendo' : 'No reproduciendo'}</Text>
-          </Row>
-          <Row>
-            <Text>---</Text>
-          </Row>
-          <Row>
-            <Text>---</Text>
-          </Row>
-          <Row>
-            <Col size={25} style={{ justifyContent: 'center', paddingLeft: 5 }}>
-              <Icon
-                name={isPlaying ? 'pause' : 'play-arrow'}
-                size={48}
-                color={isReady ? PRIMARY_COLOR : SECONDAY_COLOR}
-                onPress={this.togglePlay}
-                disabled={!isReady}
-              />
-            </Col>
-            <Col size={75} style={{flex: 1, alignItems: 'stretch', justifyContent: 'center', paddingRight: 20, paddingLeft: 10}}>
-              <Slider />
-            </Col>
-          </Row>
-        </Grid>
       </View>
     );
   }
