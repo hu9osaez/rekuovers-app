@@ -3323,7 +3323,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.6.0:
+prop-types@^15.5.0, prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.6.0:
   version "15.6.0"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.0.tgz#ceaf083022fc46b4a35f69e13ef75aed0d639856"
   dependencies:
@@ -3460,6 +3460,12 @@ react-native-vector-icons@^4.4.2:
     lodash "^4.0.0"
     prop-types "^15.5.10"
     yargs "^8.0.2"
+
+"react-native-youtube@https://github.com/inProgress-team/react-native-youtube.git":
+  version "1.0.1"
+  resolved "https://github.com/inProgress-team/react-native-youtube.git#b10b4c3a0b92f4decb6119fca94488edc29fd9f6"
+  dependencies:
+    prop-types "^15.5.0"
 
 react-native@0.50.4:
   version "0.50.4"
