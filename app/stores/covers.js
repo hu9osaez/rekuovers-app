@@ -14,20 +14,20 @@ class CoversStore {
   loadCovers() {
       let self = this;
       rs([
-        function (cb) {
+        cb => {
           self.isLoading = true;
           cb(null, true);
         },
-        function (cb) {
+        cb => {
           self.getNewestCovers();
           cb(null, true);
         },
-        function (cb) {
+        cb => {
           self.getPopularCovers();
           cb(null, true);
         }
       ],
-      function (err, results) {
+      (err, results) => {
         self.isLoading = false;
       });
   }
@@ -39,6 +39,7 @@ class CoversStore {
       .then((res) => res.json())
       .then((covers) => {
         self.newest = covers.data;
+        console.log('Newest', 'Covers loaded');
       })
       .catch((err) => {
         if (err) {
@@ -54,6 +55,7 @@ class CoversStore {
       .then((res) => res.json())
       .then((covers) => {
         self.popular = covers.data;
+          console.log('Popular', 'Covers loaded');
       })
       .catch((err) => {
         if (err) {

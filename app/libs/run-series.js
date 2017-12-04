@@ -10,7 +10,7 @@ module.exports = function (tasks, cb) {
     function end () {
       if (cb) cb(err, results);
     }
-    if (isSync) setImmediate(end);
+    if (isSync) setImmediate(end); // process.nextTick(end) --> setImmediate(end)
     else end();
   }
 
