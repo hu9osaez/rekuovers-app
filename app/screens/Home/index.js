@@ -26,15 +26,15 @@ class HomeScreen extends React.Component {
   };
 
   render() {
-    let { isLoading, songs } = this.props.store.songs;
+    let { isLoading, newest } = this.props.store.covers;
     return (
       <View style={styles.container}>
         <ScrollView>
           <FlatList
-            data={toJS(songs)}
+            data={toJS(newest)}
             refreshing={isLoading}
             renderItem={this.renderSong}
-            keyExtractor={song => song.id}
+            keyExtractor={cover => cover.id}
             style={{ padding: 2 }}
           />
         </ScrollView>

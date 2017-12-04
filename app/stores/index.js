@@ -2,11 +2,11 @@
 //useStrict(true);
 
 import AuthStore from './auth';
-import SongsStore from './songsStore';
+import CoversStore from './covers';
 
 const store = {
   auth: new AuthStore(),
-  songs: new SongsStore()
+  covers: new CoversStore()
 };
 
 export default store;

@@ -62,10 +62,10 @@ const SongCard = ({ song, onPress }) => {
         >
           <View style={styles.contentContainer}>
             <Text h4 style={[styles.text, {fontFamily: 'sans-serif-medium'}]}>
-              {song.title}
+              {song.song_title}
             </Text>
             <Text style={[styles.text, {fontFamily: 'sans-serif-thin'}]}>
-              {song.artist}
+              {song.artists.map(a => a.name)}
             </Text>
           </View>
         </ImageBackground>
