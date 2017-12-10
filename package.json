@@ -4,7 +4,7 @@
 	"private": true,
 	"scripts": {
 		"dev": "npm start --reset-cache",
-		"start": "node node_modules/react-native/local-cli/cli.js start",
+		"start": "node node_modules/react-native/local-cli/cli.js start --port 9988",
 		"clean:android": "cd android && ./gradlew clean",
 		"debug:android": "cd android && ./gradlew installDebug --debug",
 		"build:android": "cd android && ./gradlew assembleRelease --info",
@@ -19,6 +19,7 @@
 		"react": "16.0.0",
 		"react-native": "0.50.4",
 		"react-native-animatable": "^1.2.4",
+		"react-native-dominant-color": "/home/hugo/DominantColor",
 		"react-native-easy-grid": "^0.1.15",
 		"react-native-elements": "^0.18.4",
 		"react-native-simple-store": "^1.3.0",

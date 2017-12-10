@@ -10,6 +10,7 @@ import {
     Slider
 } from 'react-native-elements';
 import YouTube from 'react-native-youtube';
+import { getDominantColor } from 'react-native-dominant-color';
 import { PRIMARY_COLOR, SECONDAY_COLOR } from '../../utils';
 
 const styles = StyleSheet.create({
@@ -31,6 +32,15 @@ class SongScreen extends React.Component {
         isReady: false,
         isPlaying: false,
         state: null
+    };
+
+    componentDidMount() {
+        const { song } = this.props.navigation.state.params;
+        const urlImagen = `https://img.youtube.com/vi/${song.youtube_id}/mqdefault.jpg`;
+
+        getDominantColor(urlImagen, function (err, color) {
+            console.log(color);
+        });
     };
 
     onReady = (e) => {
