@@ -1,37 +1,53 @@
 import React from 'react';
-import { Text, StyleSheet, View } from 'react-native';
-import { Icon } from 'react-native-elements';
+import { Alert, StyleSheet, View } from 'react-native';
+import { Icon, Slider, Text } from 'react-native-elements';
 import YouTube from 'react-native-youtube';
+import timer from 'react-native-timer';
 
-import { PRIMARY_COLOR, SECONDARY_COLOR } from '../../utils';
+import { PRIMARY_COLOR, SECONDARY_COLOR, SECONDARY_COLOR_TEXT } from '../../utils';
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: '#fff'
     },
     playerControls: {
         flexDirection: 'row',
-        height: 45
+        height: 45,
+        borderBottomColor: '#f7f7f7',
+        borderBottomWidth: 1
     },
     playContainer: {
         flex: 2,
         flexDirection: 'column',
         justifyContent: 'center',
     },
-    sliderContainer: {
-        flex: 8,
+    totalTimeContainer: {
+        flex: 2,
         flexDirection: 'column',
-        backgroundColor: 'blue',
         justifyContent: 'center',
+    },
+    sliderContainer: {
+        flex: 6,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        paddingRight: 5
     }
 });
 
 class CoverDetailsScreen extends React.Component {
     state = {
+        duration: 0,
         firstPlay: false,
         isPlaying: false,
-        isReady: false
+        isReady: false,
+        statePlayer: null,
+        cTime: 0
     };
+
+    componentWillUnmount() {
+        timer.clearInterval(this);
+    }
 
     playerOnReady = (e) => {
         this.setState({ isReady: true });
@@ -40,14 +56,51 @@ class CoverDetailsScreen extends React.Component {
     togglePlay = () => {
         let self = this;
 
+        if(self.state.firstPlay === false) {
+            self.setState({ firstPlay: true });
+            self.player.duration()
+                .then(d => self.setState({ duration: d }));
+
+            timer.setInterval(self, 'seconds', () => {
+                self.player.currentTime()
+                    .then(currentTime => this.setState({ cTime: currentTime }));
+            }, 200);
+        }
+
         setTimeout(function() {
             self.setState(s => ({ isPlaying: !s.isPlaying }));
         }, 100);
     };
 
+    handleStatePlayer = (e) => {
+        if(e.state === 'loading') {
+            this.player.duration()
+                .then(d => this.setState({ duration: d }));
+            Alert.alert('AAAAAAAAAAAAAA');
+        }
+
+        if(e.state === 'playing') {
+            this.setState({ isPlaying: true });
+        }
+
+        if(e.state === 'paused') {
+            this.setState({ isPlaying: false });
+        }
+
+        if(e.state === 'stopped') {
+            this.setState({ isPlaying: false });
+        }
+
+        this.setState({ statePlayer: e.state });
+    };
+
+    sectostr(time) {
+        return ~~(time / 60) + ":" + (time % 60 < 10 ? "0" : "") + time % 60;
+    }
+
     render() {
         const { song } = this.props.navigation.state.params;
-        let { isPlaying, isReady } = this.state;
+        let { cTime, duration, isPlaying, isReady, statePlayer } = this.state;
 
         return (
             <View style={styles.container}>
@@ -56,9 +109,11 @@ class CoverDetailsScreen extends React.Component {
                     ref      = {item => this.player = item}
                     videoId  = {song.youtube_id}
                     play     = {isPlaying}
-                    controls = {0}
+                    controls = {1}
                     onReady  = {this.playerOnReady}
-                    style    = {{ alignSelf: 'stretch', height: 220 }}
+                    onChangeState = {this.handleStatePlayer}
+                    resumePlayAndroid={false}
+                    style    = {{ alignSelf: 'stretch', height: 221 }}
                 />
                 <View style={styles.playerControls}>
                     <View style={styles.playContainer}>
@@ -71,9 +126,20 @@ class CoverDetailsScreen extends React.Component {
                         />
                     </View>
                     <View style={styles.sliderContainer}>
-                        <Text>Time slider</Text>
+                        <Slider
+                            maximumValue={duration}
+                            step={1}
+                            value={cTime}
+                            thumbTintColor={PRIMARY_COLOR}
+                            thumbStyle={{borderRadius: 0, width: 4, height: 10}}
+                            onValueChange={(value) => this.player.seekTo(value)}
+                        />
+                    </View>
+                    <View style={styles.totalTimeContainer}>
+                        <Text>{this.sectostr(cTime)} / {this.sectostr(duration)}</Text>
                     </View>
                 </View>
+                <Text>{statePlayer}</Text>
             </View>
         );
     }
