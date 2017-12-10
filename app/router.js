@@ -10,7 +10,7 @@ import {
   HomeScreen as HomeTab,
   SearchScreen as SearchTab,
   ProfileScreen as ProfileTab,
-  SongScreen
+  CoverDetailsScreen
 } from './screens';
 
 const tabOptions = {
@@ -59,8 +59,8 @@ const SignedInNavigator = StackNavigator({
       ProfileTab: { screen: ProfileTab }
     }, tabOptions)
   },
-  Song: {
-    screen: SongScreen
+  CoverDetails: {
+    screen: CoverDetailsScreen
   }
 });
 

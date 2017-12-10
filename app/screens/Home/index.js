@@ -18,7 +18,7 @@ const styles = {
 class HomeScreen extends React.Component {
 
   goSongDetail(song) {
-    this.props.navigation.navigate('Song', { song: song });
+    this.props.navigation.navigate('CoverDetails', { song: song });
   }
 
   renderSong = (song) => {
