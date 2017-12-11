@@ -76,7 +76,6 @@ class CoverDetailsScreen extends React.Component {
         if(e.state === 'loading') {
             this.player.duration()
                 .then(d => this.setState({ duration: d }));
-            Alert.alert('AAAAAAAAAAAAAA');
         }
 
         if(e.state === 'playing') {
@@ -109,7 +108,7 @@ class CoverDetailsScreen extends React.Component {
                     ref      = {item => this.player = item}
                     videoId  = {song.youtube_id}
                     play     = {isPlaying}
-                    controls = {1}
+                    controls = {0}
                     onReady  = {this.playerOnReady}
                     onChangeState = {this.handleStatePlayer}
                     resumePlayAndroid={false}
