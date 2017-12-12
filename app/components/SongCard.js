@@ -13,17 +13,20 @@ let width = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
   container: {
-    width,
-    height: width * 0.65,
-    marginBottom: 2
+    width: width-40,
+    height: width * 0.25,
+    marginBottom: 8,
+    overflow: 'hidden',
+    borderRadius: 10
   },
   imageContainer: {
     alignItems: 'center',
     justifyContent: 'center',
     resizeMode: 'cover',
     backgroundColor: BACKGROUND_COLOR,
-    width,
-    height: width * 0.55
+    width: width-40,
+    height: width * 0.25,
+    borderRadius: 10
   },
   contentContainer: {
     flex: 1,
@@ -36,13 +39,6 @@ const styles = StyleSheet.create({
     paddingTop: 30,
     paddingBottom: 30,
     ...StyleSheet.absoluteFillObject
-  },
-  footerContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    backgroundColor: '#fff',
-    height: 40,
-    paddingTop: 8
   },
   text: {
     color: '#fff',
@@ -70,17 +66,6 @@ const SongCard = ({ song, onPress }) => {
           </View>
         </ImageBackground>
       </TouchableOpacity>
-      <View style={styles.footerContainer}>
-        <Icon
-          name={'favorite-border'}
-          color={SECONDARY_COLOR_TEXT}
-          containerStyle={{
-            marginBottom: 10,
-            marginLeft: 7
-          }}
-        />
-        <Text style={{ marginLeft: 5, color: SECONDARY_COLOR_TEXT }}>{song.likes_count}</Text>
-      </View>
     </View>
   );
 };
