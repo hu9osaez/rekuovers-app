@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Icon, Slider, Text } from 'react-native-elements';
 import YouTube from 'react-native-youtube';
 import timer from 'react-native-timer';

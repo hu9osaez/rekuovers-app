@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
   imageContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    resizeMode: 'cover',
     backgroundColor: BACKGROUND_COLOR,
     width: width-40,
     height: width * 0.25,
