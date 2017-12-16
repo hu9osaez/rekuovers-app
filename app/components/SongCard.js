@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
-import { Icon, Text } from 'react-native-elements';
+import { Text } from 'react-native-elements';
 import { BACKGROUND_COLOR, SECONDARY_COLOR_TEXT } from 'utils';
 
 let width = Dimensions.get('window').width;
@@ -14,7 +14,7 @@ let width = Dimensions.get('window').width;
 const styles = StyleSheet.create({
   container: {
     width: (width/2)-30,
-    height: width * 0.15,
+    height: width * 0.25,
     marginHorizontal: 5,
     overflow: 'hidden',
     borderRadius: 5,
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: BACKGROUND_COLOR,
     width: (width/2)-30,
-    height: width * 0.20,
+    height: width * 0.15,
     borderRadius: 10
   },
   contentContainer: {
@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.3)',
   },
   text: {
-    color: '#fff',
     textAlign: 'center'
   }
 });
@@ -49,6 +48,7 @@ const SongCard = ({ song, onPress }) => {
         >
           <View style={styles.contentContainer} />
         </ImageBackground>
+        <Text style={styles.text}>{song.song_title}</Text>
       </TouchableOpacity>
     </View>
   );
