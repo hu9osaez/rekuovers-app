@@ -2,7 +2,7 @@ import React from 'react';
 import { Provider } from 'mobx-react/native';
 
 import { createRootNavigator } from './router';
-import { isSignedIn } from './utils';
+import { isSignedIn } from 'utils';
 
 import stores from './stores';
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 import { normalize, Text } from 'react-native-elements';
 
-import { SECONDAY_COLOR } from '../utils';
+import { SECONDAY_COLOR } from 'utils';
 
 const styles = StyleSheet.create({
   logoContainer: {

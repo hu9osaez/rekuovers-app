@@ -4,7 +4,7 @@ import { Icon, Slider, Text } from 'react-native-elements';
 import YouTube from 'react-native-youtube';
 import timer from 'react-native-timer';
 
-import { PRIMARY_COLOR, SECONDARY_COLOR, SECONDARY_COLOR_TEXT } from '../../utils';
+import { PRIMARY_COLOR, SECONDARY_COLOR, SECONDARY_COLOR_TEXT } from 'utils';
 
 const styles = StyleSheet.create({
     container: {

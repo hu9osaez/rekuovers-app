@@ -1,6 +1,6 @@
 import React from 'react';
 import { TabNavigator, StackNavigator } from 'react-navigation';
-import { BACKGROUND_COLOR, PRIMARY_COLOR, SECONDARY_COLOR } from './utils';
+import { BACKGROUND_COLOR, PRIMARY_COLOR, SECONDARY_COLOR } from 'utils';
 
 import {
   SplashScreen,
@@ -16,7 +16,7 @@ import {
 const tabOptions = {
   tabBarPosition: 'bottom',
   swipeEnabled: false,
-  lazy: true,
+  lazy: false,
   tabBarOptions: {
     activeTintColor: PRIMARY_COLOR,
     inactiveTintColor: SECONDARY_COLOR,

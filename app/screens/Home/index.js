@@ -1,16 +1,17 @@
 import React from 'react';
-import { FlatList, ScrollView, View, Text } from 'react-native';
-import { Icon } from 'react-native-elements';
-import Carousel from 'react-native-looped-carousel-improved';
+import { FlatList, ScrollView, View } from 'react-native';
+import { Icon, Text } from 'react-native-elements';
+import Swiper from 'react-native-swiper';
 
 import { toJS } from 'mobx';
 import { observer, inject } from 'mobx-react/native';
 
 import SongCard from '../../components/SongCard';
+import FeaturedCover from './components/FeaturedCover';
 
 const styles = {
   container: {
-    backgroundColor: '#fbfbfb'
+    backgroundColor: '#fbfbfb',
   }
 };
 
@@ -26,43 +27,34 @@ class HomeScreen extends React.Component {
     return <SongCard song={song.item} onPress={this.goSongDetail.bind(this)} />;
   };
 
+  renderPopularCover = ({item, index}) => {
+    return <FeaturedCover cover={item} />;
+  };
+
   render() {
     let { isLoading, newest, popular } = this.props.store.covers;
     return (
       <View style={styles.container}>
         <ScrollView>
-            <Carousel
-                delay={6000}
-                style={{height: 200, width: 360}}
+            <Swiper
                 autoplay
-                isLooped
-                bullets
-                bulletStyle={{
-                    margin: 5,
-                    width: 6,
-                    height: 6,
-                    backgroundColor: 'rgba(255, 255, 255, 0.5)',
-                    borderWidth: 0
-                }}
-                chosenBulletStyle={{
-                    margin: 5,
-                    width: 6,
-                    height: 6
-                }}
-                bulletsContainerStyle={{
-                    marginTop: 15
-                }}
+                autoplayTimeout={6}
+                height={200}
+                width={360}
+                containerStyle={{ flex: 0 }}
+                paginationStyle={{ bottom: 10}}
             >
-                <View style={{ backgroundColor: '#BADA55', height: 200, width: 360 }}><Text>1</Text></View>
-                <View style={{ backgroundColor: 'red', height: 200, width: 360 }}><Text>2</Text></View>
-                <View style={{ backgroundColor: 'blue', height: 200, width: 360 }}><Text>3</Text></View>
-            </Carousel>
+                {popular.map((item) => <FeaturedCover cover={item} />)}
+            </Swiper>
+            <Text>Heading 4</Text>
           <FlatList
             data={toJS(newest)}
             refreshing={isLoading}
             renderItem={this.renderCover}
             keyExtractor={cover => cover.id}
-            style={{ paddingTop: 20, paddingHorizontal: 20 }}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            style={{ paddingVertical: 10 }}
           />
         </ScrollView>
       </View>
