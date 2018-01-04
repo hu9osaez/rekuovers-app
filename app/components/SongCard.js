@@ -13,41 +13,42 @@ let width = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
   container: {
-    width: (width/2)-30,
+    width: (width/3)-10,
     height: width * 0.25,
     marginHorizontal: 5,
     overflow: 'hidden',
     borderRadius: 5,
-    elevation: 2
   },
   imageContainer: {
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: BACKGROUND_COLOR,
-    width: (width/2)-30,
-    height: width * 0.15,
-    borderRadius: 10
+    width: (width/3)-10,
+    height: width * 0.15
   },
   contentContainer: {
     flex: 1,
     alignSelf: 'stretch',
     backgroundColor: 'rgba(0,0,0,0.3)',
+    borderRadius: 5
   },
   text: {
-    textAlign: 'center'
+    marginLeft: 2,
+    fontSize: 12
   }
 });
 
 const SongCard = ({ song, onPress }) => {
   return (
-    <View style={styles.container}>
-      <TouchableOpacity onPress={() => onPress(song)}>
-        <ImageBackground
-          source={{uri: `https://img.youtube.com/vi/${song.youtube_id}/mqdefault.jpg`}}
-          style={styles.imageContainer}
-        >
-          <View style={styles.contentContainer} />
-        </ImageBackground>
+      <View style={styles.container}>
+          <TouchableOpacity onPress={() => onPress(song)}>
+              <ImageBackground
+                  borderRadius={5}
+                  source={{uri: `https://img.youtube.com/vi/${song.youtube_id}/mqdefault.jpg`}}
+                  style={styles.imageContainer}
+              >
+              <View style={styles.contentContainer} />
+            </ImageBackground>
         <Text style={styles.text}>{song.song_title}</Text>
       </TouchableOpacity>
     </View>

@@ -42,12 +42,12 @@ class HomeScreen extends React.Component {
                 autoplayTimeout={6}
                 height={200}
                 width={360}
-                containerStyle={{ flex: 0 }}
+                containerStyle={{ flex: 0, backgroundColor: 'red' }}
                 paginationStyle={{ bottom: 10}}
             >
                 {popular.map((item) => <FeaturedCover cover={item} />)}
             </Swiper>
-            <Text style={[robotoWeights.condensedBold, {fontSize: 16, marginLeft: 5, marginTop: 5}]}>NEW COVERS</Text>
+            <Text style={[robotoWeights.condensedBold, {fontSize: 16, marginLeft: 5, marginTop: 12}]}>NEW COVERS</Text>
           <FlatList
             data={toJS(newest)}
             refreshing={isLoading}
@@ -55,7 +55,7 @@ class HomeScreen extends React.Component {
             keyExtractor={cover => cover.id}
             horizontal
             showsHorizontalScrollIndicator={false}
-            style={{ paddingVertical: 7 }}
+            style={{ paddingTop: 7 }}
           />
         </ScrollView>
       </View>

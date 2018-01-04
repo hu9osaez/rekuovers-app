@@ -39,7 +39,7 @@ class SignInScreen extends React.Component {
         auth.toggleLoading();
 
         if(res.success) {
-          onSignIn(res.data.api_token).then(() => {
+          onSignIn(res.data.access_token).then(() => {
             resetDeepNavigationTo('SignedIn', navigation);
           });
         }
