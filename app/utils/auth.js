@@ -1,15 +1,15 @@
 import RNStore from 'react-native-simple-store';
 
-export const API_TOKEN_KEY = 'api-token';
+export const KEY_ACCESS_TOKEN = 'rekuovers:access_token';
 
-export const onSignIn = token => RNStore.save(API_TOKEN_KEY, token);
+export const onSignIn = token => RNStore.save(KEY_ACCESS_TOKEN, token);
 
-export const onLogOut = () => RNStore.delete(API_TOKEN_KEY);
+export const onLogOut = () => RNStore.delete(KEY_ACCESS_TOKEN);
 
 export const isSignedIn = () => {
   return new Promise((resolve, reject) => {
     RNStore
-      .get(API_TOKEN_KEY)
+      .get(KEY_ACCESS_TOKEN)
       .then(token =>  resolve(token !== null))
       .catch(err => reject(err));
   });
