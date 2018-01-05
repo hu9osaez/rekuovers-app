@@ -13,18 +13,19 @@ let width = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
   container: {
-    width: (width/3)-10,
+    width: (width/2)-25,
     height: width * 0.25,
     marginHorizontal: 5,
     overflow: 'hidden',
     borderRadius: 5,
+    elevation: 2
   },
   imageContainer: {
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: BACKGROUND_COLOR,
-    width: (width/3)-10,
-    height: width * 0.15
+    width: (width/2)-10,
+    height: width * 0.25
   },
   contentContainer: {
     flex: 1,

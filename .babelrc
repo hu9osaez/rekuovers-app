@@ -9,7 +9,8 @@
           "./app"
         ],
         "alias": {
-          "utils": "utils"
+          "utils": "utils",
+          "store": "store"
         }
       }
     ]

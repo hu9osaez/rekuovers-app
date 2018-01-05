@@ -55,7 +55,7 @@ class HomeScreen extends React.Component {
             keyExtractor={cover => cover.id}
             horizontal
             showsHorizontalScrollIndicator={false}
-            style={{ paddingTop: 7 }}
+            style={{ paddingTop: 7, paddingBottom: 10 }}
           />
         </ScrollView>
       </View>
