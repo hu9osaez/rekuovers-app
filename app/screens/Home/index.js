@@ -9,6 +9,7 @@ import { observer, inject } from 'mobx-react/native';
 
 import SongCard from '../../components/SongCard';
 import FeaturedCover from './components/FeaturedCover';
+import SurpriseMe from './components/SurpriseMe';
 
 const styles = {
   container: {
@@ -43,10 +44,11 @@ class HomeScreen extends React.Component {
                 height={200}
                 width={360}
                 containerStyle={{ flex: 0, backgroundColor: 'red' }}
-                paginationStyle={{ bottom: 10}}
+                paginationStyle={{ bottom: 7 }}
             >
                 {popular.map((item) => <FeaturedCover cover={item} />)}
             </Swiper>
+            <SurpriseMe />
             <Text style={[robotoWeights.condensedBold, {fontSize: 16, marginLeft: 5, marginTop: 12}]}>NEW COVERS</Text>
           <FlatList
             data={toJS(newest)}
@@ -64,7 +66,7 @@ class HomeScreen extends React.Component {
 }
 
 HomeScreen.navigationOptions = {
-  header: null,
+  title: 'Explore',
   tabBarIcon: ({ tintColor }) => (<Icon name='home' color={tintColor} />)
 };
 

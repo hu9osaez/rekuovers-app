@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Linking, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Text, Icon, normalize } from 'react-native-elements';
 
 const styles = StyleSheet.create({

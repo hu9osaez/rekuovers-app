@@ -1,8 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Button } from 'react-native-elements';
+import { Button, Text } from 'react-native-elements';
 import { ImgBackground } from '../../components';
-import { PRIMARY_COLOR, PRIMARY_COLOR_TEXT } from '../../utils';
 
 import Heading from './components/Heading';
 import BgAttribution from './components/BgAttribution';
@@ -13,21 +12,25 @@ const WelcomeScreen = ({navigation}) =>
     <View style={styles.contentContainer}>
       <Heading/>
       <Button
-        title='Sign up'
-        backgroundColor={PRIMARY_COLOR}
-        color={'#fff'}
+        title={'SIGN UP'}
+        color={'#ffffff'}
+        outline
+        borderRadius={12}
         containerViewStyle={styles.btnContainer}
         buttonStyle={styles.btn}
-        onPress={ () => navigation.navigate('SignUp')}
+        textStyle={{
+            fontWeight: 'bold'
+        }}
+        onPress={() => navigation.navigate('SignUp')}
       />
-      <Button
-        title='Sign in'
-        backgroundColor={'#fff'}
-        color={PRIMARY_COLOR_TEXT}
-        containerViewStyle={styles.btnContainer}
-        buttonStyle={styles.btn}
-        onPress={ () => navigation.navigate('SignIn')}
-      />
+      <Text style={styles.loginText}>
+        Already have an account?{' '}
+        <Text
+          onPress={() => navigation.navigate('SignIn')}
+          style={styles.loginTextSecondary}>
+            Login
+        </Text>
+      </Text>
     </View>
     <BgAttribution />
   </ImgBackground>;

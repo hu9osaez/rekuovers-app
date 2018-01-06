@@ -15,15 +15,12 @@ const styles = StyleSheet.create({
   container: {
     width: (width/2)-25,
     height: width * 0.25,
-    marginHorizontal: 5,
-    overflow: 'hidden',
-    borderRadius: 5,
-    elevation: 2
+    marginHorizontal: 5
   },
   imageContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: BACKGROUND_COLOR,
+    backgroundColor: 'red',
     width: (width/2)-10,
     height: width * 0.25
   },
@@ -31,11 +28,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignSelf: 'stretch',
     backgroundColor: 'rgba(0,0,0,0.3)',
-    borderRadius: 5
-  },
-  text: {
-    marginLeft: 2,
-    fontSize: 12
   }
 });
 
@@ -44,13 +36,10 @@ const SongCard = ({ song, onPress }) => {
       <View style={styles.container}>
           <TouchableOpacity onPress={() => onPress(song)}>
               <ImageBackground
-                  borderRadius={5}
                   source={{uri: `https://img.youtube.com/vi/${song.youtube_id}/mqdefault.jpg`}}
                   style={styles.imageContainer}
               >
-              <View style={styles.contentContainer} />
             </ImageBackground>
-        <Text style={styles.text}>{song.song_title}</Text>
       </TouchableOpacity>
     </View>
   );
