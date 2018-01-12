@@ -1,27 +1,42 @@
 import React from 'react';
-import { StyleSheet, ToastAndroid, View } from 'react-native';
-import { Text, FormLabel, FormInput, Button, SocialIcon } from 'react-native-elements';
+import {
+    StyleSheet,
+    ToastAndroid,
+    View
+} from 'react-native';
+import { Text, FormInput, Button } from 'react-native-elements';
 
 import { observer, inject } from 'mobx-react/native';
-import { ImgBackground } from '../../components';
+import { Container } from 'components';
 import { PRIMARY_COLOR, postSignIn, onSignIn, resetDeepNavigationTo } from '../../utils';
 
 const styles = StyleSheet.create({
   content: {
-    backgroundColor: 'rgba(0,0,0, 0.2)',
-    marginTop: 60,
-    paddingVertical: 10,
-    paddingHorizontal: 20
-  },
-  dividerContainer: {
-  },
-  textDivider: {
-    textAlign: 'center'
+    flex: 1,
+    backgroundColor: '#ffffff',
+    paddingHorizontal: 15
   },
   inputContainer: {
-    backgroundColor: 'rgba(255, 255, 255, 0.4)',
-    borderRadius: 3,
-    marginBottom: 10
+    alignItems: 'center',
+    borderBottomColor: '#ebebeb',
+    borderBottomWidth: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    height: 50,
+    marginVertical: 11
+  },
+  input: {
+    flex: 1,
+    height: 50,
+    fontSize: 16,
+    fontWeight: '400',
+    color: '#e1e1e1',
+    paddingBottom: -5
+  },
+  footer: {
+      backgroundColor: '#ffffff',
+      height: 50,
+      justifyContent: 'center'
   }
 });
 
@@ -52,48 +67,60 @@ class SignInScreen extends React.Component {
   render() {
     let { store: { auth } } = this.props;
     return (
-      <ImgBackground
-        source={require('../../assets/bg-home-blur.png')}
-      >
-        <View style={styles.content}>
-          <SocialIcon
-            title='Sign in with Facebook'
-            button
-            type='facebook'
-          />
+      <Container>
+        <View style={{ flex: 1 }}>
+          <View style={styles.content}>
+            <Text
+              h2
+              style={{
+                  marginLeft: 15
+              }}
+            >Log In</Text>
 
-            <FormLabel labelStyle={{color: '#fff'}}>E-mail or username</FormLabel>
             <FormInput
+              autoCapitalize={'none'}
+              autoCorrect={false}
               containerStyle={styles.inputContainer}
-              underlineColorAndroid={'transparent'}
               onChangeText={(login) => auth.setLogin(login)}
+              placeholder={'Email'}
+              placeholderTextColor={'#e1e1e1'}
+              underlineColorAndroid={'transparent'}
               value={auth.login}
+              inputStyle={styles.input}
             />
 
-            <FormLabel labelStyle={{color: '#fff'}}>Password</FormLabel>
             <FormInput
+              autoCapitalize={'none'}
+              autoCorrect={false}
               secureTextEntry
               containerStyle={styles.inputContainer}
-              underlineColorAndroid={'transparent'}
               onChangeText={(password) => auth.setPassword(password)}
+              placeholder={'Password'}
+              placeholderTextColor={'#e1e1e1'}
+              underlineColorAndroid={'transparent'}
               value={auth.password}
+              inputStyle={styles.input}
             />
 
-          <Button
-            title={auth.isLoading ? '' : 'SIGN IN'}
-            backgroundColor={PRIMARY_COLOR}
-            containerViewStyle={{
-              marginTop: 10,
-              marginBottom: 5
-            }}
-            loading={auth.isLoading}
-            onPress={this.handleSignIn}
-          />
-          <Text style={{textAlign: 'center', color: '#fff'}}>
-            Don't have an account? <Text style={{fontWeight: 'bold'}}>Sign up</Text>
-          </Text>
+            <Button
+              title={auth.isLoading ? '' : 'Log In'}
+              backgroundColor={PRIMARY_COLOR}
+              borderRadius={12}
+              containerViewStyle={{
+                marginTop: 10,
+                marginBottom: 5
+              }}
+              loading={auth.isLoading}
+              onPress={this.handleSignIn}
+            />
+          </View>
+          <View style={styles.footer}>
+            <Text style={{textAlign: 'center'}}>
+              Don't have an account? <Text style={{fontWeight: 'bold'}}>Sign up</Text>
+            </Text>
+          </View>
         </View>
-      </ImgBackground>
+      </Container>
     );
   }
 }

@@ -1,11 +1,22 @@
 import React from 'react';
 import { Text } from 'react-native-elements';
 
-const SignUpScreen = () =>
-  <Text>Registro</Text>;
+import { ImgBackground } from 'components';
+
+class SignUpScreen extends React.Component {
+    render() {
+        return (
+            <ImgBackground
+                source={require('../../assets/bg-home-blur.png')}
+            >
+                <Text>Registro</Text>
+            </ImgBackground>
+        );
+    }
+}
 
 SignUpScreen.navigationOptions = {
-  header: null
+  title: 'Sign up'
 };
 
 export { SignUpScreen };
