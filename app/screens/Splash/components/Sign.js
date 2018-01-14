@@ -3,7 +3,7 @@ import { Image, StyleSheet, View } from 'react-native';
 import { Text } from 'react-native-elements';
 import * as Animatable from 'react-native-animatable';
 
-import { SECONDARY_COLOR } from '../../../utils';
+import { SECONDARY_COLOR } from 'utils';
 
 const styles = StyleSheet.create({
   container: {

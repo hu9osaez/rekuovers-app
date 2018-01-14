@@ -26,7 +26,7 @@ const WelcomeScreen = ({navigation}) =>
       <Text style={styles.loginText}>
         Already have an account?{' '}
         <Text
-          onPress={() => navigation.navigate('SignIn')}
+          onPress={() => navigation.navigate('Login')}
           style={styles.loginTextSecondary}>
             Login
         </Text>

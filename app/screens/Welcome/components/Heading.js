@@ -5,7 +5,7 @@ import { normalize } from 'react-native-elements';
 
 const styles = StyleSheet.create({
   headingContainer: {
-    backgroundColor: 'rgba(0,0,0, 0.2)',
+    backgroundColor: 'rgba(0,0,0, 0.3)',
     marginBottom: 40,
     paddingRight: 50
   },

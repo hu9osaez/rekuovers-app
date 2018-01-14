@@ -5,8 +5,8 @@ import { BACKGROUND_COLOR, PRIMARY_COLOR, SECONDARY_COLOR } from 'utils';
 import {
   SplashScreen,
   WelcomeScreen,
-  SignUpScreen,
-  SignInScreen,
+  SignupScreen,
+  LoginScreen,
   HomeScreen as HomeTab,
   SearchScreen as SearchTab,
   ProfileScreen as ProfileTab,
@@ -42,10 +42,10 @@ export const LoggedOutNavigator = StackNavigator({
     screen: WelcomeScreen
   },
   SignUp: {
-    screen: SignUpScreen
+    screen: SignupScreen
   },
-  SignIn: {
-    screen: SignInScreen
+  Login: {
+    screen: LoginScreen
   }
 }, {
   initialRouteName: 'Splash'
