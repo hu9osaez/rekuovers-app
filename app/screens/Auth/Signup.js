@@ -37,11 +37,14 @@ class SignupScreen extends React.Component {
             />
 
             <Button
+              raised
               title={'SIGN UP'}
               backgroundColor={PRIMARY_COLOR}
               borderRadius={8}
               containerViewStyle={{
-                marginTop: 20
+                marginTop: 20,
+                marginLeft: 0,
+                marginRight: 0
               }}
             />
           </View>

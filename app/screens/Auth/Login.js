@@ -1,5 +1,5 @@
 import React from 'react';
-import { ToastAndroid, View } from 'react-native';
+import { View } from 'react-native';
 import { Button, Text } from 'react-native-elements';
 
 import { Container } from 'components';
@@ -7,36 +7,28 @@ import BackRow from './components/BackRow';
 import SocialRow from './components/SocialRow';
 import SimpleInput from './components/SimpleInput';
 
-import { observer, inject } from 'mobx-react/native';
-import { PRIMARY_COLOR, postSignIn, onSignIn, resetDeepNavigationTo } from 'utils';
+import { PRIMARY_COLOR, postLogin, onSignIn, resetDeepNavigationTo } from 'utils';
 
 import styles from './styles';
 
-@inject(stores => ({ ...stores }))
-@observer
 class LoginScreen extends React.Component {
-  handleLogin = () => {
-    let { store: { auth }, navigation } = this.props;
+  constructor(props) {
+    super(props);
 
-    auth.toggleLoading();
+    this.state = {
+      email: '',
+      password: '',
+      isLoading: false
+    }
+  }
 
-    postSignIn({login: auth.login, password: auth.password})
-      .then(res => {
-        auth.toggleLoading();
-
-        if(res.success) {
-          onSignIn(res.data.access_token).then(() => {
-            resetDeepNavigationTo('SignedIn', navigation);
-            });
-          }
-        else {
-          ToastAndroid.show(res.error.message, ToastAndroid.SHORT);
-        }
-      });
+  toggleLoading = () => {
+    this.setState({isLoading: !this.state.isLoading});
   };
 
   render() {
-    let { store: { auth }, navigation } = this.props;
+    let { navigation } = this.props;
+    let { email, password, isLoading } = this.state;
     return (
       <Container>
         <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
@@ -47,27 +39,30 @@ class LoginScreen extends React.Component {
           />
           <View style={styles.content}>
             <SimpleInput
-              onChangeText={(login) => auth.setLogin(login)}
+              onChangeText={email => this.setState({email})}
               placeholder={'Email'}
-              value={auth.login}
+              value={email}
             />
 
             <SimpleInput
-              onChangeText={(password) => auth.setPassword(password)}
+              onChangeText={password => this.setState(password)}
               placeholder={'Password'}
-              value={auth.password}
+              value={password}
               secureTextEntry
             />
 
             <Button
-              title={auth.isLoading ? '' : 'LOG IN'}
+              raised
+              title={isLoading ? '' : 'LOG IN'}
               backgroundColor={PRIMARY_COLOR}
               borderRadius={8}
               containerViewStyle={{
-                marginTop: 20
+                marginTop: 20,
+                marginLeft: 0,
+                marginRight: 0
               }}
-              loading={auth.isLoading}
-              onPress={this.handleLogin}
+              loading={isLoading}
+              onPress={this.toggleLoading}
             />
 
             <Text style={{ color: '#cdcdcd', marginTop: 20, textAlign: 'center' }}>

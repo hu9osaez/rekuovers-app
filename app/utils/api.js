@@ -9,8 +9,6 @@ const postParameters = (body) => ({
   body: JSON.stringify(body)
 });
 
-export const postSignIn = (body) => {
-  const SIGNIN_ENDPOINT = `${API_ENDPOINT}/auth/login`;
-
-  return fetch(SIGNIN_ENDPOINT, postParameters(body)).then(res => res.json());
+export const postLogin = (body) => {
+  return fetch(`${API_ENDPOINT}/auth/login`, postParameters(body)).then(res => res.json());
 };

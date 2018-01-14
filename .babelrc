@@ -10,8 +10,9 @@
         ],
         "alias": {
           "components": "components",
-          "utils": "utils",
-          "store": "store"
+          "libs": "libs",
+          "store": "store",
+          "utils": "utils"
         }
       }
     ]

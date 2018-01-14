@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#ebebeb',
     borderBottomWidth: 1,
     alignItems: 'flex-start',
-    paddingHorizontal: 22
+    paddingHorizontal: 25
   },
   content: {
     flex: 1,
