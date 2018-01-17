@@ -4,9 +4,6 @@ import { Icon, Text } from 'react-native-elements';
 import Swiper from 'react-native-swiper';
 import { robotoWeights } from 'react-native-typography';
 
-import { toJS } from 'mobx';
-import { observer, inject } from 'mobx-react/native';
-
 import SongCard from '../../components/SongCard';
 import FeaturedCover from './components/FeaturedCover';
 import SurpriseMe from './components/SurpriseMe';
@@ -17,8 +14,6 @@ const styles = {
   }
 };
 
-@inject(stores => ({ ...stores }))
-@observer
 class HomeScreen extends React.Component {
 
   goSongDetail(song) {

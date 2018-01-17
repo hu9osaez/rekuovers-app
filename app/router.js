@@ -34,7 +34,7 @@ const tabOptions = {
   }
 };
 
-export const LoggedOutNavigator = StackNavigator({
+const LoggedOutNavigator = StackNavigator({
   Splash: {
     screen: SplashScreen
   },

@@ -1,42 +1,27 @@
 import React from 'react';
-import { Provider } from 'react-redux';
+import { addNavigationHelpers } from 'react-navigation';
+import { connect } from 'react-redux';
 
 import { createRootNavigator } from './router';
-import { isSignedIn } from 'utils';
-
-
 
 console.disableYellowBox = true;
 
-export default class App extends React.Component {
-
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            signedIn: false,
-            checkedSignIn: false
-        };
-    }
-
-    componentWillMount() {
-        isSignedIn()
-            .then(res => this.setState({ signedIn: res, checkedSignIn: true }))
-            .catch(err => alert(err));
-    }
-
+class AppContainer extends React.Component {
     render() {
-        const { checkedSignIn, signedIn } = this.state;
-
-        // If we haven't checked AsyncStorage yet, don't render anything (better ways to do this)
-        if (!checkedSignIn) {
-            return null;
-        }
-
-        const Router = createRootNavigator(signedIn);
-
+        const Router = createRootNavigator();
+        const { nav, dispatch } = this.props;
         return (
-          <Router />
+          <Router
+            navigation={addNavigationHelpers({ dispatch, state: nav})}
+          />
         );
     }
+}
+
+const mapStateToProps = state => {
+  return {
+    nav: state.nav
+  };
 };
+
+export default connect(mapStateToProps)(AppContainer);
