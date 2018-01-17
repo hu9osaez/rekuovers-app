@@ -1,10 +1,10 @@
 import React from 'react';
-import { Provider } from 'mobx-react/native';
+import { Provider } from 'react-redux';
 
 import { createRootNavigator } from './router';
 import { isSignedIn } from 'utils';
 
-import store from 'store';
+
 
 console.disableYellowBox = true;
 
@@ -36,9 +36,7 @@ export default class App extends React.Component {
         const Router = createRootNavigator(signedIn);
 
         return (
-            <Provider store={store}>
-                <Router />
-            </Provider>
+          <Router />
         );
     }
 };
