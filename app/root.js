@@ -1,27 +1,14 @@
 import React from 'react';
-import { addNavigationHelpers } from 'react-navigation';
-import { connect } from 'react-redux';
-
-import { createRootNavigator } from './router';
+import { RootNavigator } from './router';
 
 console.disableYellowBox = true;
 
 class AppContainer extends React.Component {
-    render() {
-        const Router = createRootNavigator();
-        const { nav, dispatch } = this.props;
-        return (
-          <Router
-            navigation={addNavigationHelpers({ dispatch, state: nav})}
-          />
-        );
-    }
+  render() {
+    return (
+      <RootNavigator />
+    );
+  }
 }
 
-const mapStateToProps = state => {
-  return {
-    nav: state.nav
-  };
-};
-
-export default connect(mapStateToProps)(AppContainer);
+export default AppContainer;

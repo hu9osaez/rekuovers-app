@@ -1,9 +1,11 @@
+import { REHYDRATE } from 'redux-persist';
 import * as types from '../types';
 
 const INITIAL_STATE = {
   loading: false,
   dataToken: {},
-  isAuthenticated: false
+  isAuthenticated: false,
+  rehydratedAt: null
 };
 
 export const authReducer = (state = INITIAL_STATE, action) => {
@@ -28,6 +30,12 @@ export const authReducer = (state = INITIAL_STATE, action) => {
       };
     case types.LOGOUT_USER:
       return INITIAL_STATE;
+    case REHYDRATE:
+      return {
+        ...state,
+        ...action.data,
+        rehydratedAt: new Date()
+      };
     default:
       return state;
   }

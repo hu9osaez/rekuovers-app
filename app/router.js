@@ -34,10 +34,7 @@ const tabOptions = {
   }
 };
 
-const LoggedOutNavigator = StackNavigator({
-  Splash: {
-    screen: SplashScreen
-  },
+const UnauthenticatedNavigator = StackNavigator({
   Welcome: {
     screen: WelcomeScreen
   },
@@ -47,16 +44,20 @@ const LoggedOutNavigator = StackNavigator({
   Login: {
     screen: LoginScreen
   }
-}, {
-  initialRouteName: 'Splash'
 });
 
-const SignedInNavigator = StackNavigator({
+const AuthenticatedNavigator = StackNavigator({
   Tabs: {
     screen: TabNavigator({
-      HomeTab: { screen: HomeTab },
-      SearchTab: { screen: SearchTab },
-      ProfileTab: { screen: ProfileTab }
+      HomeTab: {
+        screen: HomeTab
+      },
+      SearchTab: {
+        screen: SearchTab
+      },
+      ProfileTab: {
+        screen: ProfileTab
+      }
     }, tabOptions)
   },
   CoverDetails: {
@@ -64,17 +65,18 @@ const SignedInNavigator = StackNavigator({
   }
 });
 
-export const createRootNavigator = (signedIn = false) => {
-  return StackNavigator({
-      SignedIn: {
-        screen: SignedInNavigator
-      },
-      LoggedOut: {
-        screen: LoggedOutNavigator
-      }
-    },
-    {
-      headerMode: 'none',
-      initialRouteName: signedIn ? 'SignedIn' : 'LoggedOut'
-    });
-};
+export const RootNavigator = StackNavigator({
+  Splash: {
+    screen: SplashScreen,
+  },
+  Authenticated: {
+    screen: AuthenticatedNavigator
+  },
+  Unauthenticated: {
+    screen: UnauthenticatedNavigator
+  }
+},
+  {
+    headerMode: 'none',
+    initialRouteName: 'Splash'
+  });

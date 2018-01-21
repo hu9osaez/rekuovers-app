@@ -1,16 +1,32 @@
 import React from 'react';
 import { Image, View } from 'react-native';
-import { resetNavigationTo } from '../../utils';
+import { NavigationActions } from 'react-navigation';
+import { connect } from 'react-redux';
 
 import styles from './styles';
 import Sign from './components/Sign';
 
 class SplashScreen extends React.Component {
   componentDidMount() {
+    const { isAuthenticated, rehydratedAt } = this.props;
+
+    if (rehydratedAt) {
+      this.init(isAuthenticated);
+    }
+  }
+
+  init(authenticated) {
     const { navigation } = this.props;
+    let routeName = authenticated ? 'Authenticated' : 'Unauthenticated';
+
+    let resetAction = NavigationActions.reset({
+      index: 0,
+      actions: [NavigationActions.navigate({ routeName })],
+      key: null
+    });
 
     setTimeout(() => {
-      resetNavigationTo('Welcome', navigation);
+      navigation.dispatch(resetAction);
     }, 2500);
   }
 
@@ -33,8 +49,9 @@ SplashScreen.navigationOptions = {
   header: null
 };
 
-/*SplashScreen.propTypes = {
-  navigation: React.PropTypes.object
-};*/
+const mapStateToProps = state => {
+  const { isAuthenticated, rehydratedAt } = state.auth;
+  return { isAuthenticated, rehydratedAt };
+};
 
-export { SplashScreen };
+export default connect(mapStateToProps)(SplashScreen);
