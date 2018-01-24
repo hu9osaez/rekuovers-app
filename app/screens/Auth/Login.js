@@ -7,7 +7,9 @@ import BackRow from './components/BackRow';
 import SocialRow from './components/SocialRow';
 import SimpleInput from './components/SimpleInput';
 
-import { PRIMARY_COLOR, postLogin, onSignIn, resetDeepNavigationTo } from 'utils';
+import { connect } from 'react-redux';
+import { PRIMARY_COLOR } from 'utils';
+import { loginUser } from 'store/auth/actions';
 
 import styles from './styles';
 
@@ -17,18 +19,20 @@ class LoginScreen extends React.Component {
 
     this.state = {
       email: '',
-      password: '',
-      isLoading: false
+      password: ''
     }
   }
 
-  toggleLoading = () => {
-    this.setState({isLoading: !this.state.isLoading});
+  onSubmitLogin = () => {
+    const { email, password } = this.state;
+    const { navigation } = this.props;
+
+    this.props.loginUser({ login: email, password }, navigation);
   };
 
   render() {
-    let { navigation } = this.props;
-    let { email, password, isLoading } = this.state;
+    let { loading, navigation } = this.props;
+    let { email, password } = this.state;
     return (
       <Container>
         <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
@@ -45,7 +49,7 @@ class LoginScreen extends React.Component {
             />
 
             <SimpleInput
-              onChangeText={password => this.setState(password)}
+              onChangeText={password => this.setState({password})}
               placeholder={'Password'}
               value={password}
               secureTextEntry
@@ -53,7 +57,7 @@ class LoginScreen extends React.Component {
 
             <Button
               raised
-              title={isLoading ? '' : 'LOG IN'}
+              title={loading ? '' : 'LOG IN'}
               backgroundColor={PRIMARY_COLOR}
               borderRadius={8}
               containerViewStyle={{
@@ -61,8 +65,8 @@ class LoginScreen extends React.Component {
                 marginLeft: 0,
                 marginRight: 0
               }}
-              loading={isLoading}
-              onPress={this.toggleLoading}
+              loading={loading}
+              onPress={this.onSubmitLogin}
             />
 
             <Text style={{ color: '#cdcdcd', marginTop: 20, textAlign: 'center' }}>
@@ -79,4 +83,9 @@ LoginScreen.navigationOptions = {
   header: null
 };
 
-export { LoginScreen };
+const mapStateToProps = state => {
+  let { loading } = state.auth;
+  return { loading };
+};
+
+export default connect(mapStateToProps, { loginUser })(LoginScreen);

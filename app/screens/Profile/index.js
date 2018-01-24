@@ -1,25 +1,15 @@
 import React from 'react';
 import { View } from 'react-native';
 import { Button, Icon, Text } from 'react-native-elements';
-import { onLogOut } from '../../utils';
+import { connect } from 'react-redux';
+import { logoutUser } from 'store/auth/actions';
 
-import { NavigationActions } from 'react-navigation';
-
-
-const ProfileScreen = ({navigation}) =>
+const ProfileScreen = ({navigation, logoutUser}) =>
 <View>
   <Text>Profile</Text>
   <Button
     title={'Cerrar sesion'}
-    onPress={() => onLogOut().then(() => {
-        const resetAction = NavigationActions.reset({
-            index: 0,
-            key: null,
-            actions: [NavigationActions.navigate({ routeName: 'LoggedOut' })]
-        });
-
-        navigation.dispatch(resetAction);
-    })}
+    onPress={() => logoutUser(navigation)}
   />
 </View>;
 
@@ -28,4 +18,4 @@ ProfileScreen.navigationOptions = {
   tabBarIcon: ({ tintColor }) => (<Icon name="account-circle" color={tintColor} />)
 };
 
-export { ProfileScreen };
+export default connect(null, { logoutUser })(ProfileScreen);

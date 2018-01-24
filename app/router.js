@@ -9,7 +9,7 @@ import {
   LoginScreen,
   HomeScreen as HomeTab,
   SearchScreen as SearchTab,
-  ProfileScreen as ProfileTab,
+  ProfileTab,
   CoverDetailsScreen
 } from './screens';
 

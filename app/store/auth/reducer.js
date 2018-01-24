@@ -33,7 +33,7 @@ export const authReducer = (state = INITIAL_STATE, action) => {
     case REHYDRATE:
       return {
         ...state,
-        ...action.data,
+        ...action.payload.auth,
         rehydratedAt: new Date()
       };
     default:

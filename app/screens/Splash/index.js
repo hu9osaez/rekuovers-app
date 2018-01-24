@@ -15,6 +15,14 @@ class SplashScreen extends React.Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    const { isAuthenticated } = nextProps;
+
+    console.tron.log(nextProps);
+
+    this.init(isAuthenticated);
+  }
+
   init(authenticated) {
     const { navigation } = this.props;
     let routeName = authenticated ? 'Authenticated' : 'Unauthenticated';

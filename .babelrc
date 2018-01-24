@@ -9,6 +9,7 @@
           "./app"
         ],
         "alias": {
+          "core": "core",
           "components": "components",
           "store": "store",
           "utils": "utils"

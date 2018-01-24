@@ -29,11 +29,10 @@ class HomeScreen extends React.Component {
   };
 
   render() {
-    let { isLoading, newest, popular } = this.props.store.covers;
     return (
       <View style={styles.container}>
         <ScrollView>
-            <Swiper
+          {/*<Swiper
                 autoplay
                 autoplayTimeout={6}
                 height={200}
@@ -42,10 +41,10 @@ class HomeScreen extends React.Component {
                 paginationStyle={{ bottom: 7 }}
             >
                 {popular.map((item) => <FeaturedCover cover={item} />)}
-            </Swiper>
+            </Swiper>*/}
             <SurpriseMe />
             <Text style={[robotoWeights.condensedBold, {fontSize: 16, marginLeft: 5, marginTop: 12}]}>NEW COVERS</Text>
-          <FlatList
+          {/*<FlatList
             data={toJS(newest)}
             refreshing={isLoading}
             renderItem={this.renderCover}
@@ -53,7 +52,7 @@ class HomeScreen extends React.Component {
             horizontal
             showsHorizontalScrollIndicator={false}
             style={{ paddingTop: 7, paddingBottom: 10 }}
-          />
+          />*/}
         </ScrollView>
       </View>
     )
