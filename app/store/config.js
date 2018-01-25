@@ -10,8 +10,7 @@ import * as rootReducers from './reducers';
 
 const config = {
   key: 'root',
-  debug: true,
-  storage
+  storage,
 };
 
 const middleware = [reduxThunk];
