@@ -18,8 +18,6 @@ class SplashScreen extends React.Component {
   componentWillReceiveProps(nextProps) {
     const { isAuthenticated } = nextProps;
 
-    console.tron.log(nextProps);
-
     this.init(isAuthenticated);
   }
 
