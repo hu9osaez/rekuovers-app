@@ -7,10 +7,10 @@ import Heading from './components/Heading';
 import BgAttribution from './components/BgAttribution';
 import styles from './styles';
 
-const WelcomeScreen = ({navigation}) =>
+const WelcomeScreen = ({ navigation }) => (
   <ImgBackground source={require('../../assets/bg-home.png')}>
     <View style={styles.contentContainer}>
-      <Heading/>
+      <Heading />
       <Button
         title={'SIGN UP'}
         color={'#ffffff'}
@@ -19,7 +19,7 @@ const WelcomeScreen = ({navigation}) =>
         containerViewStyle={styles.btnContainer}
         buttonStyle={styles.btn}
         textStyle={{
-            fontWeight: 'bold'
+          fontWeight: 'bold',
         }}
         onPress={() => navigation.navigate('SignUp')}
       />
@@ -27,16 +27,18 @@ const WelcomeScreen = ({navigation}) =>
         Already have an account?{' '}
         <Text
           onPress={() => navigation.navigate('Login')}
-          style={styles.loginTextSecondary}>
-            Login
+          style={styles.loginTextSecondary}
+        >
+          Login
         </Text>
       </Text>
     </View>
     <BgAttribution />
-  </ImgBackground>;
+  </ImgBackground>
+);
 
 WelcomeScreen.navigationOptions = {
-  header: null
+  header: null,
 };
 
 export { WelcomeScreen };

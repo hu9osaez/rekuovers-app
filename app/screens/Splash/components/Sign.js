@@ -8,27 +8,27 @@ import { SECONDARY_COLOR } from 'utils';
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   linesContainer: {
     flexDirection: 'row',
-    zIndex: 2
+    zIndex: 2,
   },
   lineWrapper: {
-    marginHorizontal: 30
+    marginHorizontal: 30,
   },
   line: {
     backgroundColor: '#343434',
     width: 1,
     height: 40,
-    position: 'relative'
+    position: 'relative',
   },
   clip: {
     position: 'absolute',
     bottom: 0,
     left: -5,
     width: 12,
-    height: 12
+    height: 12,
   },
   badge: {
     backgroundColor: SECONDARY_COLOR,
@@ -36,37 +36,35 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: 90,
     height: 20,
-    transform: [
-      { rotate: '-5deg'}
-    ],
+    transform: [{ rotate: '-5deg' }],
     marginTop: -5,
-    zIndex: 1
+    zIndex: 1,
   },
   textBadge: {
     color: '#fff',
-    fontWeight: 'bold'
-  }
+    fontWeight: 'bold',
+  },
 });
 
-const Sign = () =>
+const Sign = () => (
   <View style={styles.container}>
-    <Animatable.View animation='fadeInUp' style={styles.linesContainer}>
-      {Array(2).fill().map(() =>
-        <View style={styles.lineWrapper}>
-          <View style={styles.line} />
-          <Image
-            source={require('../../../assets/paper-clip.png')}
-            style={styles.clip}
-          />
-        </View>
-      )}
+    <Animatable.View animation="fadeInUp" style={styles.linesContainer}>
+      {Array(2)
+        .fill()
+        .map(() => (
+          <View style={styles.lineWrapper}>
+            <View style={styles.line} />
+            <Image
+              source={require('../../../assets/paper-clip.png')}
+              style={styles.clip}
+            />
+          </View>
+        ))}
     </Animatable.View>
-    <Animatable.View
-      style={styles.badge}
-      animation='bounceInDown'
-    >
+    <Animatable.View style={styles.badge} animation="bounceInDown">
       <Text style={styles.textBadge}>ALPHA</Text>
     </Animatable.View>
-  </View>;
+  </View>
+);
 
 export default Sign;

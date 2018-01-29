@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: PRIMARY_COLOR_TEXT
+    backgroundColor: PRIMARY_COLOR_TEXT,
   },
   logoContainer: {
     justifyContent: 'center',
@@ -14,12 +14,12 @@ const styles = StyleSheet.create({
     backgroundColor: PRIMARY_COLOR,
     borderRadius: 15,
     width: 130,
-    height: 130
+    height: 130,
   },
   isotipe: {
     width: 90,
-    height: 100
-  }
+    height: 100,
+  },
 });
 
 export default styles;

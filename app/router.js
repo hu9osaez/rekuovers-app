@@ -10,7 +10,7 @@ import {
   HomeScreen as HomeTab,
   SearchScreen as SearchTab,
   ProfileTab,
-  CoverDetailsScreen
+  CoverDetailsScreen,
 } from './screens';
 
 const tabOptions = {
@@ -23,60 +23,65 @@ const tabOptions = {
     showLabel: false,
     showIcon: true,
     indicatorStyle: {
-      backgroundColor: PRIMARY_COLOR
+      backgroundColor: PRIMARY_COLOR,
     },
     tabStyle: {
-      height: 50
+      height: 50,
     },
     style: {
-      backgroundColor: BACKGROUND_COLOR
-    }
-  }
+      backgroundColor: BACKGROUND_COLOR,
+    },
+  },
 };
 
 const UnauthenticatedNavigator = StackNavigator({
   Welcome: {
-    screen: WelcomeScreen
+    screen: WelcomeScreen,
   },
   SignUp: {
-    screen: SignupScreen
+    screen: SignupScreen,
   },
   Login: {
-    screen: LoginScreen
-  }
+    screen: LoginScreen,
+  },
 });
 
 const AuthenticatedNavigator = StackNavigator({
   Tabs: {
-    screen: TabNavigator({
-      HomeTab: {
-        screen: HomeTab
+    screen: TabNavigator(
+      {
+        HomeTab: {
+          screen: HomeTab,
+        },
+        SearchTab: {
+          screen: SearchTab,
+        },
+        ProfileTab: {
+          screen: ProfileTab,
+        },
       },
-      SearchTab: {
-        screen: SearchTab
-      },
-      ProfileTab: {
-        screen: ProfileTab
-      }
-    }, tabOptions)
+      tabOptions
+    ),
   },
   CoverDetails: {
-    screen: CoverDetailsScreen
-  }
+    screen: CoverDetailsScreen,
+  },
 });
 
-export const RootNavigator = StackNavigator({
-  Splash: {
-    screen: SplashScreen,
+export const RootNavigator = StackNavigator(
+  {
+    Splash: {
+      screen: SplashScreen,
+    },
+    Authenticated: {
+      screen: AuthenticatedNavigator,
+    },
+    Unauthenticated: {
+      screen: UnauthenticatedNavigator,
+    },
   },
-  Authenticated: {
-    screen: AuthenticatedNavigator
-  },
-  Unauthenticated: {
-    screen: UnauthenticatedNavigator
-  }
-},
   {
     headerMode: 'none',
-    initialRouteName: 'Splash'
-  });
+    initialRouteName: 'Splash',
+  }
+);

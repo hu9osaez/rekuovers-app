@@ -19,8 +19,8 @@ class LoginScreen extends React.Component {
 
     this.state = {
       email: '',
-      password: ''
-    }
+      password: '',
+    };
   }
 
   onSubmitLogin = () => {
@@ -43,13 +43,13 @@ class LoginScreen extends React.Component {
           />
           <View style={styles.content}>
             <SimpleInput
-              onChangeText={email => this.setState({email})}
+              onChangeText={email => this.setState({ email })}
               placeholder={'Email'}
               value={email}
             />
 
             <SimpleInput
-              onChangeText={password => this.setState({password})}
+              onChangeText={password => this.setState({ password })}
               placeholder={'Password'}
               value={password}
               secureTextEntry
@@ -63,13 +63,15 @@ class LoginScreen extends React.Component {
               containerViewStyle={{
                 marginTop: 20,
                 marginLeft: 0,
-                marginRight: 0
+                marginRight: 0,
               }}
               loading={loading}
               onPress={this.onSubmitLogin}
             />
 
-            <Text style={{ color: '#cdcdcd', marginTop: 20, textAlign: 'center' }}>
+            <Text
+              style={{ color: '#cdcdcd', marginTop: 20, textAlign: 'center' }}
+            >
               Forgot my password
             </Text>
           </View>
@@ -80,7 +82,7 @@ class LoginScreen extends React.Component {
 }
 
 LoginScreen.navigationOptions = {
-  header: null
+  header: null,
 };
 
 const mapStateToProps = state => {

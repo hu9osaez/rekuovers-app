@@ -19,7 +19,7 @@ const middlewares = [thunk, actionBuffer(REHYDRATE)];
 
 const store = Reactotron.createStore(
   combineReducers(reducers),
-  compose(applyMiddleware(...middlewares), autoRehydrate()),
+  compose(applyMiddleware(...middlewares), autoRehydrate())
 );
 
 persistStore(store, { storage: AsyncStorage, whitelist: ['auth', 'token'] });

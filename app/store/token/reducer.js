@@ -5,7 +5,7 @@ const INITIAL_STATE = {
   checking: false,
   refreshing: false,
   accessToken: null,
-  rehydratedAt: null
+  rehydratedAt: null,
 };
 
 export const accessTokenReducer = (state = INITIAL_STATE, action) => {
@@ -13,28 +13,28 @@ export const accessTokenReducer = (state = INITIAL_STATE, action) => {
     case types.CHECKING_TOKEN:
       return {
         ...state,
-        checking: true
+        checking: true,
       };
     case types.CHECKING_TOKEN_SUCCESS:
       return {
         ...state,
-        checking: false
+        checking: false,
       };
     case types.REFRESHING_TOKEN:
       return {
         ...state,
-        refreshing: true
+        refreshing: true,
       };
     case types.REFRESHING_TOKEN_SUCCESS:
       return {
         ...state,
         accessToken: action.data.access_token,
-        refreshing: false
+        refreshing: false,
       };
     case types.LOGIN_USER_SUCCESS:
       return {
         ...state,
-        accessToken: action.data.access_token
+        accessToken: action.data.access_token,
       };
     case types.LOGOUT_USER:
       return INITIAL_STATE;
@@ -42,7 +42,7 @@ export const accessTokenReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         ...action.payload.token,
-        rehydratedAt: new Date()
+        rehydratedAt: new Date(),
       };
     default:
       return state;

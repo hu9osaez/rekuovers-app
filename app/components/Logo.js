@@ -8,8 +8,8 @@ const styles = StyleSheet.create({
   logoContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    flexDirection:'row',
-    paddingTop: 15
+    flexDirection: 'row',
+    paddingTop: 15,
   },
   textStatus: {
     backgroundColor: SECONDAY_COLOR,
@@ -21,17 +21,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 3,
     fontSize: normalize(10),
     fontWeight: 'bold',
-    transform: [{ rotate: '-30deg'}]
-  }
+    transform: [{ rotate: '-30deg' }],
+  },
 });
 
-const Logo = () =>
+const Logo = () => (
   <View style={styles.logoContainer}>
-    <Image
-      source={require('../assets/logo.png')}
-    >
+    <Image source={require('../assets/logo.png')}>
       <Text style={styles.textStatus}>ALPHA</Text>
     </Image>
-  </View>;
+  </View>
+);
 
 export default Logo;

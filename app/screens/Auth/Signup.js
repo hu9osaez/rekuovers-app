@@ -23,18 +23,11 @@ class SignupScreen extends React.Component {
             text={'Sign up with Facebook'}
           />
           <View style={styles.content}>
-            <SimpleInput
-              placeholder={'Name'}
-            />
+            <SimpleInput placeholder={'Name'} />
 
-            <SimpleInput
-              placeholder={'Email'}
-            />
+            <SimpleInput placeholder={'Email'} />
 
-            <SimpleInput
-              placeholder={'Password'}
-              secureTextEntry
-            />
+            <SimpleInput placeholder={'Password'} secureTextEntry />
 
             <Button
               raised
@@ -44,7 +37,7 @@ class SignupScreen extends React.Component {
               containerViewStyle={{
                 marginTop: 20,
                 marginLeft: 0,
-                marginRight: 0
+                marginRight: 0,
               }}
             />
           </View>
@@ -55,7 +48,7 @@ class SignupScreen extends React.Component {
 }
 
 SignupScreen.navigationOptions = {
-  header: null
+  header: null,
 };
 
 export { SignupScreen };

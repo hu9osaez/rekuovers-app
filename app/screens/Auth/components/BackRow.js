@@ -8,11 +8,11 @@ const styles = StyleSheet.create({
     height: 60,
     borderBottomColor: '#dcdcdc',
     borderBottomWidth: 1,
-    justifyContent: 'center'
-  }
+    justifyContent: 'center',
+  },
 });
 
-const BackRow = ({navigation}) =>
+const BackRow = ({ navigation }) => (
   <View style={styles.container}>
     <Icon
       color={PRIMARY_COLOR}
@@ -22,6 +22,7 @@ const BackRow = ({navigation}) =>
       onPress={() => navigation.goBack()}
       size={38}
     />
-  </View>;
+  </View>
+);
 
 export default BackRow;

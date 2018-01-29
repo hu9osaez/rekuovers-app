@@ -5,9 +5,7 @@ console.disableYellowBox = true;
 
 class AppContainer extends React.Component {
   render() {
-    return (
-      <RootNavigator />
-    );
+    return <RootNavigator />;
   }
 }
 

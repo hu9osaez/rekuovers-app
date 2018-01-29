@@ -11,20 +11,19 @@ import SurpriseMe from './components/SurpriseMe';
 const styles = {
   container: {
     backgroundColor: '#fbfbfb',
-  }
+  },
 };
 
 class HomeScreen extends React.Component {
-
   goSongDetail(song) {
     this.props.navigation.navigate('CoverDetails', { song: song });
   }
 
-  renderCover = (song) => {
+  renderCover = song => {
     return <SongCard song={song.item} onPress={this.goSongDetail.bind(this)} />;
   };
 
-  renderPopularCover = ({item, index}) => {
+  renderPopularCover = ({ item, index }) => {
     return <FeaturedCover cover={item} />;
   };
 
@@ -42,8 +41,15 @@ class HomeScreen extends React.Component {
             >
                 {popular.map((item) => <FeaturedCover cover={item} />)}
             </Swiper>*/}
-            <SurpriseMe />
-            <Text style={[robotoWeights.condensedBold, {fontSize: 16, marginLeft: 5, marginTop: 12}]}>NEW COVERS</Text>
+          <SurpriseMe />
+          <Text
+            style={[
+              robotoWeights.condensedBold,
+              { fontSize: 16, marginLeft: 5, marginTop: 12 },
+            ]}
+          >
+            NEW COVERS
+          </Text>
           {/*<FlatList
             data={toJS(newest)}
             refreshing={isLoading}
@@ -55,13 +61,13 @@ class HomeScreen extends React.Component {
           />*/}
         </ScrollView>
       </View>
-    )
+    );
   }
 }
 
 HomeScreen.navigationOptions = {
   title: 'Explore',
-  tabBarIcon: ({ tintColor }) => (<Icon name='home' color={tintColor} />)
+  tabBarIcon: ({ tintColor }) => <Icon name="home" color={tintColor} />,
 };
 
 export { HomeScreen };

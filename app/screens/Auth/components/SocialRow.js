@@ -8,23 +8,23 @@ const styles = StyleSheet.create({
     borderBottomColor: '#ebebeb',
     borderBottomWidth: 1,
     alignItems: 'flex-start',
-    paddingHorizontal: 25
+    paddingHorizontal: 25,
   },
   content: {
     flex: 1,
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   textContainer: {
     justifyContent: 'center',
-    paddingLeft: 15
+    paddingLeft: 15,
   },
   text: {
     fontSize: 18,
-    fontFamily: 'sans-serif-light'
-  }
+    fontFamily: 'sans-serif-light',
+  },
 });
 
-const SocialRow = ({ handlePress, text }) =>
+const SocialRow = ({ handlePress, text }) => (
   <TouchableHighlight
     onPress={handlePress}
     underlayColor={'rgba(255, 255, 255, 0.3)'}
@@ -41,6 +41,7 @@ const SocialRow = ({ handlePress, text }) =>
         </View>
       </View>
     </View>
-  </TouchableHighlight>;
+  </TouchableHighlight>
+);
 
 export default SocialRow;

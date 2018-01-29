@@ -4,7 +4,7 @@ import * as types from '../types';
 const INITIAL_STATE = {
   loading: false,
   isAuthenticated: false,
-  rehydratedAt: null
+  rehydratedAt: null,
 };
 
 export const authReducer = (state = INITIAL_STATE, action) => {
@@ -12,19 +12,19 @@ export const authReducer = (state = INITIAL_STATE, action) => {
     case types.LOGIN_USER:
       return {
         ...state,
-        loading: true
+        loading: true,
       };
     case types.LOGIN_USER_SUCCESS:
       return {
         ...state,
         loading: false,
-        isAuthenticated: true
+        isAuthenticated: true,
       };
     case types.LOGIN_USER_FAIL:
       return {
         ...state,
         loading: false,
-        isAuthenticated: false
+        isAuthenticated: false,
       };
     case types.LOGOUT_USER:
       return INITIAL_STATE;
@@ -32,7 +32,7 @@ export const authReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         ...action.payload.auth,
-        rehydratedAt: new Date()
+        rehydratedAt: new Date(),
       };
     default:
       return state;

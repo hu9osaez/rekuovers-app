@@ -21,10 +21,10 @@ class SplashScreen extends React.Component {
     const { isAuthenticated, rehydratedAt } = nextProps.auth;
     const { accessToken, checking, refreshing } = nextProps.token;
 
-    if(this.props.auth.rehydratedAt !== rehydratedAt) {
+    if (this.props.auth.rehydratedAt !== rehydratedAt) {
       this.props.checkToken(accessToken);
 
-      if(!checking && !refreshing) {
+      if (!checking && !refreshing) {
         this.init(isAuthenticated);
       }
     }
@@ -55,14 +55,15 @@ class SplashScreen extends React.Component {
 }
 
 SplashScreen.navigationOptions = {
-  header: null
+  header: null,
 };
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  token: state.token
+  token: state.token,
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators({ checkToken }, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ checkToken }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(SplashScreen);

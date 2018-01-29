@@ -7,16 +7,15 @@ import { refreshToken } from 'core/api';
 export const checkToken = token => dispatch => {
   const isExpired = dispatch(isTokenExpired(token));
 
-  if(isExpired) {
+  if (isExpired) {
     dispatch({ type: types.REFRESHING_TOKEN });
 
     refreshToken(token).then(response => {
-      if(response.success) {
-          // Dispatch exito
+      if (response.success) {
+        // Dispatch exito
         dispatch({ type: types.REFRESHING_TOKEN_SUCCESS, data: response.data });
-      }
-      else {
-          // Dispatch error
+      } else {
+        // Dispatch error
       }
     });
   }
@@ -30,5 +29,7 @@ const isTokenExpired = token => dispatch => {
   const tokenExpiration = jwtDecode(token).exp;
 
   // If token will expire in the next 30 seconds.
-  return !!(tokenExpiration && moment.unix(tokenExpiration) - moment(Date.now()) < 30);
+  return !!(
+    tokenExpiration && moment.unix(tokenExpiration) - moment(Date.now()) < 30
+  );
 };

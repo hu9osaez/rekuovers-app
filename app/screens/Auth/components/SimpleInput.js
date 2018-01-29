@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     height: 50,
-    marginVertical: 11
+    marginVertical: 11,
   },
   input: {
     flex: 1,
@@ -17,11 +17,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '400',
     color: '#e1e1e1',
-    paddingBottom: -5
-  }
+    paddingBottom: -5,
+  },
 });
 
-const SimpleInput = (props) =>
+const SimpleInput = props => (
   <View style={styles.container}>
     <TextInput
       autoCapitalize={'none'}
@@ -31,6 +31,7 @@ const SimpleInput = (props) =>
       underlineColorAndroid={'transparent'}
       {...props}
     />
-  </View>;
+  </View>
+);
 
 export default SimpleInput;

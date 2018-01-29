@@ -9,31 +9,37 @@ const styles = StyleSheet.create({
     bottom: 3,
     right: 3,
     paddingHorizontal: 3,
-    borderRadius: 3
+    borderRadius: 3,
   },
   touchable: {
     flexWrap: 'wrap',
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   iconContainer: {
     marginRight: 3,
-    marginTop: 2
+    marginTop: 2,
   },
   text: {
     color: '#fff',
-    fontSize: normalize(10)
-  }
+    fontSize: normalize(10),
+  },
 });
 
-const BgAttribution = () =>
+const BgAttribution = () => (
   <View style={styles.attributionContainer}>
     <TouchableOpacity
       onPress={() => Linking.openURL('https://unsplash.com/@justmebreathing')}
       style={styles.touchable}
     >
-      <Icon name={'camera-alt'} color={'#fff'} size={10} containerStyle={styles.iconContainer}/>
+      <Icon
+        name={'camera-alt'}
+        color={'#fff'}
+        size={10}
+        containerStyle={styles.iconContainer}
+      />
       <Text style={styles.text}>by @justmebreathing</Text>
     </TouchableOpacity>
-  </View>;
+  </View>
+);
 
 export default BgAttribution;

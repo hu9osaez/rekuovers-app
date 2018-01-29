@@ -7,22 +7,37 @@ const styles = StyleSheet.create({
   headingContainer: {
     backgroundColor: 'rgba(0,0,0, 0.3)',
     marginBottom: 40,
-    paddingRight: 50
+    paddingRight: 50,
   },
   headingText: {
     color: '#fff',
     fontFamily: 'sans-serif-thin',
     fontSize: normalize(28),
     alignSelf: 'flex-end',
-    marginVertical: 3
-  }
+    marginVertical: 3,
+  },
 });
 
-const Heading = () =>
+const Heading = () => (
   <View style={styles.headingContainer}>
-    <Animatable.Text animation='bounceInRight' style={styles.headingText}>YOU'LL LOVE</Animatable.Text>
-    <Animatable.Text animation='bounceInRight' delay={300} style={styles.headingText}>DISCOVER NEW</Animatable.Text>
-    <Animatable.Text animation='bounceInRight' delay={600} style={styles.headingText}>MUSICAL COVERS</Animatable.Text>
-  </View>;
+    <Animatable.Text animation="bounceInRight" style={styles.headingText}>
+      YOU'LL LOVE
+    </Animatable.Text>
+    <Animatable.Text
+      animation="bounceInRight"
+      delay={300}
+      style={styles.headingText}
+    >
+      DISCOVER NEW
+    </Animatable.Text>
+    <Animatable.Text
+      animation="bounceInRight"
+      delay={600}
+      style={styles.headingText}
+    >
+      MUSICAL COVERS
+    </Animatable.Text>
+  </View>
+);
 
 export default Heading;
