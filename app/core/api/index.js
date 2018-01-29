@@ -12,3 +12,14 @@ const authParameters = (body) => ({
 export const postLogin = (body) => {
   return fetch(`${API_URL}/auth/login`, authParameters(body)).then(res => res.json());
 };
+
+export const refreshToken = (accessToken) => {
+  return fetch(`${API_URL}/auth/refresh`, {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`
+    },
+  })
+    .then(res => res.json());
+};

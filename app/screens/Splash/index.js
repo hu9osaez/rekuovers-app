@@ -1,38 +1,41 @@
 import React from 'react';
 import { Image, View } from 'react-native';
-import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { resetNavigationTo } from 'core/utils';
+import { checkToken } from 'store/token/actions';
 
 import styles from './styles';
 import Sign from './components/Sign';
 
 class SplashScreen extends React.Component {
   componentDidMount() {
-    const { isAuthenticated, rehydratedAt } = this.props;
+    const { checking, isAuthenticated, rehydratedAt } = this.props.auth;
 
     if (rehydratedAt) {
-      this.init(isAuthenticated);
+      this.init(isAuthenticated, checking);
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    const { isAuthenticated } = nextProps;
+    const { isAuthenticated, rehydratedAt } = nextProps.auth;
+    const { accessToken, checking, refreshing } = nextProps.token;
 
-    this.init(isAuthenticated);
+    if(this.props.auth.rehydratedAt !== rehydratedAt) {
+      this.props.checkToken(accessToken);
+
+      if(!checking && !refreshing) {
+        this.init(isAuthenticated);
+      }
+    }
   }
 
   init(authenticated) {
     const { navigation } = this.props;
     let routeName = authenticated ? 'Authenticated' : 'Unauthenticated';
 
-    let resetAction = NavigationActions.reset({
-      index: 0,
-      actions: [NavigationActions.navigate({ routeName })],
-      key: null
-    });
-
     setTimeout(() => {
-      navigation.dispatch(resetAction);
+      resetNavigationTo(routeName, navigation);
     }, 2500);
   }
 
@@ -55,9 +58,11 @@ SplashScreen.navigationOptions = {
   header: null
 };
 
-const mapStateToProps = state => {
-  const { isAuthenticated, rehydratedAt } = state.auth;
-  return { isAuthenticated, rehydratedAt };
-};
+const mapStateToProps = state => ({
+  auth: state.auth,
+  token: state.token
+});
 
-export default connect(mapStateToProps)(SplashScreen);
+const mapDispatchToProps = dispatch => bindActionCreators({ checkToken }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(SplashScreen);

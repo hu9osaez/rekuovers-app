@@ -22,6 +22,6 @@ const store = Reactotron.createStore(
   compose(applyMiddleware(...middlewares), autoRehydrate()),
 );
 
-persistStore(store, { storage: AsyncStorage, whitelist: ['auth'] });
+persistStore(store, { storage: AsyncStorage, whitelist: ['auth', 'token'] });
 
 export default store;

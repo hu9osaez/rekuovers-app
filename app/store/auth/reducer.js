@@ -3,7 +3,6 @@ import * as types from '../types';
 
 const INITIAL_STATE = {
   loading: false,
-  dataToken: {},
   isAuthenticated: false,
   rehydratedAt: null
 };
@@ -19,8 +18,7 @@ export const authReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         loading: false,
-        isAuthenticated: true,
-        dataToken: action.data
+        isAuthenticated: true
       };
     case types.LOGIN_USER_FAIL:
       return {
