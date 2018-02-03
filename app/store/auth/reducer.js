@@ -1,7 +1,7 @@
 import { REHYDRATE } from 'redux-persist/es/constants';
 import * as types from '../types';
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
   loading: false,
   isAuthenticated: false,
   rehydratedAt: null,
