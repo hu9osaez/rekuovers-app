@@ -43,15 +43,17 @@
 		"prettier": "^1.10.2",
 		"react-test-renderer": "16.0.0",
 		"reactotron-react-native": "^1.14.0",
-		"reactotron-redux": "^1.13.0"
+		"reactotron-redux": "^1.13.0",
+		"solidarity": "^1.1.1",
+		"solidarity-react-native": "^1.0.0"
 	},
 	"jest": {
 		"preset": "react-native",
-    "testMatch": [
-      "**/__tests__/tests/**/*.js"
-    ],
-    "transformIgnorePatterns": [
-      "node_modules/(?!(react-native|redux-persist)/)"
-    ]
+		"testMatch": [
+			"**/__tests__/tests/**/*.js"
+		],
+		"transformIgnorePatterns": [
+			"node_modules/(?!(react-native|redux-persist)/)"
+		]
 	}
 }
