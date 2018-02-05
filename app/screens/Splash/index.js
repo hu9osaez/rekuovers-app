@@ -22,7 +22,10 @@ class SplashScreen extends React.Component {
     const { accessToken, checking, refreshing } = nextProps.token;
 
     if (this.props.auth.rehydratedAt !== rehydratedAt) {
-      this.props.checkToken(accessToken);
+
+      if(isAuthenticated) {
+        this.props.checkToken(accessToken);
+      }
 
       if (!checking && !refreshing) {
         this.init(isAuthenticated);
