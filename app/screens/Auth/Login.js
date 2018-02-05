@@ -1,6 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { Button, Text } from 'react-native-elements';
+import Toast from 'react-native-easy-toast';
 
 import { Container } from 'components';
 import BackRow from './components/BackRow';
@@ -9,6 +10,7 @@ import SimpleInput from './components/SimpleInput';
 
 import { connect } from 'react-redux';
 import { PRIMARY_COLOR } from 'utils';
+import { validateData } from 'core/utils';
 import { loginUser } from 'store/auth/actions';
 
 import styles from './styles';
@@ -21,13 +23,24 @@ class LoginScreen extends React.Component {
       email: '',
       password: '',
     };
+
+    this.rules = {
+      email: 'required|email',
+      password: 'required',
+    };
   }
 
   onSubmitLogin = () => {
     const { email, password } = this.state;
     const { navigation } = this.props;
 
-    this.props.loginUser({ login: email, password }, navigation);
+    const validation = validateData({ email, password }, this.rules);
+
+    if (validation.passes()) {
+      this.props.loginUser({ login: email, password }, navigation);
+    } else {
+      this.toast.show('Wrong email or password');
+    }
   };
 
   render() {
@@ -75,6 +88,10 @@ class LoginScreen extends React.Component {
               Forgot my password
             </Text>
           </View>
+          <Toast
+            position={'center'}
+            ref={toast => (this.toast = toast)}
+          />
         </View>
       </Container>
     );

@@ -10,7 +10,6 @@ export const loginUser = (data, navigation) => async dispatch => {
       dispatch({ type: types.LOGIN_USER_SUCCESS, data: response.data });
       resetNavigationTo('Authenticated', navigation);
     } else {
-      alert('Some failed in login'); // @TODO: Show correct error message
       dispatch({ type: types.LOGIN_USER_FAIL });
     }
   });
