@@ -7,7 +7,7 @@ import {
   View,
 } from 'react-native';
 import { Text } from 'react-native-elements';
-import { BACKGROUND_COLOR, SECONDARY_COLOR_TEXT } from 'utils';
+import { BACKGROUND_COLOR, SECONDARY_COLOR_TEXT } from '@core/common/colors';
 
 let width = Dimensions.get('window').width;
 

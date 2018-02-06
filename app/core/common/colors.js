@@ -1,5 +1,3 @@
-export const API_ENDPOINT = 'http://api.rekuovers.com';
-
 export const BACKGROUND_COLOR = '#ffffff';
 
 export const PRIMARY_COLOR = '#37474F';

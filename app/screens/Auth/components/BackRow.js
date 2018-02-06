@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Icon } from 'react-native-elements';
-import { PRIMARY_COLOR } from 'utils';
+import { PRIMARY_COLOR } from '@core/common/colors';
 
 const styles = StyleSheet.create({
   container: {

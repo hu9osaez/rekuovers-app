@@ -3,7 +3,7 @@ import { RootNavigator } from './router';
 
 console.disableYellowBox = true;
 
-class AppContainer extends React.Component {
+class AppContainer extends React.PureComponent {
   render() {
     return <RootNavigator />;
   }

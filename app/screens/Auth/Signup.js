@@ -2,12 +2,12 @@ import React from 'react';
 import { View } from 'react-native';
 import { Button } from 'react-native-elements';
 
-import { Container } from 'components';
+import { Container } from '@components';
 import BackRow from './components/BackRow';
 import SocialRow from './components/SocialRow';
 import SimpleInput from './components/SimpleInput';
 
-import { PRIMARY_COLOR } from 'utils';
+import { PRIMARY_COLOR } from '@core/common/colors';
 
 import styles from './styles';
 

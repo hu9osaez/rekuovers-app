@@ -1,6 +1,6 @@
 import * as types from '../types';
-import { postLogin } from 'core/api';
-import { resetNavigationTo } from 'core/utils';
+import { postLogin } from '@core/api';
+import { resetNavigationTo } from '@core/utils';
 
 export const loginUser = (data, navigation) => async dispatch => {
   dispatch({ type: types.LOGIN_USER });

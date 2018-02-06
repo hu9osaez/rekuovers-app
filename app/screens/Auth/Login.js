@@ -10,9 +10,9 @@ import SocialRow from './components/SocialRow';
 import SimpleInput from './components/SimpleInput';
 
 import { connect } from 'react-redux';
-import { PRIMARY_COLOR } from 'utils';
-import { validateData } from 'core/utils';
-import { loginUser } from 'store/auth/actions';
+import { PRIMARY_COLOR } from '@core/common/colors';
+import { validateData } from '@core/utils';
+import { loginUser } from '@store/auth/actions';
 
 import styles from './styles';
 

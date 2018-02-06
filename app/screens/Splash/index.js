@@ -2,8 +2,8 @@ import React from 'react';
 import { Image, View } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { resetNavigationTo } from 'core/utils';
-import { checkToken } from 'store/token/actions';
+import { resetNavigationTo } from '@core/utils';
+import { checkToken } from '@store/token/actions';
 
 import styles from './styles';
 import Sign from './components/Sign';

@@ -3,7 +3,7 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
-		"dev": "npm start --reset-cache",
+		"dev": "npm start -- --reset-cache",
 		"start": "node node_modules/react-native/local-cli/cli.js start",
 		"clean:android": "cd android && ./gradlew clean",
 		"debug:android": "cd android && ./gradlew installDebug --debug",
