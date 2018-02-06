@@ -38,6 +38,9 @@ class SignupScreen extends React.Component {
     const validation = validateData(this.state, this.rules);
 
     if (validation.passes()) {
+      const { navigation } = this.props;
+
+      this.props.signupUser(this.state, navigation);
     } else {
       console.tron.log(validation.errors.all());
       Alert.alert('Error', 'Error in validation');

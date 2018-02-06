@@ -31,6 +31,7 @@ export const accessTokenReducer = (state = INITIAL_STATE, action) => {
         accessToken: action.data.access_token,
         refreshing: false,
       };
+    case types.SIGNUP_USER_SUCCESS:
     case types.LOGIN_USER_SUCCESS:
       return {
         ...state,
