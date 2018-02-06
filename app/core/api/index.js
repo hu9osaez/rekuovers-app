@@ -1,4 +1,4 @@
-export const API_URL = 'http://api.rekuovers.com';
+export const API_URL = 'http://rekuovers.com/api';
 
 const authParameters = body => ({
   method: 'POST',

@@ -28,7 +28,7 @@ class LoginScreen extends React.Component {
     const { email, password } = this.state;
     const { navigation } = this.props;
 
-    this.props.loginUser({ login: email, password }, navigation);
+    this.props.loginUser({ email, password }, navigation);
   };
 
   canBeSubmitted() {
