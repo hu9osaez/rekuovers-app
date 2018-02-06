@@ -15,6 +15,12 @@ export const postLogin = body => {
   );
 };
 
+export const postSignup = body => {
+  return fetch(`${API_URL}/auth/signup`, authParameters(body)).then(res =>
+    res.json()
+  );
+};
+
 export const refreshToken = accessToken => {
   return fetch(`${API_URL}/auth/refresh`, {
     headers: {

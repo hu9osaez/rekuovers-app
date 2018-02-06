@@ -8,8 +8,10 @@ import SocialRow from './components/SocialRow';
 import SimpleInput from './components/SimpleInput';
 import { Container } from '@components';
 
+import { connect } from 'react-redux';
 import { PRIMARY_COLOR } from '@core/common/colors';
 import { isEmail, validateData } from '@core/utils';
+import { signupUser } from '@store/auth/actions';
 
 import styles from './styles';
 
@@ -123,4 +125,9 @@ SignupScreen.navigationOptions = {
   header: null,
 };
 
-export { SignupScreen };
+const mapStateToProps = state => {
+  let { loading } = state.auth;
+  return { loading };
+};
+
+export default connect(mapStateToProps, { signupUser })(SignupScreen);
