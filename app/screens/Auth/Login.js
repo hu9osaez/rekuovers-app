@@ -1,17 +1,15 @@
 import React from 'react';
 import { View } from 'react-native';
 import { Button, Text } from 'react-native-elements';
-import Toast from 'react-native-easy-toast';
 
-import { Container } from 'components';
+import { Container } from '@components';
 import BackRow from './components/BackRow';
-import ErrorInput from './components/ErrorInput';
 import SocialRow from './components/SocialRow';
 import SimpleInput from './components/SimpleInput';
 
 import { connect } from 'react-redux';
 import { PRIMARY_COLOR } from '@core/common/colors';
-import { validateData } from '@core/utils';
+import { isEmail } from '@core/utils';
 import { loginUser } from '@store/auth/actions';
 
 import styles from './styles';
@@ -22,14 +20,7 @@ class LoginScreen extends React.Component {
 
     this.state = {
       email: '',
-      password: '',
-      emailError: null,
-      passwordError: null,
-    };
-
-    this.rules = {
-      email: 'required|email',
-      password: 'required',
+      password: ''
     };
   }
 
@@ -37,28 +28,20 @@ class LoginScreen extends React.Component {
     const { email, password } = this.state;
     const { navigation } = this.props;
 
-    const validation = validateData({ email, password }, this.rules);
-
-    if (validation.passes()) {
-      this.setState({
-        emailError: null,
-        passwordError: null,
-      });
-
-      this.props.loginUser({ login: email, password }, navigation);
-    } else {
-      this.setState({
-        emailError: validation.errors.first('email'),
-        passwordError: validation.errors.first('password'),
-      });
-
-      this.toast.show('Wrong email or password');
-    }
+    this.props.loginUser({ login: email, password }, navigation);
   };
+
+  canBeSubmitted() {
+    const { email, password } = this.state;
+    const validEmail = isEmail(email);
+
+    return (email.length > 0 && password.length > 0 && validEmail);
+  }
 
   render() {
     let { loading, navigation } = this.props;
-    let { email, password, emailError, passwordError } = this.state;
+    let { email, password } = this.state;
+    const buttonEnabled = this.canBeSubmitted();
     return (
       <Container>
         <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
@@ -69,25 +52,21 @@ class LoginScreen extends React.Component {
           />
           <View style={styles.content}>
             <SimpleInput
-              onChangeText={email => this.setState({ email })}
+              onChangeText={email => this.setState({ email: email.replace(/ /g, '_') })}
               keyboardType={'email-address'}
               placeholder={'Email'}
               value={email}
             />
-            <ErrorInput hasError={emailError != null} message={emailError} />
 
             <SimpleInput
-              onChangeText={password => this.setState({ password })}
+              onChangeText={password => this.setState({ password: password })}
               placeholder={'Password'}
               value={password}
               secureTextEntry
             />
-            <ErrorInput
-              hasError={passwordError != null}
-              message={passwordError}
-            />
 
             <Button
+              disabled={!buttonEnabled}
               raised
               title={loading ? '' : 'LOG IN'}
               backgroundColor={PRIMARY_COLOR}
@@ -107,7 +86,6 @@ class LoginScreen extends React.Component {
               Forgot my password
             </Text>
           </View>
-          <Toast position={'center'} ref={toast => (this.toast = toast)} />
         </View>
       </Container>
     );
