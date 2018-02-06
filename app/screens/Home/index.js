@@ -8,11 +8,7 @@ import { connect } from 'react-redux';
 import FeaturedCover from './components/FeaturedCover';
 import NewestCoverCard from './components/NewestCoverCard';
 
-const styles = {
-  container: {
-    backgroundColor: '#ffffff',
-  },
-};
+import styles from './styles';
 
 class HomeScreen extends React.Component {
   goSongDetail(song) {
@@ -53,7 +49,7 @@ class HomeScreen extends React.Component {
             NEWEST
           </Text>
           <FlatList
-            data={covers.newest}
+            data={covers.newest.slice(0, 6)}
             refreshing={covers.loading}
             renderItem={this.renderNewestCover}
             keyExtractor={cover => cover.id}
