@@ -61,7 +61,7 @@ class SignupScreen extends React.Component {
   }
 
   render() {
-    let { navigation } = this.props;
+    let { loading, navigation } = this.props;
     let { name, username, email, password } = this.state;
     const buttonEnabled = this.canBeSubmitted();
     return (
@@ -105,15 +105,15 @@ class SignupScreen extends React.Component {
               <Button
                 disabled={!buttonEnabled}
                 raised
-                title={'SIGN UP'}
+                title={loading ? '' : 'SIGN UP'}
                 backgroundColor={PRIMARY_COLOR}
                 borderRadius={8}
                 containerViewStyle={{
-                  marginBottom: 20,
                   marginTop: 20,
                   marginLeft: 0,
                   marginRight: 0,
                 }}
+                loading={loading}
                 onPress={this.onSubmit}
               />
             </View>

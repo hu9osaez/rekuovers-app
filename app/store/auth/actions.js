@@ -33,7 +33,7 @@ export const signupUser = (data, navigation) => async dispatch => {
     } else {
       dispatch({ type: types.SIGNUP_USER_FAIL });
 
-      Alert.alert('Incorrect signup', 'Check errors');
+      Alert.alert('Incorrect credentials', response.error.message);
     }
   });
 };
