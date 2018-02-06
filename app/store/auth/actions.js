@@ -12,7 +12,10 @@ export const loginUser = (data, navigation) => async dispatch => {
       resetNavigationTo('Authenticated', navigation);
     } else {
       dispatch({ type: types.LOGIN_USER_FAIL });
-      Alert.alert('Incorrect credentials', 'Wrong email or password.\nPlease try again.');
+      Alert.alert(
+        'Incorrect credentials',
+        'Wrong email or password.\nPlease try again.'
+      );
     }
   });
 };

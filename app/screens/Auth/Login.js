@@ -20,11 +20,11 @@ class LoginScreen extends React.Component {
 
     this.state = {
       email: '',
-      password: ''
+      password: '',
     };
   }
 
-  onSubmitLogin = () => {
+  onSubmit = () => {
     const { email, password } = this.state;
     const { navigation } = this.props;
 
@@ -35,7 +35,7 @@ class LoginScreen extends React.Component {
     const { email, password } = this.state;
     const validEmail = isEmail(email);
 
-    return (email.length > 0 && password.length > 0 && validEmail);
+    return email.length > 0 && password.length >= 6 && validEmail;
   }
 
   render() {
@@ -52,7 +52,9 @@ class LoginScreen extends React.Component {
           />
           <View style={styles.content}>
             <SimpleInput
-              onChangeText={email => this.setState({ email: email.replace(/ /g, '_') })}
+              onChangeText={email =>
+                this.setState({ email: email.replace(/ /g, '_') })
+              }
               keyboardType={'email-address'}
               placeholder={'Email'}
               value={email}
@@ -77,7 +79,7 @@ class LoginScreen extends React.Component {
                 marginRight: 0,
               }}
               loading={loading}
-              onPress={this.onSubmitLogin}
+              onPress={this.onSubmit}
             />
 
             <Text
