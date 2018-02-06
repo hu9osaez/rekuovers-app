@@ -1,3 +1,4 @@
+import { Alert } from 'react-native';
 import * as types from '../types';
 import { postLogin } from '@core/api';
 import { resetNavigationTo } from '@core/utils';
@@ -11,6 +12,7 @@ export const loginUser = (data, navigation) => async dispatch => {
       resetNavigationTo('Authenticated', navigation);
     } else {
       dispatch({ type: types.LOGIN_USER_FAIL });
+      Alert.alert('Incorrect credentials', 'Wrong email or password.\nPlease try again.');
     }
   });
 };
