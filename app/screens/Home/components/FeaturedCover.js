@@ -1,11 +1,10 @@
 import React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 import { colorsFromUrl } from 'react-native-dominant-color';
-import pify from 'pify';
 
 const styles = StyleSheet.create({
   container: {
-    height: 200,
+    height: 199,
     width: 360,
   },
   image: {
@@ -17,7 +16,6 @@ const styles = StyleSheet.create({
     top: 40,
     borderWidth: 5,
     borderColor: 'rgba(255, 255, 255, 0.2)',
-    elevation: 1,
   },
 });
 
@@ -32,11 +30,11 @@ class FeaturedCover extends React.Component {
   componentWillMount() {
     const { cover } = this.props;
 
-    pify(colorsFromUrl)(
+    /*pify(colorsFromUrl)(
       `https://img.youtube.com/vi/${cover.youtube_id}/mqdefault.jpg`
     ).then(data => {
       this.setState({ bgColor: data.averageColor });
-    });
+    });*/
   }
 
   render() {

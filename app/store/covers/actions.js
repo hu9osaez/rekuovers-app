@@ -8,25 +8,30 @@ export const fetchCovers = () => async dispatch => {
   runSeries(
     [
       cb => {
-        newestCovers().then((response) => {
-
-          if(response.success) {
-            dispatch({ type: types.NEWEST_COVERS_SUCCESS, data: response.data });
+        newestCovers().then(response => {
+          if (response.success) {
+            dispatch({
+              type: types.NEWEST_COVERS_SUCCESS,
+              data: response.data,
+            });
             cb(null, null);
           }
         });
       },
       cb => {
-        popularCovers().then((response) => {
-          if(response.success) {
-            dispatch({ type: types.POPULAR_COVERS_SUCCESS, data: response.data });
+        popularCovers().then(response => {
+          if (response.success) {
+            dispatch({
+              type: types.POPULAR_COVERS_SUCCESS,
+              data: response.data,
+            });
             cb(null, null);
           }
         });
       },
     ],
     (err, results) => {
-      // the results array will equal ['one','two']
+      dispatch({ type: types.REQUEST_COVERS_SUCCESS });
     }
   );
 };

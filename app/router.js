@@ -11,7 +11,7 @@ import {
   WelcomeScreen,
   SignupScreen,
   LoginScreen,
-  HomeScreen as HomeTab,
+  HomeTab,
   SearchScreen as SearchTab,
   ProfileTab,
   CoverDetailsScreen,

@@ -6,50 +6,45 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { Text } from 'react-native-elements';
+import { Text, normalize } from 'react-native-elements';
 import { BACKGROUND_COLOR, SECONDARY_COLOR_TEXT } from '@core/common/colors';
 
 let width = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
   container: {
-    width: width / 2 - 25,
-    height: width * 0.25,
+    backgroundColor: '#ffffff',
+    width: (width / 2) - 25,
+    height: width * 0.30,
     marginHorizontal: 5,
   },
   imageContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'red',
-    width: width / 2 - 10,
+    width: (width / 2) - 25,
     height: width * 0.25,
   },
-  contentContainer: {
-    flex: 1,
-    alignSelf: 'stretch',
-    backgroundColor: 'rgba(0,0,0,0.3)',
+  title: {
+    fontSize: normalize(11),
   },
 });
 
-const SongCard = ({ song, onPress }) => {
+const NewestCoverCard = ({ cover, onPress }) => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => onPress(song)}>
+      <TouchableOpacity onPress={() => onPress(cover)}>
         <ImageBackground
           source={{
-            uri: `https://img.youtube.com/vi/${song.youtube_id}/mqdefault.jpg`,
+            uri: `https://img.youtube.com/vi/${cover.youtube_id}/mqdefault.jpg`,
           }}
           style={styles.imageContainer}
         />
       </TouchableOpacity>
+      <Text style={styles.title} ellipsizeMode={'tail'} numberOfLines={1}>
+        {cover.description}
+      </Text>
     </View>
   );
 };
 
-/*SongCard.propTypes = {
-  song: React.PropTypes.object.isRequired
-};*/
-
-export default SongCard;
-
-// @TODO: Motivation to like it
+export default NewestCoverCard;
