@@ -5,6 +5,7 @@ import Toast from 'react-native-easy-toast';
 
 import { Container } from 'components';
 import BackRow from './components/BackRow';
+import ErrorInput from './components/ErrorInput';
 import SocialRow from './components/SocialRow';
 import SimpleInput from './components/SimpleInput';
 
@@ -22,6 +23,8 @@ class LoginScreen extends React.Component {
     this.state = {
       email: '',
       password: '',
+      emailError: null,
+      passwordError: null,
     };
 
     this.rules = {
@@ -37,15 +40,25 @@ class LoginScreen extends React.Component {
     const validation = validateData({ email, password }, this.rules);
 
     if (validation.passes()) {
+      this.setState({
+        emailError: null,
+        passwordError: null,
+      });
+
       this.props.loginUser({ login: email, password }, navigation);
     } else {
+      this.setState({
+        emailError: validation.errors.first('email'),
+        passwordError: validation.errors.first('password'),
+      });
+
       this.toast.show('Wrong email or password');
     }
   };
 
   render() {
     let { loading, navigation } = this.props;
-    let { email, password } = this.state;
+    let { email, password, emailError, passwordError } = this.state;
     return (
       <Container>
         <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
@@ -57,15 +70,21 @@ class LoginScreen extends React.Component {
           <View style={styles.content}>
             <SimpleInput
               onChangeText={email => this.setState({ email })}
+              keyboardType={'email-address'}
               placeholder={'Email'}
               value={email}
             />
+            <ErrorInput hasError={emailError != null} message={emailError} />
 
             <SimpleInput
               onChangeText={password => this.setState({ password })}
               placeholder={'Password'}
               value={password}
               secureTextEntry
+            />
+            <ErrorInput
+              hasError={passwordError != null}
+              message={passwordError}
             />
 
             <Button
@@ -88,10 +107,7 @@ class LoginScreen extends React.Component {
               Forgot my password
             </Text>
           </View>
-          <Toast
-            position={'center'}
-            ref={toast => (this.toast = toast)}
-          />
+          <Toast position={'center'} ref={toast => (this.toast = toast)} />
         </View>
       </Container>
     );
