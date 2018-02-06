@@ -1,6 +1,6 @@
 import { Alert } from 'react-native';
 import * as types from '../types';
-import { postLogin, postSignup } from '@core/api';
+import { invalidateToken, postLogin, postSignup } from '@core/api';
 import { resetNavigationTo } from '@core/utils';
 
 export const loginUser = (data, navigation) => async dispatch => {
@@ -33,16 +33,14 @@ export const signupUser = (data, navigation) => async dispatch => {
     } else {
       dispatch({ type: types.SIGNUP_USER_FAIL });
 
-      Alert.alert(
-        'Incorrect signup',
-        'Check errors'
-      );
+      Alert.alert('Incorrect signup', 'Check errors');
     }
   });
 };
 
-export const logoutUser = navigation => dispatch => {
-  dispatch({ type: types.LOGOUT_USER });
-
-  resetNavigationTo('Unauthenticated', navigation);
+export const logoutUser = navigation => (dispatch, getState) => {
+  invalidateToken(getState().token.accessToken).then(response => {
+    dispatch({ type: types.LOGOUT_USER });
+    resetNavigationTo('Unauthenticated', navigation);
+  });
 };

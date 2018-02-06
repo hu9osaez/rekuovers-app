@@ -15,8 +15,8 @@ export const authReducer = (state = INITIAL_STATE, action) => {
         ...state,
         loading: true,
       };
-      case types.SIGNUP_USER_SUCCESS:
-      case types.LOGIN_USER_SUCCESS:
+    case types.SIGNUP_USER_SUCCESS:
+    case types.LOGIN_USER_SUCCESS:
       return {
         ...state,
         loading: false,
