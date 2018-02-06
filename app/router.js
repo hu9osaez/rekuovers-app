@@ -1,6 +1,10 @@
 import React from 'react';
 import { TabNavigator, StackNavigator } from 'react-navigation';
-import { BACKGROUND_COLOR, PRIMARY_COLOR, SECONDARY_COLOR } from '@core/common/colors';
+import {
+  BACKGROUND_COLOR,
+  PRIMARY_COLOR,
+  SECONDARY_COLOR,
+} from '@core/common/colors';
 
 import {
   SplashScreen,

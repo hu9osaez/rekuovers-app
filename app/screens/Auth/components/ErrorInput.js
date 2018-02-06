@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -10,8 +10,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const ErrorInput = ({ hasError, message }) => (
-  hasError && <Text style={styles.text}>{message}</Text>
-);
+const ErrorInput = ({ hasError, message }) =>
+  hasError && <Text style={styles.text}>{message}</Text>;
 
 export default ErrorInput;
