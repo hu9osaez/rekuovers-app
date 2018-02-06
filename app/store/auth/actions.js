@@ -3,12 +3,15 @@ import * as types from '../types';
 import { invalidateToken, postLogin, postSignup } from '@core/api';
 import { resetNavigationTo } from '@core/utils';
 
+import { fetchCovers } from '../covers/actions';
+
 export const loginUser = (data, navigation) => async dispatch => {
   dispatch({ type: types.LOGIN_USER });
 
   postLogin(data).then(response => {
     if (response.success) {
       dispatch({ type: types.LOGIN_USER_SUCCESS, data: response.data });
+      dispatch(fetchCovers());
 
       resetNavigationTo('Authenticated', navigation);
     } else {

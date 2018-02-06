@@ -47,3 +47,19 @@ export const refreshToken = accessToken => {
     },
   }).then(res => res.json());
 };
+
+export const newestCovers = () => {
+  return fetch(`${API_URL}/covers/newest`, {
+    headers: {
+      Accept: 'application/json',
+    },
+  }).then(res => res.json());
+};
+
+export const popularCovers = () => {
+  return fetch(`${API_URL}/covers/popular`, {
+    headers: {
+      Accept: 'application/json',
+    },
+  }).then(res => res.json());
+};

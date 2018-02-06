@@ -3,6 +3,7 @@ import { Image, View } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { resetNavigationTo } from '@core/utils';
+import { fetchCovers } from '@store/covers/actions';
 import { checkToken } from '@store/token/actions';
 
 import styles from './styles';
@@ -24,6 +25,7 @@ class SplashScreen extends React.Component {
     if (this.props.auth.rehydratedAt !== rehydratedAt) {
       if (isAuthenticated) {
         this.props.checkToken(accessToken);
+        this.props.fetchCovers();
       }
 
       if (!checking && !refreshing) {
@@ -66,6 +68,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ checkToken }, dispatch);
+  bindActionCreators({ checkToken, fetchCovers }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(SplashScreen);

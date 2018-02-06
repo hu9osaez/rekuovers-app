@@ -4,7 +4,7 @@ import { Icon, Text } from 'react-native-elements';
 import Swiper from 'react-native-swiper';
 import { robotoWeights } from 'react-native-typography';
 
-import SongCard from '../../components/SongCard';
+import SongCard from '@components/SongCard';
 import FeaturedCover from './components/FeaturedCover';
 import SurpriseMe from './components/SurpriseMe';
 
