@@ -15,15 +15,15 @@ class NewestCoversList extends React.PureComponent {
             <Text style={styles.newestHeader}>NEWEST</Text>
           </View>
           <View style={{ flex: 1 }}>
-            <Text style={styles.newestSeeMore} onPress={() => alert('Pressed')}>See more</Text>
+            <Text style={styles.newestSeeMore} onPress={() => alert('Pressed')}>
+              See more
+            </Text>
           </View>
         </View>
         <FlatList
           data={covers.slice(0, 6)}
           refreshing={loading}
-          renderItem={({ item }) => (
-            <NewestCoverCard cover={item} />
-          )}
+          renderItem={({ item }) => <NewestCoverCard cover={item} />}
           keyExtractor={cover => cover.id}
           horizontal
           showsHorizontalScrollIndicator={false}

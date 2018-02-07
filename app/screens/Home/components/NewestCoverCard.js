@@ -79,7 +79,9 @@ class NewestCoverCard extends React.Component {
     const { likedByActualUser } = this.state;
     return (
       <View style={styles.container}>
-        <TouchableOpacity onPress={() => navigation.navigate('CoverDetails', { cover })}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('CoverDetails', { cover })}
+        >
           <ImageBackground
             source={{
               uri: `https://img.youtube.com/vi/${

@@ -4670,6 +4670,10 @@ react-native-animatable@^1.2.4:
   dependencies:
     prop-types "^15.5.10"
 
+react-native-banner-carousel@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/react-native-banner-carousel/-/react-native-banner-carousel-1.0.2.tgz#dc1343d8c37d401f867aee8f140ef7d9e33b07eb"
+
 react-native-dismiss-keyboard@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/react-native-dismiss-keyboard/-/react-native-dismiss-keyboard-1.0.0.tgz#32886242b3f2317e121f3aeb9b0a585e2b879b49"
@@ -4698,6 +4702,12 @@ react-native-elements@^0.19.0:
     lodash.times "^4.3.2"
     opencollective "^1.0.3"
     prop-types "^15.5.8"
+
+react-native-grid-list@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/react-native-grid-list/-/react-native-grid-list-1.0.6.tgz#6b3585ff9f30fd99feba6ddcd8e64eb935eb9f6a"
+  dependencies:
+    prop-types "^15.6.0"
 
 react-native-iphone-x-helper@^1.0.1:
   version "1.0.2"
