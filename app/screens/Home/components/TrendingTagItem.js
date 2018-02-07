@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     marginLeft: 10,
     fontSize: 20,
-  }
+  },
 });
 
 class TrendingTagItem extends React.Component {
@@ -28,8 +28,11 @@ class TrendingTagItem extends React.Component {
       <TouchableOpacity
         activeOpacity={0.8}
         onPress={() => alert('Pressed')}
-        style={styles.container}>
-        <Text style={[styles.text, systemWeights.thin]}># {tag.name.toUpperCase()}</Text>
+        style={styles.container}
+      >
+        <Text style={[styles.text, systemWeights.thin]}>
+          # {tag.name.toUpperCase()}
+        </Text>
       </TouchableOpacity>
     );
   }

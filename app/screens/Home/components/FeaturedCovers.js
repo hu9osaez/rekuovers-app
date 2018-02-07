@@ -9,8 +9,14 @@ const { width } = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     width,
-    height: 200
-  }
+    height: 200,
+  },
+  pageIndicatorStyle: {
+    backgroundColor: 'rgba(255,255,255, 0.3)',
+  },
+  activePageIndicatorStyle: {
+    backgroundColor: 'rgba(255,255,255, 0.4)',
+  },
 });
 
 class FeaturedCovers extends React.Component {
@@ -23,8 +29,10 @@ class FeaturedCovers extends React.Component {
           autoplayTimeout={5000}
           loop
           pageSize={width}
+          activePageIndicatorStyle={styles.activePageIndicatorStyle}
+          pageIndicatorStyle={styles.pageIndicatorStyle}
         >
-          {covers.map((cover) => <FeaturedCoverSlide cover={cover} /> )}
+          {covers.map(cover => <FeaturedCoverSlide cover={cover} />)}
         </Carousel>
       </View>
     );
@@ -32,7 +40,7 @@ class FeaturedCovers extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  covers: state.covers.popular,
+  covers: state.covers.newest,
 });
 
 export default connect(mapStateToProps)(FeaturedCovers);

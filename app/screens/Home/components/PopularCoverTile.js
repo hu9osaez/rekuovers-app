@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import { Icon, Text, normalize } from 'react-native-elements';
 import { withNavigation } from 'react-navigation';
+import { systemWeights } from 'react-native-typography';
 
 import { PRIMARY_COLOR_TEXT } from '@core/common/colors';
 import { abbreviateNumber } from '@core/utils/text';
@@ -17,13 +18,13 @@ const { width } = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     width: width / 2 - 8,
-    height: width * 0.35,
+    height: width * 0.55,
     marginHorizontal: 2,
   },
   imageContainer: {
     backgroundColor: '#ffffff',
     width: width / 2 - 8,
-    height: width * 0.35,
+    height: width * 0.55,
   },
   overlayContainer: {
     flex: 1,
@@ -54,8 +55,6 @@ const styles = StyleSheet.create({
   likesContainer: {
     backgroundColor: 'rgba(255,255,255, 0.2)',
     borderRadius: 3,
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255, 0.3)',
     position: 'absolute',
     left: 5,
     top: 5,
@@ -82,7 +81,9 @@ class PopularCoverTile extends React.Component {
       >
         <ImageBackground
           source={{
-            uri: `https://img.youtube.com/vi/${cover.youtube_id}/mqdefault.jpg`,
+            uri: `https://img.youtube.com/vi/${
+              cover.youtube_id
+            }/maxresdefault.jpg`,
           }}
           resizeMode={'cover'}
           style={styles.imageContainer}
@@ -95,7 +96,9 @@ class PopularCoverTile extends React.Component {
               </Text>
             </View>
             <View style={styles.textContainer}>
-              <Text style={styles.text}>{cover.description}</Text>
+              <Text style={[styles.text, systemWeights.light]}>
+                {cover.description}
+              </Text>
             </View>
           </View>
         </ImageBackground>

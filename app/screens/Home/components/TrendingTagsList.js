@@ -40,7 +40,7 @@ const tags = [
 class TrendingTagsList extends React.Component {
   render() {
     return (
-      <View style={[styles.containerSection, {marginBottom: 0}]}>
+      <View style={[styles.containerSection, { marginBottom: 0 }]}>
         <View style={styles.newestHeaderContainer}>
           <View style={{ flex: 1 }}>
             <Text style={styles.newestHeader}>TRENDING TAGS</Text>
@@ -59,8 +59,6 @@ class TrendingTagsList extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-
-});
+const mapStateToProps = state => ({});
 
 export default connect(mapStateToProps)(TrendingTagsList);

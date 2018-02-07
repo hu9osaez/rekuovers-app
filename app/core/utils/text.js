@@ -14,3 +14,9 @@ export const abbreviateNumber = count => {
 export const secondsToTime = time => {
   return ~~(time / 60) + ':' + (time % 60 < 10 ? '0' : '') + time % 60;
 };
+
+export const splitForWords = str => {
+  const re = /\b[\w']+(?:\s+[\w']+){0,2}/g;
+
+  return sample.match(re);
+};

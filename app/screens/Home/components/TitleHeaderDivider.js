@@ -4,14 +4,12 @@ import { StyleSheet, View } from 'react-native';
 const styles = StyleSheet.create({
   container: {
     height: 1,
-    backgroundColor: '#E0E0E0',
+    backgroundColor: '#EEEEEE',
     marginTop: 2,
     marginBottom: 10,
-  }
+  },
 });
 
-const TitleHeaderDivider = () => (
-  <View style={styles.container} />
-);
+const TitleHeaderDivider = () => <View style={styles.container} />;
 
 export default TitleHeaderDivider;
