@@ -21,8 +21,8 @@ const { width } = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#ffffff',
-    width: (width / 2.3) - 5,
-    height: width * 0.30,
+    width: width / 2.3 - 5,
+    height: width * 0.3,
     marginBottom: 3,
     marginHorizontal: 2,
     elevation: 1,
@@ -30,8 +30,8 @@ const styles = StyleSheet.create({
   imageContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    width: (width / 2.3) - 5,
-    height: width * 0.20,
+    width: width / 2.3 - 5,
+    height: width * 0.2,
   },
   title: {
     fontSize: normalize(11),

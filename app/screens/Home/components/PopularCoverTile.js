@@ -6,20 +6,23 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { Text, normalize } from 'react-native-elements';
+import { Icon, Text, normalize } from 'react-native-elements';
 import { withNavigation } from 'react-navigation';
+
+import { PRIMARY_COLOR_TEXT } from '@core/common/colors';
+import { abbreviateNumber } from '@core/utils/text';
 
 const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   container: {
-    width: (width / 2) - 8,
+    width: width / 2 - 8,
     height: width * 0.35,
     marginHorizontal: 2,
   },
   imageContainer: {
     backgroundColor: '#ffffff',
-    width: (width / 2) - 8,
+    width: width / 2 - 8,
     height: width * 0.35,
   },
   overlayContainer: {
@@ -46,23 +49,49 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0)',
     fontSize: normalize(11),
     paddingLeft: 5,
-    fontWeight: 'bold'
-  }
+    fontWeight: 'bold',
+  },
+  likesContainer: {
+    borderRadius: 3,
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255, 0.3)',
+    position: 'absolute',
+    left: 5,
+    top: 5,
+    height: 17,
+    justifyContent: 'center',
+    paddingHorizontal: 3,
+    flexDirection: 'row',
+  },
+  textLikes: {
+    color: '#ffffff',
+    fontSize: normalize(10),
+    paddingLeft: 3,
+  },
 });
 
-class MostStarredCard extends React.Component {
+class PopularCoverTile extends React.Component {
   render() {
     const { cover, navigation } = this.props;
     return (
       <TouchableOpacity
         onPress={() => navigation.navigate('CoverDetails', { cover })}
-        style={styles.container}>
+        style={styles.container}
+      >
         <ImageBackground
-          source={{ uri: `https://img.youtube.com/vi/${cover.youtube_id}/mqdefault.jpg`}}
+          source={{
+            uri: `https://img.youtube.com/vi/${cover.youtube_id}/mqdefault.jpg`,
+          }}
           resizeMode={'cover'}
           style={styles.imageContainer}
         >
           <View style={styles.overlayContainer}>
+            <View style={styles.likesContainer}>
+              <Icon name={'favorite'} size={11} color={PRIMARY_COLOR_TEXT} />
+              <Text style={styles.textLikes}>
+                {abbreviateNumber(cover.likes)}
+              </Text>
+            </View>
             <View style={styles.textContainer}>
               <Text style={styles.text}>{cover.description}</Text>
             </View>
@@ -73,4 +102,4 @@ class MostStarredCard extends React.Component {
   }
 }
 
-export default withNavigation(MostStarredCard);
+export default withNavigation(PopularCoverTile);
