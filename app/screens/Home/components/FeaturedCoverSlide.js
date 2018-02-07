@@ -1,5 +1,12 @@
 import React from 'react';
-import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+  Dimensions,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { Icon } from 'react-native-elements';
 
 import { withNavigation } from 'react-navigation';
@@ -18,7 +25,7 @@ const styles = StyleSheet.create({
     width: width,
   },
   image: {
-    width: width/2,
+    width: width / 2,
     height: 200,
     position: 'absolute',
     right: 0,
@@ -77,10 +84,9 @@ class FeaturedCoverSlide extends React.Component {
       `https://img.youtube.com/vi/${cover.youtube_id}/mqdefault.jpg`,
       (err, colors) => {
         if (!err) {
-          if(colors.dominantColor === '#CCCCCC') {
+          if (colors.dominantColor === '#CCCCCC') {
             self.setState({ bgColor: colors.dominantColor });
-          }
-          else {
+          } else {
             self.setState({ bgColor: colors.averageColor });
           }
         }
@@ -91,7 +97,9 @@ class FeaturedCoverSlide extends React.Component {
   render() {
     const { cover, navigation } = this.props;
     let { bgColor } = this.state;
-    let imgUrl = `https://img.youtube.com/vi/${cover.youtube_id}/maxresdefault.jpg`;
+    let imgUrl = `https://img.youtube.com/vi/${
+      cover.youtube_id
+    }/maxresdefault.jpg`;
 
     return (
       <TouchableOpacity
@@ -113,9 +121,7 @@ class FeaturedCoverSlide extends React.Component {
 
         <View style={styles.likesContainer}>
           <Icon name={'favorite'} size={11} color={'#ffffff'} />
-          <Text style={styles.textLikes}>
-            {abbreviateNumber(cover.likes)}
-          </Text>
+          <Text style={styles.textLikes}>{abbreviateNumber(cover.likes)}</Text>
         </View>
 
         <Image source={{ uri: imgUrl }} style={styles.image} />

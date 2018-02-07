@@ -26,7 +26,7 @@ class HomeScreen extends React.Component {
 }
 
 HomeScreen.navigationOptions = {
-  title: 'Explore',
+  header: null,
   tabBarIcon: ({ tintColor }) => <Icon name="home" color={tintColor} />,
 };
 

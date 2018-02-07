@@ -12,10 +12,11 @@ const styles = StyleSheet.create({
     marginHorizontal: 3,
     justifyContent: 'center',
     borderRadius: 3,
-    backgroundColor: PRIMARY_COLOR,
+    borderColor: PRIMARY_COLOR,
+    borderWidth: 1,
   },
   text: {
-    color: '#ffffff',
+    color: PRIMARY_COLOR,
     marginLeft: 10,
     fontSize: 20,
   },
@@ -26,7 +27,7 @@ class TrendingTagItem extends React.Component {
     const { tag } = this.props;
     return (
       <TouchableOpacity
-        activeOpacity={0.8}
+        activeOpacity={0.7}
         onPress={() => alert('Pressed')}
         style={styles.container}
       >

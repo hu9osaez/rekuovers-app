@@ -35,6 +35,10 @@ const tags = [
     name: 'Metro',
     slug: 'metro',
   },
+  {
+    name: 'Saxo',
+    slug: 'saxo',
+  },
 ];
 
 class TrendingTagsList extends React.Component {
