@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   likesContainer: {
+    backgroundColor: 'rgba(255,255,255, 0.2)',
     borderRadius: 3,
     borderWidth: 1,
     borderColor: 'rgba(255,255,255, 0.3)',
