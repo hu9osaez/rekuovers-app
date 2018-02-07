@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: PRIMARY_COLOR_TEXT,
+    backgroundColor: '#212121',
   },
   logoContainer: {
     justifyContent: 'center',

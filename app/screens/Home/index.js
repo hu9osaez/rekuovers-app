@@ -4,8 +4,9 @@ import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 
 import FeaturedCovers from './components/FeaturedCovers';
-import PopularCoversList from './components/PopularCoversList';
 import NewestCoversList from './components/NewestCoversList';
+import PopularCoversList from './components/PopularCoversList';
+import TrendingTagsList from './components/TrendingTagsList';
 
 import styles from './styles';
 
@@ -17,6 +18,7 @@ class HomeScreen extends React.Component {
           <FeaturedCovers />
           <PopularCoversList />
           <NewestCoversList />
+          <TrendingTagsList />
         </ScrollView>
       </View>
     );

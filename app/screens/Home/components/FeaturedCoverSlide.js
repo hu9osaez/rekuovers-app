@@ -37,7 +37,6 @@ class FeaturedCoverSlide extends React.Component {
       (err, colors) => {
         if (!err) {
           self.setState({ bgColor: colors.averageColor });
-          console.tron.log(colors.averageColor);
         }
       }
     );
