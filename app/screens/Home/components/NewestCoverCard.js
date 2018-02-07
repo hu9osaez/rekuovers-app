@@ -10,6 +10,7 @@ import { Icon, Text, normalize } from 'react-native-elements';
 
 import moment from 'moment';
 import { connect } from 'react-redux';
+import { withNavigation } from 'react-navigation';
 
 import { checkCoverLike } from '@core/api';
 import { PRIMARY_COLOR_TEXT, SECONDARY_COLOR_TEXT } from '@core/common/colors';
@@ -37,7 +38,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     height: 20,
   },
-  iconContainer: {},
   textLikes: {
     fontSize: normalize(11),
     marginLeft: 4,
@@ -75,11 +75,11 @@ class NewestCoverCard extends React.Component {
   };
 
   render() {
-    const { cover, onPress } = this.props;
+    const { cover, navigation } = this.props;
     const { likedByActualUser } = this.state;
     return (
       <View style={styles.container}>
-        <TouchableOpacity onPress={() => onPress(cover)}>
+        <TouchableOpacity onPress={() => navigation.navigate('CoverDetails', { cover })}>
           <ImageBackground
             source={{
               uri: `https://img.youtube.com/vi/${
@@ -103,7 +103,6 @@ class NewestCoverCard extends React.Component {
               name={'favorite'}
               size={13}
               color={likedByActualUser ? '#C62828' : PRIMARY_COLOR_TEXT}
-              containerStyle={styles.iconContainer}
             />
             <Text style={styles.textLikes}>
               {abbreviateNumber(cover.likes)}
@@ -124,4 +123,4 @@ const mapStateToProps = state => ({
   accessToken: state.token.accessToken,
 });
 
-export default connect(mapStateToProps)(NewestCoverCard);
+export default connect(mapStateToProps)(withNavigation(NewestCoverCard));

@@ -9,11 +9,20 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#ffffff',
   },
+  newestHeaderContainer: {
+    flexDirection: 'row',
+    height: 30,
+  },
   newestHeader: {
     ...condensedBold,
     fontSize: 16,
     marginLeft: 5,
-    marginTop: 10,
+    lineHeight: 35,
+  },
+  newestSeeMore: {
+    lineHeight: 30,
+    marginRight: 5,
+    textAlign: 'right',
   },
 });
 
