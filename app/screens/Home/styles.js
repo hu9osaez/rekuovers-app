@@ -7,7 +7,12 @@ const { condensedBold } = robotoWeights;
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: '#E0E0E0',
+  },
+  containerSection: {
     backgroundColor: '#ffffff',
+    paddingVertical: 5,
+    marginBottom: 12,
   },
   newestHeaderContainer: {
     flexDirection: 'row',

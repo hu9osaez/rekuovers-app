@@ -9,7 +9,7 @@ class NewestCoversList extends React.PureComponent {
   render() {
     const { covers, loading } = this.props;
     return (
-      <View>
+      <View style={styles.containerSection}>
         <View style={styles.newestHeaderContainer}>
           <View style={{ flex: 1 }}>
             <Text style={styles.newestHeader}>NEWEST</Text>

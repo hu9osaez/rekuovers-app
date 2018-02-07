@@ -76,6 +76,7 @@ class PopularCoverTile extends React.Component {
     const { cover, navigation } = this.props;
     return (
       <TouchableOpacity
+        activeOpacity={0.8}
         onPress={() => navigation.navigate('CoverDetails', { cover })}
         style={styles.container}
       >

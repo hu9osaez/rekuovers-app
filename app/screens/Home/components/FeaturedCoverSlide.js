@@ -4,8 +4,8 @@ import { colorsFromUrl } from 'react-native-dominant-color';
 
 const styles = StyleSheet.create({
   container: {
-    height: 199,
-    width: 360,
+    height: '100%',
+    width: '100%',
   },
   image: {
     borderRadius: 100,
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   },
 });
 
-class FeaturedCover extends React.Component {
+class FeaturedCoverSlide extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -56,4 +56,4 @@ class FeaturedCover extends React.Component {
   }
 }
 
-export default FeaturedCover;
+export default FeaturedCoverSlide;

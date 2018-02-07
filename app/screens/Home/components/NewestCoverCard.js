@@ -85,6 +85,7 @@ class NewestCoverCard extends React.Component {
     return (
       <View style={styles.container}>
         <TouchableOpacity
+          activeOpacity={0.8}
           onPress={() => navigation.navigate('CoverDetails', { cover })}
         >
           <Image

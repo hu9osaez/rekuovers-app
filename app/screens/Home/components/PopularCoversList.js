@@ -9,7 +9,7 @@ class PopularCoversList extends React.Component {
   render() {
     const { covers } = this.props;
     return (
-      <View>
+      <View style={styles.containerSection}>
         <View style={styles.newestHeaderContainer}>
           <View style={{ flex: 1 }}>
             <Text style={styles.newestHeader}>POPULAR</Text>
