@@ -63,3 +63,12 @@ export const popularCovers = () => {
     },
   }).then(res => res.json());
 };
+
+export const checkCoverLike = (cover, accessToken) => {
+  return fetch(`${API_URL}/covers/${cover}/likes/exists`, {
+    headers: {
+      Accept: 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+  }).then(res => res.json());
+};
