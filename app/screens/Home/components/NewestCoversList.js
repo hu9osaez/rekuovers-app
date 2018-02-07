@@ -6,17 +6,22 @@ import { connect } from 'react-redux';
 import styles from '../styles';
 
 class NewestCoversList extends React.PureComponent {
+
+  goToCoverDetails = (cover) => {
+    const { navigate } = this.props.navigation;
+
+    navigate('CoverDetails', { cover })
+  };
+
   render() {
     const { covers, loading } = this.props;
-    return(
+    return (
       <View>
         <Text style={styles.newestHeader}>NEWEST</Text>
         <FlatList
           data={covers.slice(0, 6)}
           refreshing={loading}
-          renderItem={({item}) => (
-            <NewestCoverCard cover={item} />
-          )}
+          renderItem={({ item }) => <NewestCoverCard cover={item} onPress={this.goToCoverDetails} />}
           keyExtractor={cover => cover.id}
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -29,7 +34,7 @@ class NewestCoversList extends React.PureComponent {
 
 const mapStateToProps = state => ({
   covers: state.covers.newest,
-  loading: state.covers.loading
+  loading: state.covers.loading,
 });
 
 export default connect(mapStateToProps)(NewestCoversList);

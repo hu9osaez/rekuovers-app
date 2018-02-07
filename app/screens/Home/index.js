@@ -12,7 +12,7 @@ class HomeScreen extends React.Component {
     return (
       <View style={styles.container}>
         <ScrollView>
-          <NewestCoversList />
+          <NewestCoversList navigation={this.props.navigation} />
         </ScrollView>
       </View>
     );
@@ -25,7 +25,7 @@ HomeScreen.navigationOptions = {
 };
 
 const mapStateToProps = state => ({
-  accessToken: state.token.accessToken
+  accessToken: state.token.accessToken,
 });
 
 export default connect(mapStateToProps)(HomeScreen);

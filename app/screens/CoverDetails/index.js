@@ -9,6 +9,7 @@ import {
   SECONDARY_COLOR,
   SECONDARY_COLOR_TEXT,
 } from '@core/common/colors';
+import { secondsToTime } from '@core/utils/text';
 
 const styles = StyleSheet.create({
   container: {
@@ -101,12 +102,8 @@ class CoverDetailsScreen extends React.Component {
     this.setState({ statePlayer: e.state });
   };
 
-  sectostr(time) {
-    return ~~(time / 60) + ':' + (time % 60 < 10 ? '0' : '') + time % 60;
-  }
-
   render() {
-    const { song } = this.props.navigation.state.params;
+    const { cover } = this.props.navigation.state.params;
     let { cTime, duration, isPlaying, isReady, statePlayer } = this.state;
 
     return (
@@ -114,7 +111,7 @@ class CoverDetailsScreen extends React.Component {
         <YouTube
           apiKey={'AIzaSyDEGxujgp4qSdZt4R7XZEr6KPPt4D8QxEY'}
           ref={item => (this.player = item)}
-          videoId={song.youtube_id}
+          videoId={cover.youtube_id}
           play={isPlaying}
           controls={0}
           onReady={this.playerOnReady}
@@ -144,7 +141,7 @@ class CoverDetailsScreen extends React.Component {
           </View>
           <View style={styles.totalTimeContainer}>
             <Text>
-              {this.sectostr(cTime)} / {this.sectostr(duration)}
+              {secondsToTime(cTime)} / {secondsToTime(duration)}
             </Text>
           </View>
         </View>
@@ -156,7 +153,6 @@ class CoverDetailsScreen extends React.Component {
 
 CoverDetailsScreen.navigationOptions = {
   header: null,
-  //title: ({state}) => `${state.params.song.originalSong}'s Details`
 };
 
 export { CoverDetailsScreen };

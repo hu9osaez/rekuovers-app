@@ -56,7 +56,7 @@ class NewestCoverCard extends React.Component {
     super();
 
     this.state = {
-      likedByActualUser: false
+      likedByActualUser: false,
     };
   }
 
@@ -67,9 +67,9 @@ class NewestCoverCard extends React.Component {
   checkLikes = async () => {
     const { accessToken, cover } = this.props;
 
-    checkCoverLike(cover.id, accessToken).then((response) => {
+    checkCoverLike(cover.id, accessToken).then(response => {
       this.setState({
-        likedByActualUser: response.success
+        likedByActualUser: response.success,
       });
     });
   };
@@ -82,7 +82,9 @@ class NewestCoverCard extends React.Component {
         <TouchableOpacity onPress={() => onPress(cover)}>
           <ImageBackground
             source={{
-              uri: `https://img.youtube.com/vi/${cover.youtube_id}/mqdefault.jpg`,
+              uri: `https://img.youtube.com/vi/${
+                cover.youtube_id
+              }/mqdefault.jpg`,
             }}
             style={styles.imageContainer}
           />
@@ -119,7 +121,7 @@ class NewestCoverCard extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  accessToken: state.token.accessToken
+  accessToken: state.token.accessToken,
 });
 
 export default connect(mapStateToProps)(NewestCoverCard);

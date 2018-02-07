@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginLeft: 5,
     marginTop: 10,
-  }
+  },
 });
 
 export default styles;

@@ -42,7 +42,6 @@ class SignupScreen extends React.Component {
 
       this.props.signupUser(this.state, navigation);
     } else {
-      console.tron.log(validation.errors.all());
       Alert.alert('Error', 'Error in validation');
     }
   };
