@@ -3,7 +3,7 @@ import { ScrollView, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 
-import MostStarredGrid from './components/MostStarredGrid';
+import PopularCoversList from './components/PopularCoversList';
 import NewestCoversList from './components/NewestCoversList';
 
 import styles from './styles';
@@ -13,8 +13,8 @@ class HomeScreen extends React.Component {
     return (
       <View style={styles.container}>
         <ScrollView>
+          <PopularCoversList />
           <NewestCoversList />
-          <MostStarredGrid />
         </ScrollView>
       </View>
     );

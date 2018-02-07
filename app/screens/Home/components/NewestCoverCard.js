@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   Dimensions,
-  ImageBackground,
+  Image,
   StyleSheet,
   TouchableOpacity,
   View,
@@ -16,38 +16,43 @@ import { checkCoverLike } from '@core/api';
 import { PRIMARY_COLOR_TEXT, SECONDARY_COLOR_TEXT } from '@core/common/colors';
 import { abbreviateNumber } from '@core/utils/text';
 
-let width = Dimensions.get('window').width;
+const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   container: {
-    width: width / 2 - 20,
-    height: width * 0.35,
-    marginHorizontal: 5,
+    backgroundColor: '#ffffff',
+    width: (width / 2.3) - 5,
+    height: width * 0.30,
+    marginBottom: 3,
+    marginHorizontal: 2,
+    elevation: 1,
   },
   imageContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    width: width / 2 - 20,
-    height: width * 0.25,
+    width: (width / 2.3) - 5,
+    height: width * 0.20,
   },
   title: {
-    fontSize: normalize(12),
+    fontSize: normalize(11),
     color: PRIMARY_COLOR_TEXT,
+    paddingLeft: 3,
   },
   extraContainer: {
     flexDirection: 'row',
     height: 20,
+    padding: 3,
   },
   textLikes: {
-    fontSize: normalize(11),
+    fontSize: normalize(10),
     marginLeft: 4,
-    lineHeight: 20,
+    lineHeight: 15,
     color: SECONDARY_COLOR_TEXT,
   },
   textTime: {
-    fontSize: normalize(10),
+    fontSize: normalize(9),
     textAlign: 'right',
-    lineHeight: 20,
+    lineHeight: 18,
   },
 });
 
@@ -82,7 +87,7 @@ class NewestCoverCard extends React.Component {
         <TouchableOpacity
           onPress={() => navigation.navigate('CoverDetails', { cover })}
         >
-          <ImageBackground
+          <Image
             source={{
               uri: `https://img.youtube.com/vi/${
                 cover.youtube_id

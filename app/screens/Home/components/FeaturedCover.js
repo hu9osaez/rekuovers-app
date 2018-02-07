@@ -27,14 +27,17 @@ class FeaturedCover extends React.Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const { cover } = this.props;
 
-    /*pify(colorsFromUrl)(
-      `https://img.youtube.com/vi/${cover.youtube_id}/mqdefault.jpg`
-    ).then(data => {
-      this.setState({ bgColor: data.averageColor });
-    });*/
+    let self = this;
+
+    colorsFromUrl(`https://img.youtube.com/vi/${cover.youtube_id}/mqdefault.jpg`, (err, colors) => {
+      if(!err) {
+        self.setState({ bgColor: colors.averageColor });
+        console.tron.log(colors.averageColor);
+      }
+    });
   }
 
   render() {

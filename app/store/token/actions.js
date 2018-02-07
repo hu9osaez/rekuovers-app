@@ -13,9 +13,10 @@ export const checkToken = token => dispatch => {
     refreshToken(token).then(response => {
       if (response.success) {
         // Dispatch exito
-        //dispatch({ type: types.REFRESHING_TOKEN_SUCCESS, data: response.data });
+        dispatch({ type: types.REFRESHING_TOKEN_SUCCESS, data: response.data });
       } else {
         // Dispatch error
+        // @TODO: Do something when request failed
       }
     });
   }

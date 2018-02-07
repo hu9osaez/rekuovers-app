@@ -1,29 +1,28 @@
 import React from 'react';
 import { FlatList, Text, View } from 'react-native';
-import NewestCoverCard from './NewestCoverCard';
-import { connect } from 'react-redux';
+import PopularCoverTile from './PopularCoverTile';
 
+import { connect } from 'react-redux';
 import styles from '../styles';
 
-class NewestCoversList extends React.PureComponent {
+class PopularCoversList extends React.Component {
   render() {
-    const { covers, loading } = this.props;
+    const { covers } = this.props;
     return (
       <View>
         <View style={styles.newestHeaderContainer}>
           <View style={{ flex: 1 }}>
-            <Text style={styles.newestHeader}>NEWEST</Text>
+            <Text style={styles.newestHeader}>POPULAR</Text>
           </View>
           <View style={{ flex: 1 }}>
             <Text style={styles.newestSeeMore} onPress={() => alert('Pressed')}>
-              See more
+              Today
             </Text>
           </View>
         </View>
         <FlatList
-          data={covers.slice(0, 6)}
-          refreshing={loading}
-          renderItem={({ item }) => <NewestCoverCard cover={item} />}
+          data={covers}
+          renderItem={({ item }) => <PopularCoverTile cover={item} />}
           keyExtractor={cover => cover.id}
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -35,8 +34,7 @@ class NewestCoversList extends React.PureComponent {
 }
 
 const mapStateToProps = state => ({
-  covers: state.covers.newest,
-  loading: state.covers.loading,
+  covers: state.covers.popular,
 });
 
-export default connect(mapStateToProps)(NewestCoversList);
+export default connect(mapStateToProps)(PopularCoversList);
