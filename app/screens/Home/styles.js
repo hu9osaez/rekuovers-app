@@ -11,7 +11,6 @@ const styles = StyleSheet.create({
   },
   containerSection: {
     backgroundColor: '#ffffff',
-    paddingVertical: 5,
     marginBottom: 12,
   },
   newestHeaderContainer: {

@@ -32,7 +32,7 @@ class TrendingTagItem extends React.Component {
         style={styles.container}
       >
         <Text style={[styles.text, systemWeights.thin]}>
-          # {tag.name.toUpperCase()}
+          {tag.name.toUpperCase()}
         </Text>
       </TouchableOpacity>
     );

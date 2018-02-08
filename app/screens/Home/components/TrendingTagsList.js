@@ -47,7 +47,7 @@ class TrendingTagsList extends React.Component {
       <View style={[styles.containerSection, { marginBottom: 0 }]}>
         <View style={styles.newestHeaderContainer}>
           <View style={{ flex: 1 }}>
-            <Text style={styles.newestHeader}>TRENDING TAGS</Text>
+            <Text style={styles.newestHeader}>EXPLORE TOPICS</Text>
           </View>
         </View>
         <TitleHeaderDivider />
