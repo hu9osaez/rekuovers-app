@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   Dimensions,
-  ImageBackground,
+  Image,
   StyleSheet,
   TouchableOpacity,
   View,
@@ -12,60 +12,31 @@ import { systemWeights } from 'react-native-typography';
 
 import { PRIMARY_COLOR_TEXT } from '@core/common/colors';
 import { abbreviateNumber } from '@core/utils/text';
+import moment from 'moment/moment';
 
 const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: '#ffffff',
+    borderRadius: 2,
     width: width / 2 - 8,
-    height: width * 0.55,
+    height: width * 0.65,
+    marginBottom: 3,
     marginHorizontal: 2,
+    elevation: 1,
   },
   imageContainer: {
-    backgroundColor: '#ffffff',
+    alignItems: 'center',
+    borderTopLeftRadius: 2,
+    borderTopRightRadius: 2,
+    justifyContent: 'center',
     width: width / 2 - 8,
     height: width * 0.55,
   },
-  overlayContainer: {
-    flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.1)',
-    alignSelf: 'stretch',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-  },
-  textContainer: {
-    backgroundColor: 'rgba(0, 0, 0, 0.4)',
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: 0,
-    height: 40,
-    justifyContent: 'center',
-  },
-  text: {
-    color: '#ffffff',
-    backgroundColor: 'rgba(0,0,0,0)',
+  title: {
     fontSize: normalize(11),
-    paddingLeft: 5,
-    fontWeight: 'bold',
-  },
-  likesContainer: {
-    backgroundColor: 'rgba(255,255,255, 0.2)',
-    borderRadius: 3,
-    position: 'absolute',
-    left: 5,
-    top: 5,
-    height: 17,
-    justifyContent: 'center',
-    paddingHorizontal: 3,
-    flexDirection: 'row',
-  },
-  textLikes: {
-    color: '#ffffff',
-    fontSize: normalize(10),
+    color: PRIMARY_COLOR_TEXT,
     paddingLeft: 3,
   },
 });
@@ -74,35 +45,24 @@ class PopularCoverTile extends React.Component {
   render() {
     const { cover, navigation } = this.props;
     return (
-      <TouchableOpacity
-        activeOpacity={0.8}
-        onPress={() => navigation.navigate('CoverDetails', { cover })}
-        style={styles.container}
-      >
-        <ImageBackground
-          source={{
-            uri: `https://img.youtube.com/vi/${
-              cover.youtube_id
-            }/maxresdefault.jpg`,
-          }}
-          resizeMode={'cover'}
-          style={styles.imageContainer}
+      <View style={styles.container}>
+        <TouchableOpacity
+          activeOpacity={0.8}
+          onPress={() => navigation.navigate('CoverDetails', { cover })}
         >
-          <View style={styles.overlayContainer}>
-            <View style={styles.likesContainer}>
-              <Icon name={'favorite'} size={11} color={PRIMARY_COLOR_TEXT} />
-              <Text style={styles.textLikes}>
-                {abbreviateNumber(cover.likes)}
-              </Text>
-            </View>
-            <View style={styles.textContainer}>
-              <Text style={[styles.text, systemWeights.light]}>
-                {cover.description}
-              </Text>
-            </View>
-          </View>
-        </ImageBackground>
-      </TouchableOpacity>
+          <Image
+            source={{
+              uri: `https://img.youtube.com/vi/${
+                cover.youtube_id
+                }/maxresdefault.jpg`,
+            }}
+            style={styles.imageContainer}
+          />
+        </TouchableOpacity>
+        <Text style={styles.title} ellipsizeMode={'tail'} numberOfLines={1}>
+          {cover.description}
+        </Text>
+      </View>
     );
   }
 }

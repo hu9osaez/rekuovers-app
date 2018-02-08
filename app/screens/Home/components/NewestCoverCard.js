@@ -21,6 +21,7 @@ const { width } = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#ffffff',
+    borderRadius: 2,
     width: width / 2.3 - 5,
     height: width * 0.3,
     marginBottom: 3,
@@ -29,6 +30,8 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     alignItems: 'center',
+    borderTopLeftRadius: 2,
+    borderTopRightRadius: 2,
     justifyContent: 'center',
     width: width / 2.3 - 5,
     height: width * 0.2,

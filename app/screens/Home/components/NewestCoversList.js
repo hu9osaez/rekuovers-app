@@ -1,6 +1,5 @@
 import React from 'react';
 import { FlatList, Text, View } from 'react-native';
-import TitleHeaderDivider from './TitleHeaderDivider';
 import NewestCoverCard from './NewestCoverCard';
 import { connect } from 'react-redux';
 
@@ -21,7 +20,6 @@ class NewestCoversList extends React.PureComponent {
             </Text>
           </View>
         </View>
-        <TitleHeaderDivider />
         <FlatList
           data={covers.slice(0, 6)}
           refreshing={loading}

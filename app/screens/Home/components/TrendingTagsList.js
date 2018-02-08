@@ -1,6 +1,5 @@
 import React from 'react';
 import { FlatList, Text, View } from 'react-native';
-import TitleHeaderDivider from './TitleHeaderDivider';
 import TrendingTagItem from './TrendingTagItem';
 
 import { connect } from 'react-redux';
@@ -50,7 +49,6 @@ class TrendingTagsList extends React.Component {
             <Text style={styles.newestHeader}>EXPLORE TOPICS</Text>
           </View>
         </View>
-        <TitleHeaderDivider />
         <FlatList
           data={tags}
           renderItem={({ item }) => <TrendingTagItem tag={item} />}

@@ -9,7 +9,7 @@ const { width } = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     width,
-    height: 200,
+    height: 235,
   },
   pageIndicatorStyle: {
     backgroundColor: 'rgba(255,255,255, 0.3)',

@@ -1,6 +1,5 @@
 import React from 'react';
 import { FlatList, Text, View } from 'react-native';
-import TitleHeaderDivider from './TitleHeaderDivider';
 import PopularCoverTile from './PopularCoverTile';
 
 import { connect } from 'react-redux';
@@ -21,7 +20,6 @@ class PopularCoversList extends React.Component {
             </Text>
           </View>
         </View>
-        <TitleHeaderDivider />
         <FlatList
           data={covers}
           renderItem={({ item }) => <PopularCoverTile cover={item} />}
