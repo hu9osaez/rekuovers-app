@@ -26,4 +26,6 @@ const mapStateToProps = state => {
   return { user };
 };
 
-export default connect(mapStateToProps, { fetchCurrentUser, logoutUser })(ProfileScreen);
+export default connect(mapStateToProps, { fetchCurrentUser, logoutUser })(
+  ProfileScreen
+);

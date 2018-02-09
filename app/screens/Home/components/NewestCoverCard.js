@@ -9,10 +9,8 @@ import {
 import { Icon, Text, normalize } from 'react-native-elements';
 
 import moment from 'moment';
-import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
 
-import { checkCoverLike } from '@core/api';
 import { PRIMARY_COLOR_TEXT, SECONDARY_COLOR_TEXT } from '@core/common/colors';
 import { abbreviateNumber } from '@core/utils/text';
 
@@ -59,32 +57,9 @@ const styles = StyleSheet.create({
   },
 });
 
-class NewestCoverCard extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      likedByActualUser: false,
-    };
-  }
-
-  componentDidMount() {
-    this.checkLikes();
-  }
-
-  checkLikes = async () => {
-    const { accessToken, cover } = this.props;
-
-    checkCoverLike(cover.id, accessToken).then(response => {
-      this.setState({
-        likedByActualUser: response.success,
-      });
-    });
-  };
-
+class NewestCoverCard extends React.PureComponent {
   render() {
-    const { cover, navigation } = this.props;
-    const { likedByActualUser } = this.state;
+    const { cover, isLiked, navigation } = this.props;
     return (
       <View style={styles.container}>
         <TouchableOpacity
@@ -113,7 +88,7 @@ class NewestCoverCard extends React.Component {
             <Icon
               name={'favorite'}
               size={13}
-              color={likedByActualUser ? '#C62828' : PRIMARY_COLOR_TEXT}
+              color={isLiked ? '#C62828' : PRIMARY_COLOR_TEXT}
             />
             <Text style={styles.textLikes}>
               {abbreviateNumber(cover.likes)}
@@ -130,8 +105,4 @@ class NewestCoverCard extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  accessToken: state.auth.token,
-});
-
-export default connect(mapStateToProps)(withNavigation(NewestCoverCard));
+export default withNavigation(NewestCoverCard);

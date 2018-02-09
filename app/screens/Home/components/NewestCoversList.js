@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 
 import styles from '../styles';
 
-class NewestCoversList extends React.PureComponent {
+class NewestCoversList extends React.Component {
   render() {
-    const { covers, loading } = this.props;
+    const { covers, likedCovers, loading } = this.props;
     return (
       <View style={styles.containerSection}>
         <View style={styles.newestHeaderContainer}>
@@ -23,7 +23,11 @@ class NewestCoversList extends React.PureComponent {
         <FlatList
           data={covers.slice(0, 6)}
           refreshing={loading}
-          renderItem={({ item }) => <NewestCoverCard cover={item} />}
+          renderItem={({ item }) => {
+            const isLiked = likedCovers.indexOf(item.id) > -1;
+
+            return (<NewestCoverCard cover={item} isLiked={isLiked} />);
+          }}
           keyExtractor={cover => cover.id}
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -37,6 +41,7 @@ class NewestCoversList extends React.PureComponent {
 const mapStateToProps = state => ({
   covers: state.covers.newest,
   loading: state.covers.loading,
+  likedCovers: state.user.likedCovers,
 });
 
 export default connect(mapStateToProps)(NewestCoversList);

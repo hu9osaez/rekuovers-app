@@ -18,10 +18,25 @@ export const userReducer = (state = INITIAL_STATE, action) => {
     case types.FETCH_CURRENT_USER_SUCCESS:
       return {
         ...state,
-        loading: false,
         currentUser: action.data,
       };
     case types.FETCH_CURRENT_USER_FAIL:
+      return {
+        ...state,
+        loading: false,
+      };
+    case types.FETCH_LIKED_COVERS:
+      return {
+        ...state,
+        loading: true,
+      };
+    case types.FETCH_LIKED_COVERS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        likedCovers: action.data,
+      };
+    case types.FETCH_LIKED_COVERS_FAIL:
       return {
         ...state,
         loading: false,

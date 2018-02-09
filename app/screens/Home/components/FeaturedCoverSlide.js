@@ -31,8 +31,6 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
     bottom: 0,
-    borderWidth: 3,
-    borderLeftColor: 'rgba(255, 255, 255, 0.2)',
   },
   titleSection: {
     ...condensedBold,

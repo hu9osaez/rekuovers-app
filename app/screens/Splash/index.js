@@ -46,7 +46,7 @@ class SplashScreen extends React.Component {
 
     setTimeout(() => {
       resetNavigationTo(routeName, navigation);
-    }, 2500);
+    }, 1000);
   }
 
   render() {
