@@ -8,11 +8,9 @@ import {
 } from 'react-native';
 import { Icon, Text, normalize } from 'react-native-elements';
 import { withNavigation } from 'react-navigation';
-import { systemWeights } from 'react-native-typography';
 
-import { PRIMARY_COLOR_TEXT } from '@core/common/colors';
+import { PRIMARY_COLOR_TEXT, SECONDARY_COLOR_TEXT } from '@core/common/colors';
 import { abbreviateNumber } from '@core/utils/text';
-import moment from 'moment/moment';
 
 const { width } = Dimensions.get('window');
 
@@ -35,15 +33,27 @@ const styles = StyleSheet.create({
     height: width * 0.55,
   },
   title: {
-    fontSize: normalize(11),
+    fontSize: normalize(12),
     color: PRIMARY_COLOR_TEXT,
-    paddingLeft: 3,
+    paddingLeft: 4,
+  },
+  extraContainer: {
+    flexDirection: 'row',
+    height: 20,
+    padding: 3,
+    paddingLeft: 4,
+  },
+  textLikes: {
+    fontSize: normalize(10),
+    marginLeft: 4,
+    lineHeight: 15,
+    color: SECONDARY_COLOR_TEXT,
   },
 });
 
-class PopularCoverTile extends React.Component {
+class PopularCoverCard extends React.PureComponent {
   render() {
-    const { cover, navigation } = this.props;
+    const { cover, isLiked, navigation } = this.props;
     return (
       <View style={styles.container}>
         <TouchableOpacity
@@ -62,9 +72,26 @@ class PopularCoverTile extends React.Component {
         <Text style={styles.title} ellipsizeMode={'tail'} numberOfLines={1}>
           {cover.description}
         </Text>
+        <View style={styles.extraContainer}>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+            }}
+          >
+            <Icon
+              name={'favorite'}
+              size={13}
+              color={isLiked ? '#C62828' : PRIMARY_COLOR_TEXT}
+            />
+            <Text style={styles.textLikes}>
+              {abbreviateNumber(cover.likes)}
+            </Text>
+          </View>
+        </View>
       </View>
     );
   }
 }
 
-export default withNavigation(PopularCoverTile);
+export default withNavigation(PopularCoverCard);

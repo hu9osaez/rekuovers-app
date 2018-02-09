@@ -1,13 +1,13 @@
 import React from 'react';
 import { FlatList, Text, View } from 'react-native';
-import PopularCoverTile from './PopularCoverTile';
+import PopularCoverCard from './PopularCoverCard';
 
 import { connect } from 'react-redux';
 import styles from '../styles';
 
 class PopularCoversList extends React.Component {
   render() {
-    const { covers } = this.props;
+    const { covers, likedCovers } = this.props;
     return (
       <View style={styles.containerSection}>
         <View style={styles.newestHeaderContainer}>
@@ -22,7 +22,11 @@ class PopularCoversList extends React.Component {
         </View>
         <FlatList
           data={covers}
-          renderItem={({ item }) => <PopularCoverTile cover={item} />}
+          renderItem={({ item }) => {
+            const isLiked = likedCovers.indexOf(item.id) > -1;
+
+            return (<PopularCoverCard cover={item} isLiked={isLiked} />);
+          }}
           keyExtractor={cover => cover.id}
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -35,6 +39,7 @@ class PopularCoversList extends React.Component {
 
 const mapStateToProps = state => ({
   covers: state.covers.popular,
+  likedCovers: state.user.likedCovers,
 });
 
 export default connect(mapStateToProps)(PopularCoversList);

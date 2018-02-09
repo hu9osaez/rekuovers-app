@@ -52,7 +52,7 @@ const Sign = () => (
       {Array(2)
         .fill()
         .map(() => (
-          <View style={styles.lineWrapper}>
+          <View style={styles.lineWrapper} key={Math.random().toString(36).substr(2, 5)}>
             <View style={styles.line} />
             <Image
               source={require('../../../assets/paper-clip.png')}
