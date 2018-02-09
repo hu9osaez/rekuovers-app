@@ -2,17 +2,22 @@ import { Alert } from 'react-native';
 import jwtDecode from 'jwt-decode';
 import moment from 'moment';
 
-import { invalidateToken, postLogin, postSignup, refreshToken } from '@core/api';
+import {
+  invalidateToken,
+  postLogin,
+  postSignup,
+  refreshToken,
+} from '@core/api';
 import { resetNavigationTo } from '@core/utils';
 
 import * as types from '../types';
 import { fetchCovers } from '../covers/actions';
 
 export const checkToken = token => dispatch => {
-
   const tokenExpiration = jwtDecode(token).exp;
 
-  const isExpired = tokenExpiration && moment.unix(tokenExpiration) - moment(Date.now()) < 30;
+  const isExpired =
+    tokenExpiration && moment.unix(tokenExpiration) - moment(Date.now()) < 30;
 
   if (isExpired) {
     dispatch({ type: types.REFRESHING_TOKEN });

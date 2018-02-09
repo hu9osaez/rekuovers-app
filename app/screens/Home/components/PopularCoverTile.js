@@ -54,7 +54,7 @@ class PopularCoverTile extends React.Component {
             source={{
               uri: `https://img.youtube.com/vi/${
                 cover.youtube_id
-                }/maxresdefault.jpg`,
+              }/maxresdefault.jpg`,
             }}
             style={styles.imageContainer}
           />
