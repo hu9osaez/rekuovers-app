@@ -32,7 +32,9 @@ class FeaturedCovers extends React.Component {
           activePageIndicatorStyle={styles.activePageIndicatorStyle}
           pageIndicatorStyle={styles.pageIndicatorStyle}
         >
-          {covers.map(cover => <FeaturedCoverSlide key={cover.id} cover={cover} />)}
+          {covers.map(cover => (
+            <FeaturedCoverSlide key={cover.id} cover={cover} />
+          ))}
         </Carousel>
       </View>
     );

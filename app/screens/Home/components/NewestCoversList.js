@@ -26,7 +26,7 @@ class NewestCoversList extends React.Component {
           renderItem={({ item }) => {
             const isLiked = likedCovers.indexOf(item.id) > -1;
 
-            return (<NewestCoverCard cover={item} isLiked={isLiked} />);
+            return <NewestCoverCard cover={item} isLiked={isLiked} />;
           }}
           keyExtractor={cover => cover.id}
           horizontal

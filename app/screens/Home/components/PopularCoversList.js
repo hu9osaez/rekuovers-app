@@ -25,7 +25,7 @@ class PopularCoversList extends React.Component {
           renderItem={({ item }) => {
             const isLiked = likedCovers.indexOf(item.id) > -1;
 
-            return (<PopularCoverCard cover={item} isLiked={isLiked} />);
+            return <PopularCoverCard cover={item} isLiked={isLiked} />;
           }}
           keyExtractor={cover => cover.id}
           horizontal

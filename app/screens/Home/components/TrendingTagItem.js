@@ -1,5 +1,11 @@
 import React from 'react';
-import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+  Dimensions,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 import { PRIMARY_COLOR_TEXT } from '@core/common/colors';
 
@@ -25,10 +31,7 @@ class TrendingTagItem extends React.Component {
     const { tag } = this.props;
     return (
       <View style={styles.container}>
-        <TouchableOpacity
-          activeOpacity={0.9}
-          onPress={() => alert('Pressed')}
-        >
+        <TouchableOpacity activeOpacity={0.9} onPress={() => alert('Pressed')}>
           <Text style={styles.text}>{tag.name.toUpperCase()}</Text>
         </TouchableOpacity>
       </View>

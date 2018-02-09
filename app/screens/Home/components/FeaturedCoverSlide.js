@@ -11,9 +11,8 @@ import { Icon } from 'react-native-elements';
 
 import { withNavigation } from 'react-navigation';
 import { colorsFromUrl } from 'react-native-dominant-color';
-import { robotoWeights, systemWeights } from 'react-native-typography';
+import { systemWeights } from 'react-native-typography';
 import { normalize } from 'react-native-elements/src/index';
-const { condensedBold } = robotoWeights;
 
 import { abbreviateNumber } from '@core/utils/text';
 
@@ -33,7 +32,7 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
   titleSection: {
-    ...condensedBold,
+    fontFamily: 'OswaldMedium',
     color: '#ffffff',
     fontSize: 16,
     marginLeft: 10,

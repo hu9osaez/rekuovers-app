@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     paddingVertical: 3,
     justifyContent: 'center',
     marginTop: 15,
-  }
+  },
 });
 
 class TrendingTagsCarousel extends React.Component {
@@ -71,7 +71,9 @@ class TrendingTagsCarousel extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.tagline}>I would like listen something about...</Text>
+        <Text style={styles.tagline}>
+          I would like listen something about...
+        </Text>
         <Carousel
           autoplay
           autoplayTimeout={4000}
@@ -79,7 +81,9 @@ class TrendingTagsCarousel extends React.Component {
           pageSize={width}
           showsPageIndicator={false}
         >
-          {this.state.tags.map((tag) => <TrendingTagItem key={tag.slug} tag={tag} />)}
+          {this.state.tags.map(tag => (
+            <TrendingTagItem key={tag.slug} tag={tag} />
+          ))}
         </Carousel>
       </View>
     );
