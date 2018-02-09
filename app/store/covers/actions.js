@@ -2,7 +2,7 @@ import * as types from '../types';
 import { newestCovers, popularCovers } from '@core/api';
 import { runSeries } from '@core/utils/lib';
 
-export const fetchCovers = () => async dispatch => {
+export const fetchCovers = () => dispatch => {
   dispatch({ type: types.REQUEST_COVERS });
 
   runSeries(

@@ -12,6 +12,7 @@ import { resetNavigationTo } from '@core/utils';
 
 import * as types from '../types';
 import { fetchCovers } from '../covers/actions';
+import { fetchCurrentUser } from '../user/actions';
 
 export const checkToken = token => dispatch => {
   const tokenExpiration = jwtDecode(token).exp;
@@ -34,12 +35,13 @@ export const checkToken = token => dispatch => {
   }
 };
 
-export const loginUser = (data, navigation) => async dispatch => {
+export const loginUser = (data, navigation) => dispatch => {
   dispatch({ type: types.LOGIN_USER });
 
   postLogin(data).then(response => {
     if (response.success) {
       dispatch({ type: types.LOGIN_USER_SUCCESS, data: response.data });
+      dispatch(fetchCurrentUser());
       dispatch(fetchCovers());
 
       resetNavigationTo('Authenticated', navigation);
@@ -54,7 +56,7 @@ export const loginUser = (data, navigation) => async dispatch => {
   });
 };
 
-export const signupUser = (data, navigation) => async dispatch => {
+export const signupUser = (data, navigation) => dispatch => {
   dispatch({ type: types.SIGNUP_USER });
 
   postSignup(data).then(response => {
@@ -71,7 +73,7 @@ export const signupUser = (data, navigation) => async dispatch => {
 };
 
 export const logoutUser = navigation => (dispatch, getState) => {
-  invalidateToken(getState().token.accessToken).then(response => {
+  invalidateToken(getState().auth.token).then(response => {
     dispatch({ type: types.LOGOUT_USER });
     resetNavigationTo('Unauthenticated', navigation);
   });

@@ -72,3 +72,21 @@ export const checkCoverLike = (cover, accessToken) => {
     },
   }).then(res => res.json());
 };
+
+export const currentUser = accessToken => {
+  return fetch(`${API_URL}/me`, {
+    headers: {
+      Accept: 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+  }).then(res => res.json());
+};
+
+export const likedCoversCurrentUser = accessToken => {
+  return fetch(`${API_URL}/me/liked-covers`, {
+    headers: {
+      Accept: 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+  }).then(res => res.json());
+};
