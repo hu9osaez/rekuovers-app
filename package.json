@@ -50,6 +50,11 @@
 		"solidarity": "^1.1.1",
 		"solidarity-react-native": "^1.0.0"
 	},
+  "rnpm": {
+    "assets": [
+      "./assets/fonts/"
+    ]
+  },
 	"jest": {
 		"preset": "react-native",
 		"testMatch": [

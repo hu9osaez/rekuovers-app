@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import FeaturedCovers from './components/FeaturedCovers';
 import NewestCoversList from './components/NewestCoversList';
 import PopularCoversList from './components/PopularCoversList';
-import TrendingTagsList from './components/TrendingTagsList';
+import TrendingTags from './components/TrendingTagsCarousel';
 
 import styles from './styles';
 
@@ -18,7 +18,7 @@ class HomeScreen extends React.Component {
           <FeaturedCovers />
           <PopularCoversList />
           <NewestCoversList />
-          <TrendingTagsList />
+          <TrendingTags />
         </ScrollView>
       </View>
     );

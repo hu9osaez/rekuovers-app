@@ -30,7 +30,7 @@ class PopularCoversList extends React.Component {
           keyExtractor={cover => cover.id}
           horizontal
           showsHorizontalScrollIndicator={false}
-          style={{ paddingBottom: 10, marginHorizontal: 3 }}
+          style={{ paddingBottom: 7, marginHorizontal: 3 }}
         />
       </View>
     );
