@@ -31,7 +31,7 @@ HomeScreen.navigationOptions = {
 };
 
 const mapStateToProps = state => ({
-  accessToken: state.token.accessToken,
+  accessToken: state.auth.token,
 });
 
 export default connect(mapStateToProps)(HomeScreen);

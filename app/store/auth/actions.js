@@ -1,9 +1,33 @@
 import { Alert } from 'react-native';
-import * as types from '../types';
-import { invalidateToken, postLogin, postSignup } from '@core/api';
+import jwtDecode from 'jwt-decode';
+import moment from 'moment';
+
+import { invalidateToken, postLogin, postSignup, refreshToken } from '@core/api';
 import { resetNavigationTo } from '@core/utils';
 
+import * as types from '../types';
 import { fetchCovers } from '../covers/actions';
+
+export const checkToken = token => dispatch => {
+
+  const tokenExpiration = jwtDecode(token).exp;
+
+  const isExpired = tokenExpiration && moment.unix(tokenExpiration) - moment(Date.now()) < 30;
+
+  if (isExpired) {
+    dispatch({ type: types.REFRESHING_TOKEN });
+
+    refreshToken(token).then(response => {
+      if (response.success) {
+        // Dispatch exito
+        dispatch({ type: types.REFRESHING_TOKEN_SUCCESS, data: response.data });
+      } else {
+        // Dispatch error
+        // @TODO: Do something when request failed
+      }
+    });
+  }
+};
 
 export const loginUser = (data, navigation) => async dispatch => {
   dispatch({ type: types.LOGIN_USER });

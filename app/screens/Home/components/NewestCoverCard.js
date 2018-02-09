@@ -131,7 +131,7 @@ class NewestCoverCard extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  accessToken: state.token.accessToken,
+  accessToken: state.auth.token,
 });
 
 export default connect(mapStateToProps)(withNavigation(NewestCoverCard));

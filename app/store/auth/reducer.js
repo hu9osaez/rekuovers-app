@@ -4,11 +4,31 @@ import * as types from '../types';
 export const INITIAL_STATE = {
   loading: false,
   isAuthenticated: false,
+  isRefreshingToken: false,
+  token: null,
   rehydratedAt: null,
 };
 
 export const authReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case types.REFRESHING_TOKEN:
+      return {
+        ...state,
+        isRefreshingToken: true,
+      };
+    case types.REFRESHING_TOKEN_SUCCESS:
+      return {
+        ...state,
+        token: action.data.access_token,
+        isRefreshingToken: false,
+      };
+    case types.REFRESHING_TOKEN_FAIL:
+      return {
+        ...state,
+        token: null,
+        isAuthenticated: false,
+        isRefreshingToken: false,
+      };
     case types.SIGNUP_USER:
     case types.LOGIN_USER:
       return {
@@ -21,6 +41,7 @@ export const authReducer = (state = INITIAL_STATE, action) => {
         ...state,
         loading: false,
         isAuthenticated: true,
+        token: action.data.access_token,
       };
     case types.SIGNUP_USER_FAIL:
     case types.LOGIN_USER_FAIL:
