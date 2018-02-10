@@ -68,10 +68,7 @@ class SignupScreen extends React.Component {
         <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
           <KeyboardAwareScrollView>
             <BackRow navigation={navigation} />
-            <SocialRow
-              handlePress={() => console.log('Touched')}
-              text={'Sign up with Facebook'}
-            />
+            <SocialRow text={'Sign up with Facebook'} />
             <View style={styles.content}>
               <SimpleInput
                 onChangeText={name => this.setState({ name })}

@@ -1,6 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 import { Icon } from 'react-native-elements';
+import { withNavigation } from 'react-navigation';
+import { connect } from 'react-redux';
+import { connectWithFacebook } from '@store/auth/actions';
 
 const styles = StyleSheet.create({
   container: {
@@ -24,9 +27,9 @@ const styles = StyleSheet.create({
   },
 });
 
-const SocialRow = ({ handlePress, text }) => (
+const SocialRow = ({ connectWithFacebook, navigation, text }) => (
   <TouchableHighlight
-    onPress={handlePress}
+    onPress={() => connectWithFacebook(navigation)}
     underlayColor={'rgba(255, 255, 255, 0.3)'}
   >
     <View style={styles.container}>
@@ -44,4 +47,6 @@ const SocialRow = ({ handlePress, text }) => (
   </TouchableHighlight>
 );
 
-export default SocialRow;
+export default connect(null, { connectWithFacebook })(
+  withNavigation(SocialRow)
+);
