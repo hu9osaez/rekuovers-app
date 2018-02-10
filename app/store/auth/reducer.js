@@ -3,6 +3,7 @@ import * as types from '../types';
 
 export const INITIAL_STATE = {
   loading: false,
+  loadingFb: false,
   isAuthenticated: false,
   isRefreshingToken: false,
   token: null,
@@ -49,6 +50,21 @@ export const authReducer = (state = INITIAL_STATE, action) => {
         ...state,
         loading: false,
         isAuthenticated: false,
+      };
+    case types.FETCH_FB_TOKEN:
+      return {
+        ...state,
+        loadingFb: true,
+      };
+    case types.FETCH_FB_TOKEN_SUCCESS:
+      return {
+        ...state,
+        loadingFb: false,
+      };
+    case types.FETCH_FB_TOKEN_FAIL:
+      return {
+        ...state,
+        loadingFb: false,
       };
     case types.LOGOUT_USER:
       return INITIAL_STATE;

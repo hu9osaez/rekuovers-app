@@ -10,7 +10,7 @@ import SimpleInput from './components/SimpleInput';
 import { connect } from 'react-redux';
 import { PRIMARY_COLOR } from '@core/common/colors';
 import { isEmail } from '@core/utils';
-import { loginUser } from '@store/auth/actions';
+import { connectWithFacebook, loginUser } from '@store/auth/actions';
 
 import styles from './styles';
 
@@ -47,7 +47,7 @@ class LoginScreen extends React.Component {
         <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
           <BackRow navigation={navigation} />
           <SocialRow
-            handlePress={() => console.log('Touched')}
+            handlePress={() => this.props.connectWithFacebook(navigation)}
             text={'Log in with Facebook'}
           />
           <View style={styles.content}>
@@ -103,4 +103,6 @@ const mapStateToProps = state => {
   return { loading };
 };
 
-export default connect(mapStateToProps, { loginUser })(LoginScreen);
+export default connect(mapStateToProps, { connectWithFacebook, loginUser })(
+  LoginScreen
+);

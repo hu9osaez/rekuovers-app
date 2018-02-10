@@ -18,6 +18,15 @@ const authenticatedParameters = body => ({
   body: JSON.stringify(body),
 });
 
+export const authFb = accessToken => {
+  return fetch(`${API_URL}/auth/facebook?access_token=${accessToken}`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+    },
+  }).then(res => res.json());
+};
+
 export const postLogin = body => {
   return fetch(`${API_URL}/auth/login`, authParameters(body)).then(res =>
     res.json()
