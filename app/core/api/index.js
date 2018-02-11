@@ -99,25 +99,19 @@ export const fetchAuthFacebook = async accessToken => {
   return response;
 };
 
-/** OLD **/
-const authenticatedParameters = body => ({
-  method: 'POST',
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify(body),
-});
+export const fetchCurrentUser = async accessToken => {
+  const response = await api.getJson('/me', accessToken);
 
-export const authFb = accessToken => {
-  return fetch(`${API_URL}/auth/facebook?access_token=${accessToken}`, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-    },
-  }).then(res => res.json());
+  return response;
 };
 
+export const fetchLikedCovers = async accessToken => {
+  const response = await api.getJson('/me/liked-covers', accessToken);
+
+  return response;
+};
+
+/** OLD **/
 export const newestCovers = () => {
   return fetch(`${API_URL}/covers/newest`, {
     headers: {
@@ -130,33 +124,6 @@ export const popularCovers = () => {
   return fetch(`${API_URL}/covers/popular`, {
     headers: {
       Accept: 'application/json',
-    },
-  }).then(res => res.json());
-};
-
-export const checkCoverLike = (cover, accessToken) => {
-  return fetch(`${API_URL}/covers/${cover}/likes/exists`, {
-    headers: {
-      Accept: 'application/json',
-      Authorization: `Bearer ${accessToken}`,
-    },
-  }).then(res => res.json());
-};
-
-export const currentUser = accessToken => {
-  return fetch(`${API_URL}/me`, {
-    headers: {
-      Accept: 'application/json',
-      Authorization: `Bearer ${accessToken}`,
-    },
-  }).then(res => res.json());
-};
-
-export const likedCoversCurrentUser = accessToken => {
-  return fetch(`${API_URL}/me/liked-covers`, {
-    headers: {
-      Accept: 'application/json',
-      Authorization: `Bearer ${accessToken}`,
     },
   }).then(res => res.json());
 };

@@ -1,29 +1,28 @@
-import { currentUser, likedCoversCurrentUser } from '@core/api';
+import { fetchCurrentUser, fetchLikedCovers } from '@core/api';
 import * as types from '../types';
 
-export const fetchCurrentUser = () => (dispatch, getState) => {
+export const fetchCurrentUserData = () => async (dispatch, getState) => {
   dispatch({ type: types.FETCH_CURRENT_USER });
 
   const token = getState().auth.token;
+  const response = await fetchCurrentUser(token);
 
-  currentUser(token).then(response => {
-    if (response.success) {
-      dispatch({ type: types.FETCH_CURRENT_USER_SUCCESS, data: response.data });
-      dispatch(fetchlikedCoversIds(token));
-    } else {
-      dispatch({ type: types.FETCH_CURRENT_USER_FAIL });
-    }
-  });
+  if (response.success) {
+    dispatch({ type: types.FETCH_CURRENT_USER_SUCCESS, data: response.data });
+    dispatch(fetchlikedCoversIds(token));
+  } else {
+    dispatch({ type: types.FETCH_CURRENT_USER_FAIL });
+  }
 };
 
-export const fetchlikedCoversIds = token => dispatch => {
+export const fetchlikedCoversIds = token => async dispatch => {
   dispatch({ type: types.FETCH_LIKED_COVERS });
 
-  likedCoversCurrentUser(token).then(response => {
-    if (response.success) {
-      dispatch({ type: types.FETCH_LIKED_COVERS_SUCCESS, data: response.data });
-    } else {
-      dispatch({ type: types.FETCH_LIKED_COVERS_FAIL });
-    }
-  });
+  const response = await fetchLikedCovers(token);
+
+  if (response.success) {
+    dispatch({ type: types.FETCH_LIKED_COVERS_SUCCESS, data: response.data });
+  } else {
+    dispatch({ type: types.FETCH_LIKED_COVERS_FAIL });
+  }
 };

@@ -14,7 +14,7 @@ import { resetNavigationTo } from '@core/utils';
 
 import * as types from '../types';
 import { fetchCovers } from '../covers/actions';
-import { fetchCurrentUser } from '../user/actions';
+import { fetchCurrentUserData } from '../user/actions';
 
 export const connectWithFacebook = navigation => dispatch => {
   dispatch({ type: types.FETCH_FB_TOKEN });
@@ -52,7 +52,7 @@ export const loginUser = (data, navigation) => async dispatch => {
 
   if (response.success) {
     dispatch({ type: types.LOGIN_USER_SUCCESS, data: response.data });
-    dispatch(fetchCurrentUser());
+    dispatch(fetchCurrentUserData());
     dispatch(fetchCovers());
 
     resetNavigationTo('Authenticated', navigation);

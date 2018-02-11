@@ -3,13 +3,13 @@ import { View } from 'react-native';
 import { Button, Icon, Text } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { logoutUser } from '@store/auth/actions';
-import { fetchCurrentUser } from '@store/user/actions';
+import { fetchCurrentUserData } from '@store/user/actions';
 
-const ProfileScreen = ({ navigation, user, fetchCurrentUser, logoutUser }) => (
+const ProfileScreen = ({ navigation, user, fetchCurrentUserData, logoutUser }) => (
   <View>
     <Text>Profile</Text>
     <Text>{user.name}</Text>
-    <Button title={'Datos'} onPress={() => fetchCurrentUser()} />
+    <Button title={'Datos'} onPress={() => fetchCurrentUserData()} />
     <Button title={'Cerrar sesion'} onPress={() => logoutUser(navigation)} />
   </View>
 );
@@ -26,6 +26,6 @@ const mapStateToProps = state => {
   return { user };
 };
 
-export default connect(mapStateToProps, { fetchCurrentUser, logoutUser })(
+export default connect(mapStateToProps, { fetchCurrentUserData, logoutUser })(
   ProfileScreen
 );

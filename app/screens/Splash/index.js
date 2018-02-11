@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { resetNavigationTo } from '@core/utils';
 import { checkToken } from '@store/auth/actions';
 import { fetchCovers } from '@store/covers/actions';
-import { fetchCurrentUser } from '@store/user/actions';
+import { fetchCurrentUserData } from '@store/user/actions';
 
 import styles from './styles';
 import Sign from './components/Sign';
@@ -30,7 +30,7 @@ class SplashScreen extends React.Component {
     if (this.props.auth.rehydratedAt !== rehydratedAt) {
       if (isAuthenticated) {
         this.props.checkToken(token);
-        this.props.fetchCurrentUser();
+        this.props.fetchCurrentUserData();
         this.props.fetchCovers();
       }
 
@@ -73,6 +73,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ checkToken, fetchCovers, fetchCurrentUser }, dispatch);
+  bindActionCreators({ checkToken, fetchCovers, fetchCurrentUserData }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(SplashScreen);
