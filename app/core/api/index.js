@@ -111,19 +111,14 @@ export const fetchLikedCovers = async accessToken => {
   return response;
 };
 
-/** OLD **/
-export const newestCovers = () => {
-  return fetch(`${API_URL}/covers/newest`, {
-    headers: {
-      Accept: 'application/json',
-    },
-  }).then(res => res.json());
+export const fetchNewestCovers = async () => {
+  const response = await api.getJson('/covers/newest');
+
+  return response;
 };
 
-export const popularCovers = () => {
-  return fetch(`${API_URL}/covers/popular`, {
-    headers: {
-      Accept: 'application/json',
-    },
-  }).then(res => res.json());
+export const fetchPopularCovers = async () => {
+  const response = await api.getJson('/covers/popular');
+
+  return response;
 };

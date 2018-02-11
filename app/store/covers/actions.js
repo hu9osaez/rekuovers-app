@@ -1,37 +1,24 @@
 import * as types from '../types';
-import { newestCovers, popularCovers } from '@core/api';
+import { fetchNewestCovers, fetchPopularCovers } from '@core/api';
 import { runSeries } from '@core/utils/lib';
 
-export const fetchCovers = () => dispatch => {
+export const fetchCovers = () => async dispatch => {
   dispatch({ type: types.REQUEST_COVERS });
 
-  runSeries(
-    [
-      cb => {
-        newestCovers().then(response => {
-          if (response.success) {
-            dispatch({
-              type: types.NEWEST_COVERS_SUCCESS,
-              data: response.data,
-            });
-            cb(null, null);
-          }
-        });
-      },
-      cb => {
-        popularCovers().then(response => {
-          if (response.success) {
-            dispatch({
-              type: types.POPULAR_COVERS_SUCCESS,
-              data: response.data,
-            });
-            cb(null, null);
-          }
-        });
-      },
-    ],
-    (err, results) => {
-      dispatch({ type: types.REQUEST_COVERS_SUCCESS });
-    }
-  );
+  const responseNewest = await fetchNewestCovers();
+  const responsePopular = await fetchPopularCovers();
+
+  if (responseNewest.success) {
+    dispatch({
+      type: types.NEWEST_COVERS_SUCCESS,
+      data: responseNewest.data,
+    });
+  }
+
+  if (responsePopular.success) {
+    dispatch({
+      type: types.POPULAR_COVERS_SUCCESS,
+      data: responsePopular.data,
+    });
+  }
 };
