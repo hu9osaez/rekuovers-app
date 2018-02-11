@@ -4,11 +4,11 @@ import jwtDecode from 'jwt-decode';
 import moment from 'moment';
 
 import {
-  authFb,
-  invalidateToken,
-  postLogin,
-  postSignup,
-  refreshToken,
+  fetchAuthFacebook,
+  fetchPostLogin,
+  fetchPostLogout,
+  fetchPostSignup,
+  fetchRefreshToken,
 } from '@core/api';
 import { resetNavigationTo } from '@core/utils';
 
@@ -20,24 +20,23 @@ export const connectWithFacebook = navigation => dispatch => {
   dispatch({ type: types.FETCH_FB_TOKEN });
 
   LoginManager.logInWithReadPermissions(['public_profile']).then(
-    result => {
+    async result => {
       if (!result.isCancelled) {
-        AccessToken.getCurrentAccessToken().then(data => {
-          authFb(data.accessToken.toString()).then(response => {
-            if (response.success) {
-              dispatch({ type: types.FETCH_FB_TOKEN_SUCCESS });
-              dispatch({ type: types.LOGIN_USER_SUCCESS, data: response.data });
-              dispatch(fetchCurrentUser());
-              dispatch(fetchCovers());
+        const data = await AccessToken.getCurrentAccessToken();
+        const response = await fetchAuthFacebook(data.accessToken.toString());
 
-              resetNavigationTo('Authenticated', navigation);
-            } else {
-              dispatch({ type: types.FETCH_FB_TOKEN_FAIL });
+        if (response.success) {
+          dispatch({ type: types.FETCH_FB_TOKEN_SUCCESS });
+          dispatch({ type: types.LOGIN_USER_SUCCESS, data: response.data });
+          dispatch(fetchCurrentUser());
+          dispatch(fetchCovers());
 
-              Alert.alert('Error', 'Wrong request.\nPlease try again.');
-            }
-          });
-        });
+          resetNavigationTo('Authenticated', navigation);
+        } else {
+          dispatch({ type: types.FETCH_FB_TOKEN_FAIL });
+
+          Alert.alert('Error', 'Wrong request.\nPlease try again.');
+        }
       }
     },
     error => {
@@ -46,52 +45,52 @@ export const connectWithFacebook = navigation => dispatch => {
   );
 };
 
-export const loginUser = (data, navigation) => dispatch => {
+export const loginUser = (data, navigation) => async dispatch => {
   dispatch({ type: types.LOGIN_USER });
 
-  postLogin(data).then(response => {
-    if (response.success) {
-      dispatch({ type: types.LOGIN_USER_SUCCESS, data: response.data });
-      dispatch(fetchCurrentUser());
-      dispatch(fetchCovers());
+  const response = await fetchPostLogin(data);
 
-      resetNavigationTo('Authenticated', navigation);
-    } else {
-      dispatch({ type: types.LOGIN_USER_FAIL });
+  if (response.success) {
+    dispatch({ type: types.LOGIN_USER_SUCCESS, data: response.data });
+    dispatch(fetchCurrentUser());
+    dispatch(fetchCovers());
 
-      Alert.alert(
-        'Incorrect credentials',
-        'Wrong email or password.\nPlease try again.'
-      );
-    }
-  });
+    resetNavigationTo('Authenticated', navigation);
+  } else {
+    dispatch({ type: types.LOGIN_USER_FAIL });
+
+    Alert.alert(
+      'Incorrect credentials',
+      'Wrong email or password.\nPlease try again.'
+    );
+  }
 };
 
-export const signupUser = (data, navigation) => dispatch => {
+export const signupUser = (data, navigation) => async dispatch => {
   dispatch({ type: types.SIGNUP_USER });
 
-  postSignup(data).then(response => {
-    if (response.success) {
-      dispatch({ type: types.SIGNUP_USER_SUCCESS, data: response.data });
+  const response = await fetchPostSignup(data);
 
-      resetNavigationTo('Authenticated', navigation);
-    } else {
-      dispatch({ type: types.SIGNUP_USER_FAIL });
+  if (response.success) {
+    dispatch({ type: types.SIGNUP_USER_SUCCESS, data: response.data });
 
-      Alert.alert('Incorrect credentials', response.error.message);
-    }
-  });
+    resetNavigationTo('Authenticated', navigation);
+  } else {
+    dispatch({ type: types.SIGNUP_USER_FAIL });
+
+    Alert.alert('Incorrect credentials', response.error.message);
+  }
 };
 
-export const logoutUser = navigation => (dispatch, getState) => {
-  invalidateToken(getState().auth.token).then(response => {
-    resetNavigationTo('Unauthenticated', navigation);
-    dispatch({ type: types.LOGOUT_USER });
-  });
+export const logoutUser = navigation => async (dispatch, getState) => {
+  const response = await fetchPostLogout(getState().auth.token);
+
+  resetNavigationTo('Unauthenticated', navigation);
+  dispatch({ type: types.LOGOUT_USER });
 };
 
-export const checkToken = token => dispatch => {
-  const tokenExpiration = jwtDecode(token).exp;
+export const checkToken = accessToken => async dispatch => {
+  const tokenExpiration = jwtDecode(accessToken).exp;
 
   const isExpired =
     tokenExpiration && moment.unix(tokenExpiration) - moment(Date.now()) < 30;
@@ -99,14 +98,14 @@ export const checkToken = token => dispatch => {
   if (isExpired) {
     dispatch({ type: types.REFRESHING_TOKEN });
 
-    refreshToken(token).then(response => {
-      if (response.success) {
-        // Dispatch exito
-        dispatch({ type: types.REFRESHING_TOKEN_SUCCESS, data: response.data });
-      } else {
-        // Dispatch error
-        // @TODO: Do something when request failed
-      }
-    });
+    const response = fetchRefreshToken(accessToken);
+
+    if (response.success) {
+      // Dispatch exito
+      dispatch({ type: types.REFRESHING_TOKEN_SUCCESS, data: response.data });
+    } else {
+      // Dispatch error
+      // @TODO: Do something when request failed
+    }
   }
 };
