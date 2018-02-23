@@ -5,6 +5,7 @@ import { colorsFromUrl } from 'react-native-dominant-color';
 import YouTube from 'react-native-youtube';
 import moment from 'moment';
 import timer from 'react-native-timer';
+import { connect } from 'react-redux';
 
 import {
   PRIMARY_COLOR,
@@ -12,7 +13,7 @@ import {
   SECONDARY_COLOR,
   SECONDARY_COLOR_TEXT,
 } from '@core/common/colors';
-import { secondsToTime } from '@core/utils/text';
+import { abbreviateNumber, secondsToTime } from '@core/utils/text';
 
 const styles = StyleSheet.create({
   container: {
@@ -26,12 +27,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   playContainer: {
-    flex: 2,
-    flexDirection: 'column',
-    justifyContent: 'center',
-  },
-  totalTimeContainer: {
-    flex: 2,
+    flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
   },
@@ -39,7 +35,13 @@ const styles = StyleSheet.create({
     flex: 6,
     flexDirection: 'column',
     justifyContent: 'center',
-    paddingRight: 5,
+    paddingHorizontal: 5,
+  },
+  totalTimeContainer: {
+    flex: 2,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    paddingHorizontal: 3,
   },
   detailsContainer: {
     height: 72,
@@ -73,13 +75,28 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   actionsContainer: {
-    height: 80,
+    flexDirection: 'row',
+    height: 70,
     borderBottomColor: '#f7f7f7',
     borderBottomWidth: 1,
   },
+  actionBox: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRightWidth: 1,
+    borderRightColor: '#f7f7f7',
+  },
+  likesText: {
+    fontSize: 24,
+    fontFamily: 'OswaldMedium',
+    color: PRIMARY_COLOR_TEXT,
+    paddingBottom: 5,
+  }
 });
 
-class CoverDetailsScreen extends React.Component {
+class CoverDetailsScreen extends React.PureComponent {
   state = {
     duration: 0,
     firstPlay: false,
@@ -155,6 +172,7 @@ class CoverDetailsScreen extends React.Component {
 
   render() {
     const { cover } = this.props.navigation.state.params;
+    const { likedCovers } = this.props;
     let {
       cTime,
       duration,
@@ -162,6 +180,8 @@ class CoverDetailsScreen extends React.Component {
       isReady,
       bgColor,
     } = this.state;
+
+    const isLiked = likedCovers.indexOf(cover.id) > -1;
 
     return (
       <View style={styles.container}>
@@ -230,7 +250,36 @@ class CoverDetailsScreen extends React.Component {
           </View>
         </View>
         <View style={[styles.tagsContainer, { backgroundColor: bgColor }]} />
-        <View style={styles.actionsContainer} />
+        <View style={styles.actionsContainer}>
+          <View style={styles.actionBox}>
+            <Icon
+              name={'favorite'}
+              size={32}
+              color={isLiked ? '#C62828' : PRIMARY_COLOR_TEXT}
+              containerStyle={{
+                marginRight: 5,
+              }}
+              onPress={() => alert('Pressed')}
+            />
+            <Text style={styles.likesText}>{abbreviateNumber(1200)}</Text>
+          </View>
+          <View style={styles.actionBox}>
+            <Icon
+              name={'share'}
+              color={PRIMARY_COLOR_TEXT}
+              size={32}
+              onPress={() => alert('Pressed')}
+            />
+          </View>
+          <View style={[styles.actionBox, {borderRightWidth: 0}]}>
+            <Icon
+              name={'add-box'}
+              color={PRIMARY_COLOR_TEXT}
+              size={32}
+              onPress={() => alert('Pressed')}
+            />
+          </View>
+        </View>
       </View>
     );
   }
@@ -240,4 +289,8 @@ CoverDetailsScreen.navigationOptions = {
   header: null,
 };
 
-export { CoverDetailsScreen };
+const mapStateToProps = state => ({
+  likedCovers: state.user.likedCovers,
+});
+
+export default connect(mapStateToProps)(CoverDetailsScreen);
