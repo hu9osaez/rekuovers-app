@@ -64,12 +64,29 @@ const styles = StyleSheet.create({
   },
 });
 
-class FeaturedCoverSlide extends React.Component {
-  constructor() {
-    super();
+class FeaturedCoverSlide extends React.PureComponent {
+  constructor(props) {
+    super(props);
+
+    const { cover } = props;
+
     this.state = {
       bgColor: '#cccccc',
+      imageUrl: `https://img.youtube.com/vi/${cover.youtube_id}/maxresdefault.jpg`,
     };
+  }
+
+  async componentWillMount() {
+    const { cover } = this.props;
+    let imgUrl = `https://img.youtube.com/vi/${
+      cover.youtube_id
+      }/maxresdefault.jpg`;
+
+    const response = await fetch(imgUrl);
+
+    if(!response.ok) {
+      this.setState({imageUrl: `https://img.youtube.com/vi/${cover.youtube_id}/mqdefault.jpg`});
+    }
   }
 
   componentDidMount() {
@@ -93,10 +110,7 @@ class FeaturedCoverSlide extends React.Component {
 
   render() {
     const { cover, navigation } = this.props;
-    let { bgColor } = this.state;
-    let imgUrl = `https://img.youtube.com/vi/${
-      cover.youtube_id
-    }/maxresdefault.jpg`;
+    let { bgColor, imageUrl } = this.state;
 
     return (
       <TouchableOpacity
@@ -121,7 +135,7 @@ class FeaturedCoverSlide extends React.Component {
           <Text style={styles.textLikes}>{abbreviateNumber(cover.likes)}</Text>
         </View>
 
-        <Image source={{ uri: imgUrl }} style={styles.image} />
+        <Image source={{ uri: imageUrl }} style={styles.image} />
       </TouchableOpacity>
     );
   }

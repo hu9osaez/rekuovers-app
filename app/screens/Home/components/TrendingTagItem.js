@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   },
 });
 
-class TrendingTagItem extends React.Component {
+class TrendingTagItem extends React.PureComponent {
   render() {
     const { tag } = this.props;
     return (
