@@ -4655,7 +4655,7 @@ prompt-rawlist@^2.0.0, prompt-rawlist@^2.0.1:
     is-number "^3.0.0"
     prompt-list "^2.0.1"
 
-prop-types@^15.5.0, prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.6.0:
+prop-types@^15.5.0, prop-types@^15.5.10, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@^15.6.0:
   version "15.6.0"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.0.tgz#ceaf083022fc46b4a35f69e13ef75aed0d639856"
   dependencies:
@@ -4868,6 +4868,12 @@ react-native-vector-icons@^4.4.2:
     lodash "^4.0.0"
     prop-types "^15.5.10"
     yargs "^8.0.2"
+
+react-native-view-more-text@^1.4.3:
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/react-native-view-more-text/-/react-native-view-more-text-1.4.3.tgz#1df0dffa2ff472c0fd2f01217b1690a047d18575"
+  dependencies:
+    prop-types "^15.5.7"
 
 "react-native-youtube@https://github.com/inProgress-team/react-native-youtube.git":
   version "1.1.0"

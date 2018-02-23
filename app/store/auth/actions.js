@@ -28,7 +28,7 @@ export const connectWithFacebook = navigation => dispatch => {
         if (response.success) {
           dispatch({ type: types.FETCH_FB_TOKEN_SUCCESS });
           dispatch({ type: types.LOGIN_USER_SUCCESS, data: response.data });
-          dispatch(fetchCurrentUser());
+          dispatch(fetchCurrentUserData());
           dispatch(fetchCovers());
 
           resetNavigationTo('Authenticated', navigation);
@@ -101,11 +101,10 @@ export const checkToken = accessToken => async dispatch => {
     const response = fetchRefreshToken(accessToken);
 
     if (response.success) {
-      // Dispatch exito
       dispatch({ type: types.REFRESHING_TOKEN_SUCCESS, data: response.data });
     } else {
-      // Dispatch error
-      // @TODO: Do something when request failed
+      const response = await fetchPostLogout(accessToken);
+      dispatch({ type: types.LOGOUT_USER });
     }
   }
 };

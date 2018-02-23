@@ -73,6 +73,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ checkToken, fetchCovers, fetchCurrentUserData }, dispatch);
+  bindActionCreators(
+    { checkToken, fetchCovers, fetchCurrentUserData },
+    dispatch
+  );
 
 export default connect(mapStateToProps, mapDispatchToProps)(SplashScreen);

@@ -112,7 +112,7 @@ class FeaturedCoverSlide extends React.Component {
             ellipsizeMode={'tail'}
             style={[styles.descriptionText, systemWeights.light]}
           >
-            {cover.description}
+            {cover.name}
           </Text>
         </View>
 

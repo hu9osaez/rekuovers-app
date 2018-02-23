@@ -1,11 +1,14 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Icon, Slider, Text } from 'react-native-elements';
+import { colorsFromUrl } from 'react-native-dominant-color';
 import YouTube from 'react-native-youtube';
+import moment from 'moment';
 import timer from 'react-native-timer';
 
 import {
   PRIMARY_COLOR,
+  PRIMARY_COLOR_TEXT,
   SECONDARY_COLOR,
   SECONDARY_COLOR_TEXT,
 } from '@core/common/colors';
@@ -38,6 +41,42 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingRight: 5,
   },
+  detailsContainer: {
+    height: 72,
+    borderBottomColor: '#f7f7f7',
+    borderBottomWidth: 1,
+  },
+  detailsRow: {
+    flex: 1,
+    flexDirection: 'row',
+    paddingHorizontal: 5,
+    alignItems: 'center',
+  },
+  metaText: {
+    fontFamily: 'OswaldBold',
+    fontSize: 12,
+    color: '#cacaca',
+  },
+  usernameText: {
+    fontFamily: 'OswaldBold',
+    fontSize: 12,
+    color: PRIMARY_COLOR,
+  },
+  nameText: {
+    fontFamily: 'OswaldMedium',
+    fontSize: 16,
+    color: PRIMARY_COLOR_TEXT,
+  },
+  tagsContainer: {
+    height: 40,
+    borderBottomColor: '#f7f7f7',
+    borderBottomWidth: 1,
+  },
+  actionsContainer: {
+    height: 80,
+    borderBottomColor: '#f7f7f7',
+    borderBottomWidth: 1,
+  },
 });
 
 class CoverDetailsScreen extends React.Component {
@@ -46,17 +85,34 @@ class CoverDetailsScreen extends React.Component {
     firstPlay: false,
     isPlaying: false,
     isReady: false,
-    statePlayer: null,
     cTime: 0,
+    bgColor: '#cccccc',
   };
+
+  componentDidMount() {
+    const { cover } = this.props.navigation.state.params;
+
+    let self = this;
+
+    colorsFromUrl(
+      `https://img.youtube.com/vi/${cover.youtube_id}/mqdefault.jpg`,
+      (err, colors) => {
+        if (!err) {
+          if (colors.dominantColor === '#CCCCCC') {
+            self.setState({ bgColor: colors.dominantColor });
+          } else {
+            self.setState({ bgColor: colors.averageColor });
+          }
+        }
+      }
+    );
+  }
 
   componentWillUnmount() {
     timer.clearInterval(this);
   }
 
-  playerOnReady = e => {
-    this.setState({ isReady: true });
-  };
+  playerOnReady = () => this.setState({ isReady: true });
 
   togglePlay = () => {
     let self = this;
@@ -83,28 +139,29 @@ class CoverDetailsScreen extends React.Component {
   };
 
   handleStatePlayer = e => {
-    if (e.state === 'loading') {
-      this.player.duration().then(d => this.setState({ duration: d }));
+    switch (e.state) {
+      case 'loading':
+        this.player.duration().then(d => this.setState({ duration: d }));
+        break;
+      case 'playing':
+        this.setState({ isPlaying: true });
+        break;
+      case 'paused':
+      case 'stopped':
+        this.setState({ isPlaying: false });
+        break;
     }
-
-    if (e.state === 'playing') {
-      this.setState({ isPlaying: true });
-    }
-
-    if (e.state === 'paused') {
-      this.setState({ isPlaying: false });
-    }
-
-    if (e.state === 'stopped') {
-      this.setState({ isPlaying: false });
-    }
-
-    this.setState({ statePlayer: e.state });
   };
 
   render() {
     const { cover } = this.props.navigation.state.params;
-    let { cTime, duration, isPlaying, isReady, statePlayer } = this.state;
+    let {
+      cTime,
+      duration,
+      isPlaying,
+      isReady,
+      bgColor,
+    } = this.state;
 
     return (
       <View style={styles.container}>
@@ -117,7 +174,7 @@ class CoverDetailsScreen extends React.Component {
           onReady={this.playerOnReady}
           onChangeState={this.handleStatePlayer}
           resumePlayAndroid={false}
-          style={{ alignSelf: 'stretch', height: 221 }}
+          style={{ alignSelf: 'stretch', height: 200 }}
         />
         <View style={styles.playerControls}>
           <View style={styles.playContainer}>
@@ -145,7 +202,35 @@ class CoverDetailsScreen extends React.Component {
             </Text>
           </View>
         </View>
-        <Text>{statePlayer}</Text>
+        <View style={styles.detailsContainer}>
+          <View style={styles.detailsRow}>
+            <Text style={styles.metaText}>
+              {moment
+                .unix(cover.published_at)
+                .fromNow()
+                .toUpperCase()}{' '}
+              BY
+            </Text>
+            <Text
+              style={styles.usernameText}
+              onPress={() => alert('Go to profile')}
+            >
+              {' '}
+              {cover.publisher.username.toUpperCase()}
+            </Text>
+          </View>
+          <View style={[styles.detailsRow, { flex: 2 }]}>
+            <Text
+              style={styles.nameText}
+              numberOfLines={2}
+              ellipsizeMode={'tail'}
+            >
+              {cover.name}
+            </Text>
+          </View>
+        </View>
+        <View style={[styles.tagsContainer, { backgroundColor: bgColor }]} />
+        <View style={styles.actionsContainer} />
       </View>
     );
   }

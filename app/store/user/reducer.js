@@ -2,7 +2,7 @@ import { REHYDRATE } from 'redux-persist/es/constants';
 import * as types from '../types';
 
 export const INITIAL_STATE = {
-  currentUser: null,
+  currentUser: {},
   loading: false,
   likedCovers: [],
   rehydratedAt: null,

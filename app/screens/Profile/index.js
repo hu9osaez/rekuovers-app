@@ -5,7 +5,12 @@ import { connect } from 'react-redux';
 import { logoutUser } from '@store/auth/actions';
 import { fetchCurrentUserData } from '@store/user/actions';
 
-const ProfileScreen = ({ navigation, user, fetchCurrentUserData, logoutUser }) => (
+const ProfileScreen = ({
+  navigation,
+  user,
+  fetchCurrentUserData,
+  logoutUser,
+}) => (
   <View>
     <Text>Profile</Text>
     <Text>{user.name}</Text>

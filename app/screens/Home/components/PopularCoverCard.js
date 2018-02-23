@@ -70,7 +70,7 @@ class PopularCoverCard extends React.PureComponent {
           />
         </TouchableOpacity>
         <Text style={styles.title} ellipsizeMode={'tail'} numberOfLines={1}>
-          {cover.description}
+          {cover.name}
         </Text>
         <View style={styles.extraContainer}>
           <View
