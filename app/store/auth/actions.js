@@ -89,21 +89,22 @@ export const logoutUser = navigation => async (dispatch, getState) => {
   dispatch({ type: types.LOGOUT_USER });
 };
 
-export const checkToken = accessToken => async dispatch => {
-  const tokenExpiration = jwtDecode(accessToken).exp;
+export const checkToken = (forceRefresh = false) => async (dispatch, getState) => {
+  const { token } = getState().auth;
+  const tokenExpiration = jwtDecode(token).exp;
 
   const isExpired =
     tokenExpiration && moment.unix(tokenExpiration) - moment(Date.now()) < 30;
 
-  if (isExpired) {
+  if (isExpired || forceRefresh) {
     dispatch({ type: types.REFRESHING_TOKEN });
 
-    const response = fetchRefreshToken(accessToken);
+    const response = await fetchRefreshToken(token);
 
     if (response.success) {
       dispatch({ type: types.REFRESHING_TOKEN_SUCCESS, data: response.data });
     } else {
-      const response = await fetchPostLogout(accessToken);
+      const response = await fetchPostLogout(token);
       dispatch({ type: types.LOGOUT_USER });
     }
   }
