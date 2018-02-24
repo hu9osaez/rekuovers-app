@@ -20,7 +20,7 @@ import {
 const tabOptions = {
   tabBarPosition: 'bottom',
   swipeEnabled: false,
-  lazy: false,
+  lazy: true,
   tabBarOptions: {
     activeTintColor: PRIMARY_COLOR,
     inactiveTintColor: SECONDARY_COLOR,

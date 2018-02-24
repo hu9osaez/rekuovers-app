@@ -9,15 +9,16 @@ export const fetchCurrentUserData = () => async (dispatch, getState) => {
 
   if (response.success) {
     dispatch({ type: types.FETCH_CURRENT_USER_SUCCESS, data: response.data });
-    dispatch(fetchlikedCoversIds(token));
+    dispatch(fetchLikedCoversIds());
   } else {
     dispatch({ type: types.FETCH_CURRENT_USER_FAIL });
   }
 };
 
-export const fetchlikedCoversIds = token => async dispatch => {
+export const fetchLikedCoversIds = () => async (dispatch, getState) => {
   dispatch({ type: types.FETCH_LIKED_COVERS });
 
+  const token = getState().auth.token;
   const response = await fetchLikedCovers(token);
 
   if (response.success) {

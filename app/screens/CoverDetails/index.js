@@ -5,8 +5,10 @@ import { colorsFromUrl } from 'react-native-dominant-color';
 import YouTube from 'react-native-youtube';
 import moment from 'moment';
 import timer from 'react-native-timer';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+import { fetchToggleLike } from '@core/api';
 import {
   PRIMARY_COLOR,
   PRIMARY_COLOR_TEXT,
@@ -14,6 +16,8 @@ import {
   SECONDARY_COLOR_TEXT,
 } from '@core/common/colors';
 import { abbreviateNumber, secondsToTime } from '@core/utils/text';
+
+import { fetchLikedCoversIds } from '@store/user/actions';
 
 const styles = StyleSheet.create({
   container: {
@@ -93,43 +97,50 @@ const styles = StyleSheet.create({
     fontFamily: 'OswaldMedium',
     color: PRIMARY_COLOR_TEXT,
     paddingBottom: 5,
-  }
+  },
 });
 
 class CoverDetailsScreen extends React.PureComponent {
-  state = {
-    duration: 0,
-    firstPlay: false,
-    isPlaying: false,
-    isReady: false,
-    cTime: 0,
-    bgColor: '#cccccc',
-  };
+  constructor(props) {
+    super(props);
 
-  componentDidMount() {
+    const { cover } = props.navigation.state.params;
+    const { likedCovers } = props;
+
+    this.state = {
+      duration: 0,
+      firstPlay: false,
+      isPlaying: false,
+      isReady: false,
+      cTime: 0,
+      bgColor: '#cccccc',
+      likesCount: cover.likes,
+      isLiked: likedCovers.indexOf(cover.id) > -1,
+    };
+  }
+
+  async componentDidMount() {
     const { cover } = this.props.navigation.state.params;
 
-    let self = this;
-
-    colorsFromUrl(
-      `https://img.youtube.com/vi/${cover.youtube_id}/mqdefault.jpg`,
-      (err, colors) => {
-        if (!err) {
-          if (colors.dominantColor === '#CCCCCC') {
-            self.setState({ bgColor: colors.dominantColor });
-          } else {
-            self.setState({ bgColor: colors.averageColor });
-          }
-        }
-      }
+    const colors = await colorsFromUrl(
+      `https://img.youtube.com/vi/${cover.youtube_id}/mqdefault.jpg`
     );
+
+    if (colors.dominantColor === '#CCCCCC') {
+      this.setState({ bgColor: colors.dominantColor });
+    } else {
+      this.setState({ bgColor: colors.averageColor });
+    }
   }
 
   componentWillUnmount() {
     timer.clearInterval(this);
   }
 
-  playerOnReady = () => this.setState({ isReady: true });
+  playerOnReady = () =>
+    this.setState({ isReady: true }, () => {
+      this.togglePlay();
+    });
 
   togglePlay = () => {
     let self = this;
@@ -170,18 +181,37 @@ class CoverDetailsScreen extends React.PureComponent {
     }
   };
 
+  toggleLike = async () => {
+    const { accessToken } = this.props;
+    const { likesCount, isLiked } = this.state;
+    const { cover } = this.props.navigation.state.params;
+
+    this.setState({
+      likesCount: isLiked ? likesCount - 1 : likesCount + 1,
+      isLiked: !isLiked,
+    });
+
+    const response = await fetchToggleLike(accessToken, cover.id);
+
+    if (response.success) {
+      // Refresh liked covers
+      this.props.fetchLikedCoversIds();
+    } else {
+      // @TODO: Do somenthing when fail request
+    }
+  };
+
   render() {
     const { cover } = this.props.navigation.state.params;
-    const { likedCovers } = this.props;
     let {
       cTime,
       duration,
       isPlaying,
       isReady,
       bgColor,
+      likesCount,
+      isLiked,
     } = this.state;
-
-    const isLiked = likedCovers.indexOf(cover.id) > -1;
 
     return (
       <View style={styles.container}>
@@ -259,9 +289,9 @@ class CoverDetailsScreen extends React.PureComponent {
               containerStyle={{
                 marginRight: 5,
               }}
-              onPress={() => alert('Pressed')}
+              onPress={this.toggleLike}
             />
-            <Text style={styles.likesText}>{abbreviateNumber(1200)}</Text>
+            <Text style={styles.likesText}>{abbreviateNumber(likesCount)}</Text>
           </View>
           <View style={styles.actionBox}>
             <Icon
@@ -271,7 +301,7 @@ class CoverDetailsScreen extends React.PureComponent {
               onPress={() => alert('Pressed')}
             />
           </View>
-          <View style={[styles.actionBox, {borderRightWidth: 0}]}>
+          <View style={[styles.actionBox, { borderRightWidth: 0 }]}>
             <Icon
               name={'add-box'}
               color={PRIMARY_COLOR_TEXT}
@@ -290,7 +320,11 @@ CoverDetailsScreen.navigationOptions = {
 };
 
 const mapStateToProps = state => ({
+  accessToken: state.auth.token,
   likedCovers: state.user.likedCovers,
 });
 
-export default connect(mapStateToProps)(CoverDetailsScreen);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ fetchLikedCoversIds }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(CoverDetailsScreen);

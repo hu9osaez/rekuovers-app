@@ -17,7 +17,7 @@ export const api = {
 
     return response;
   },
-  parameters: (accessToken, method = METHOD.GET, body) => {
+  parameters: (accessToken, method = METHOD.GET, body = {}) => {
     const withBody = [METHOD.POST];
     const params = {
       method,
@@ -26,7 +26,7 @@ export const api = {
       },
     };
 
-    if (withBody.indexOf(method) !== -1) {
+    if (withBody.indexOf(method) !== -1 && Object.keys(body).length !== 0) {
       params.body = JSON.stringify(body);
       params.headers['Content-Type'] = 'application/json';
     }
@@ -121,4 +121,13 @@ export const fetchPopularCovers = async () => {
   const response = await api.getJson('/covers/popular');
 
   return response;
+};
+
+export const fetchToggleLike = async (accessToken, coverId) => {
+  const response = await api.call(
+    `/covers/${coverId}/likes`,
+    api.parameters(accessToken, METHOD.POST)
+  );
+
+  return response.json();
 };

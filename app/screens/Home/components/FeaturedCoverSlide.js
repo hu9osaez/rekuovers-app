@@ -72,7 +72,9 @@ class FeaturedCoverSlide extends React.PureComponent {
 
     this.state = {
       bgColor: '#cccccc',
-      imageUrl: `https://img.youtube.com/vi/${cover.youtube_id}/maxresdefault.jpg`,
+      imageUrl: `https://img.youtube.com/vi/${
+        cover.youtube_id
+      }/maxresdefault.jpg`,
     };
   }
 
@@ -80,32 +82,31 @@ class FeaturedCoverSlide extends React.PureComponent {
     const { cover } = this.props;
     let imgUrl = `https://img.youtube.com/vi/${
       cover.youtube_id
-      }/maxresdefault.jpg`;
+    }/maxresdefault.jpg`;
 
     const response = await fetch(imgUrl);
 
-    if(!response.ok) {
-      this.setState({imageUrl: `https://img.youtube.com/vi/${cover.youtube_id}/mqdefault.jpg`});
+    if (!response.ok) {
+      this.setState({
+        imageUrl: `https://img.youtube.com/vi/${
+          cover.youtube_id
+        }/mqdefault.jpg`,
+      });
     }
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const { cover } = this.props;
 
-    let self = this;
-
-    colorsFromUrl(
-      `https://img.youtube.com/vi/${cover.youtube_id}/mqdefault.jpg`,
-      (err, colors) => {
-        if (!err) {
-          if (colors.dominantColor === '#CCCCCC') {
-            self.setState({ bgColor: colors.dominantColor });
-          } else {
-            self.setState({ bgColor: colors.averageColor });
-          }
-        }
-      }
+    const colors = await colorsFromUrl(
+      `https://img.youtube.com/vi/${cover.youtube_id}/mqdefault.jpg`
     );
+
+    if (colors.dominantColor === '#CCCCCC') {
+      this.setState({ bgColor: colors.dominantColor });
+    } else {
+      this.setState({ bgColor: colors.averageColor });
+    }
   }
 
   render() {

@@ -8,9 +8,4 @@ export * from './Auth';
 export * from './Search';
 export * from './Profile';
 
-export {
-  CoverDetailsScreen,
-  HomeTab,
-  ProfileTab,
-  SplashScreen
-};
+export { CoverDetailsScreen, HomeTab, ProfileTab, SplashScreen };

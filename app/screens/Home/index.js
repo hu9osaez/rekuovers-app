@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, View } from 'react-native';
+import { RefreshControl, ScrollView, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 
@@ -8,13 +8,26 @@ import NewestCoversList from './components/NewestCoversList';
 import PopularCoversList from './components/PopularCoversList';
 import TrendingTags from './components/TrendingTagsCarousel';
 
+import { fetchCovers } from '@store/covers/actions';
+
 import styles from './styles';
 
 class HomeScreen extends React.Component {
+  componentDidMount() {
+    console.tron.log('Mounted', true);
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <ScrollView>
+        <ScrollView
+          refreshControl={
+            <RefreshControl
+              refreshing={this.props.loading}
+              onRefresh={() => this.props.fetchCovers()}
+            />
+          }
+        >
           <FeaturedCovers />
           <PopularCoversList />
           <NewestCoversList />
@@ -32,6 +45,7 @@ HomeScreen.navigationOptions = {
 
 const mapStateToProps = state => ({
   accessToken: state.auth.token,
+  loading: state.covers.loading,
 });
 
-export default connect(mapStateToProps)(HomeScreen);
+export default connect(mapStateToProps, { fetchCovers })(HomeScreen);

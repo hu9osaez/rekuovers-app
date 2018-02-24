@@ -21,4 +21,6 @@ export const fetchCovers = () => async dispatch => {
       data: responsePopular.data,
     });
   }
+
+  dispatch({ type: types.REQUEST_COVERS_SUCCESS });
 };
