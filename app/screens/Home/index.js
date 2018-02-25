@@ -13,10 +13,6 @@ import { fetchCovers } from '@store/covers/actions';
 import styles from './styles';
 
 class HomeScreen extends React.Component {
-  componentDidMount() {
-    console.tron.log('Mounted', true);
-  }
-
   render() {
     return (
       <View style={styles.container}>

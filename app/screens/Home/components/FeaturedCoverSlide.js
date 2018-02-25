@@ -78,23 +78,6 @@ class FeaturedCoverSlide extends React.PureComponent {
     };
   }
 
-  async componentWillMount() {
-    const { cover } = this.props;
-    let imgUrl = `https://img.youtube.com/vi/${
-      cover.youtube_id
-    }/maxresdefault.jpg`;
-
-    const response = await fetch(imgUrl);
-
-    if (!response.ok) {
-      this.setState({
-        imageUrl: `https://img.youtube.com/vi/${
-          cover.youtube_id
-        }/mqdefault.jpg`,
-      });
-    }
-  }
-
   async componentDidMount() {
     const { cover } = this.props;
 
@@ -136,7 +119,19 @@ class FeaturedCoverSlide extends React.PureComponent {
           <Text style={styles.textLikes}>{abbreviateNumber(cover.likes)}</Text>
         </View>
 
-        <Image source={{ uri: imageUrl }} style={styles.image} />
+        <Image
+          source={{
+            uri: imageUrl,
+          }}
+          style={styles.image}
+          onError={e =>
+            this.setState({
+              imageUrl: `https://img.youtube.com/vi/${
+                cover.youtube_id
+              }/mqdefault.jpg`,
+            })
+          }
+        />
       </TouchableOpacity>
     );
   }

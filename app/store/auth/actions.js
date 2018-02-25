@@ -89,7 +89,10 @@ export const logoutUser = navigation => async (dispatch, getState) => {
   dispatch({ type: types.LOGOUT_USER });
 };
 
-export const checkToken = (forceRefresh = false) => async (dispatch, getState) => {
+export const checkToken = (forceRefresh = false) => async (
+  dispatch,
+  getState
+) => {
   const { token } = getState().auth;
   const tokenExpiration = jwtDecode(token).exp;
 

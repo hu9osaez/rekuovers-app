@@ -52,8 +52,21 @@ const styles = StyleSheet.create({
 });
 
 class PopularCoverCard extends React.PureComponent {
+  constructor(props) {
+    super(props);
+
+    const { cover } = props;
+
+    this.state = {
+      imageUrl: `https://img.youtube.com/vi/${
+        cover.youtube_id
+      }/maxresdefault.jpg`,
+    };
+  }
+
   render() {
     const { cover, isLiked, navigation } = this.props;
+    const { imageUrl } = this.state;
     return (
       <View style={styles.container}>
         <TouchableOpacity
@@ -62,11 +75,16 @@ class PopularCoverCard extends React.PureComponent {
         >
           <Image
             source={{
-              uri: `https://img.youtube.com/vi/${
-                cover.youtube_id
-              }/maxresdefault.jpg`,
+              uri: imageUrl,
             }}
             style={styles.imageContainer}
+            onError={e =>
+              this.setState({
+                imageUrl: `https://img.youtube.com/vi/${
+                  cover.youtube_id
+                }/mqdefault.jpg`,
+              })
+            }
           />
         </TouchableOpacity>
         <Text style={styles.title} ellipsizeMode={'tail'} numberOfLines={1}>

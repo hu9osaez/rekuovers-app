@@ -42,7 +42,7 @@ class FeaturedCovers extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  covers: state.covers.newest,
+  covers: state.covers.popular,
 });
 
 export default connect(mapStateToProps)(FeaturedCovers);
