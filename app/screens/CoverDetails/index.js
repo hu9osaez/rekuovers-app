@@ -17,6 +17,7 @@ import {
 } from '@core/common/colors';
 import { abbreviateNumber, secondsToTime } from '@core/utils/text';
 
+import { updateLikesToCover } from '@store/covers/actions';
 import { fetchLikedCoversIds } from '@store/user/actions';
 
 const styles = StyleSheet.create({
@@ -196,6 +197,7 @@ class CoverDetailsScreen extends React.PureComponent {
     if (response.success) {
       // Refresh liked covers
       this.props.fetchLikedCoversIds();
+      this.props.updateLikesToCover(cover.id, this.state.likesCount);
     } else {
       // @TODO: Do somenthing when fail request
     }
@@ -325,6 +327,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ fetchLikedCoversIds }, dispatch);
+  bindActionCreators({ fetchLikedCoversIds, updateLikesToCover }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(CoverDetailsScreen);

@@ -22,6 +22,11 @@ const styles = StyleSheet.create({
 class FeaturedCovers extends React.Component {
   render() {
     const { covers } = this.props;
+
+    if (covers.loading) {
+      return null;
+    }
+
     return (
       <View style={styles.container}>
         <Carousel

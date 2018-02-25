@@ -28,6 +28,17 @@ export const coversReducer = (state = INITIAL_STATE, action) => {
         ...state,
         popular: action.data,
       };
+    case types.UPDATE_LIKES_COVER_SUCCESS:
+      const { coverId, likes } = action.data;
+      return {
+        ...state,
+        newest: state.newest.map(
+          cover => (cover.id === coverId ? { ...cover, likes } : cover)
+        ),
+        popular: state.popular.map(
+          cover => (cover.id === coverId ? { ...cover, likes } : cover)
+        ),
+      };
     default:
       return state;
   }

@@ -24,3 +24,10 @@ export const fetchCovers = () => async dispatch => {
 
   dispatch({ type: types.REQUEST_COVERS_SUCCESS });
 };
+
+export const updateLikesToCover = (coverId, likes) => dispatch => {
+  dispatch({
+    type: types.UPDATE_LIKES_COVER_SUCCESS,
+    data: { coverId, likes },
+  });
+};
