@@ -8,7 +8,7 @@ import timer from 'react-native-timer';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { fetchToggleLike } from '@core/api';
+import { fetchCreateLike, fetchDeleteLike } from '@core/api';
 import {
   PRIMARY_COLOR,
   PRIMARY_COLOR_TEXT,
@@ -192,14 +192,29 @@ class CoverDetailsScreen extends React.PureComponent {
       isLiked: !isLiked,
     });
 
-    const response = await fetchToggleLike(accessToken, cover.id);
+    if(!isLiked) {
+      const response = await fetchCreateLike(accessToken, cover.id);
 
-    if (response.success) {
-      // Refresh liked covers
-      this.props.fetchLikedCoversIds();
-      this.props.updateLikesToCover(cover.id, this.state.likesCount);
-    } else {
-      // @TODO: Do somenthing when fail request
+      if(response.success) {
+        this.props.fetchLikedCoversIds();
+        this.props.updateLikesToCover(cover.id, this.state.likesCount);
+      }
+      else {
+        // @TODO
+        // Show some alert with the error
+      }
+    }
+    else {
+      const response = await fetchDeleteLike(accessToken, cover.id);
+
+      if(response.success) {
+        this.props.fetchLikedCoversIds();
+        this.props.updateLikesToCover(cover.id, this.state.likesCount);
+      }
+      else {
+        // @TODO
+        // Show some alert with the error
+      }
     }
   };
 

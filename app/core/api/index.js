@@ -7,6 +7,7 @@ const ACCEPT = {
 const METHOD = {
   GET: 'GET',
   POST: 'POST',
+  DELETE: 'DELETE',
 };
 
 export const api = {
@@ -51,6 +52,14 @@ export const api = {
     const response = await api.call(
       url,
       api.parameters(accessToken, METHOD.POST, body)
+    );
+
+    return response.json();
+  },
+  delete: async (url, accessToken) => {
+    const response = await api.call(
+      url,
+      api.parameters(accessToken, METHOD.DELETE)
     );
 
     return response.json();
@@ -123,11 +132,14 @@ export const fetchPopularCovers = async () => {
   return response;
 };
 
-export const fetchToggleLike = async (accessToken, coverId) => {
-  const response = await api.call(
-    `/covers/${coverId}/likes`,
-    api.parameters(accessToken, METHOD.POST)
-  );
+export const fetchCreateLike = async (accessToken, coverId) => {
+  const response = await api.post(`/covers/${coverId}/likes`, {}, accessToken);
 
-  return response.json();
+  return response;
+};
+
+export const fetchDeleteLike = async (accessToken, coverId) => {
+  const response = await api.delete(`/covers/${coverId}/likes`, accessToken);
+
+  return response;
 };
