@@ -12,6 +12,7 @@ import {
   SignupScreen,
   LoginScreen,
   HomeTab,
+  FeedScreen,
   SearchScreen as SearchTab,
   ProfileTab,
   CoverDetailsScreen,
@@ -69,6 +70,9 @@ const AuthenticatedNavigator = StackNavigator({
   },
   CoverDetails: {
     screen: CoverDetailsScreen,
+  },
+  Feed: {
+    screen: FeedScreen,
   },
 });
 

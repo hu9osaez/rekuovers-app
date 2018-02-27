@@ -26,7 +26,7 @@ class HomeScreen extends React.Component {
         >
           <FeaturedCovers />
           <PopularCoversList />
-          <NewestCoversList />
+          <NewestCoversList navigation={this.props.navigation} />
           <TrendingTags />
         </ScrollView>
       </View>

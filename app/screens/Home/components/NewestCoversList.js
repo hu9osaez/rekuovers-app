@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 
 import styles from '../styles';
 
-class NewestCoversList extends React.Component {
+class NewestCoversList extends React.PureComponent {
   render() {
-    const { covers, likedCovers, loading } = this.props;
+    const { covers, likedCovers, loading, navigation } = this.props;
     return (
       <View style={styles.containerSection}>
         <View style={styles.newestHeaderContainer}>
@@ -15,7 +15,7 @@ class NewestCoversList extends React.Component {
             <Text style={styles.newestHeader}>NEWEST</Text>
           </View>
           <View style={{ flex: 1 }}>
-            <Text style={styles.newestSeeMore} onPress={() => alert('Pressed')}>
+            <Text style={styles.newestSeeMore} onPress={() => navigation.navigate('Feed')}>
               See more
             </Text>
           </View>

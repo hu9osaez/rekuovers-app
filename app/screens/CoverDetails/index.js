@@ -272,6 +272,7 @@ class CoverDetailsScreen extends React.PureComponent {
         <View style={styles.detailsContainer}>
           <View style={styles.detailsRow}>
             <Text style={styles.metaText}>
+              {'PUBLISHED '}
               {moment
                 .unix(cover.published_at)
                 .fromNow()

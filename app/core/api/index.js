@@ -13,7 +13,7 @@ const METHOD = {
 export const api = {
   root: API_URL,
   call: async (url, parameters) => {
-    const finalUrl = `${api.root}${url}`;
+    const finalUrl = url.indexOf(api.root) === 0 ? url : `${api.root}${url}`;
     const response = await fetch(finalUrl, parameters);
 
     return response;
