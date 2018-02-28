@@ -15,7 +15,10 @@ class NewestCoversList extends React.PureComponent {
             <Text style={styles.newestHeader}>NEWEST</Text>
           </View>
           <View style={{ flex: 1 }}>
-            <Text style={styles.newestSeeMore} onPress={() => navigation.navigate('Feed')}>
+            <Text
+              style={styles.newestSeeMore}
+              onPress={() => navigation.navigate('Feed')}
+            >
               See more
             </Text>
           </View>

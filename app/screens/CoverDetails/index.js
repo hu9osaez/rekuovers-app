@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 import { Icon, Slider, Text } from 'react-native-elements';
 import { colorsFromUrl } from 'react-native-dominant-color';
 import YouTube from 'react-native-youtube';
@@ -7,6 +7,7 @@ import moment from 'moment';
 import timer from 'react-native-timer';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import isEmpty from 'lodash/isEmpty';
 
 import { fetchCreateLike, fetchDeleteLike } from '@core/api';
 import {
@@ -15,6 +16,7 @@ import {
   SECONDARY_COLOR,
   SECONDARY_COLOR_TEXT,
 } from '@core/common/colors';
+import { getFontColorByBackground } from '@core/utils/color';
 import { abbreviateNumber, secondsToTime } from '@core/utils/text';
 
 import { updateLikesToCover } from '@store/covers/actions';
@@ -76,8 +78,6 @@ const styles = StyleSheet.create({
   },
   tagsContainer: {
     height: 40,
-    borderBottomColor: '#f7f7f7',
-    borderBottomWidth: 1,
   },
   actionsContainer: {
     flexDirection: 'row',
@@ -114,7 +114,8 @@ class CoverDetailsScreen extends React.PureComponent {
       isPlaying: false,
       isReady: false,
       cTime: 0,
-      bgColor: '#cccccc',
+      bgColorTags: '#cccccc',
+      fontColorTags: '#000000',
       likesCount: cover.likes,
       isLiked: likedCovers.indexOf(cover.id) > -1,
     };
@@ -127,11 +128,19 @@ class CoverDetailsScreen extends React.PureComponent {
       `https://img.youtube.com/vi/${cover.youtube_id}/mqdefault.jpg`
     );
 
-    if (colors.dominantColor === '#CCCCCC') {
-      this.setState({ bgColor: colors.dominantColor });
-    } else {
-      this.setState({ bgColor: colors.averageColor });
-    }
+    this.setState(
+      {
+        bgColorTags:
+          colors.dominantColor === '#CCCCCC'
+            ? colors.dominantColor
+            : colors.averageColor,
+      },
+      () => {
+        this.setState({
+          fontColorTags: getFontColorByBackground(this.state.bgColorTags),
+        });
+      }
+    );
   }
 
   componentWillUnmount() {
@@ -192,31 +201,55 @@ class CoverDetailsScreen extends React.PureComponent {
       isLiked: !isLiked,
     });
 
-    if(!isLiked) {
+    if (!isLiked) {
       const response = await fetchCreateLike(accessToken, cover.id);
 
-      if(response.success) {
+      if (response.success) {
         this.props.fetchLikedCoversIds();
         this.props.updateLikesToCover(cover.id, this.state.likesCount);
-      }
-      else {
+      } else {
         // @TODO
         // Show some alert with the error
       }
-    }
-    else {
+    } else {
       const response = await fetchDeleteLike(accessToken, cover.id);
 
-      if(response.success) {
+      if (response.success) {
         this.props.fetchLikedCoversIds();
         this.props.updateLikesToCover(cover.id, this.state.likesCount);
-      }
-      else {
+      } else {
         // @TODO
         // Show some alert with the error
       }
     }
   };
+
+  renderTagsSection() {
+    const { cover } = this.props.navigation.state.params;
+    const shouldRenderSection = !isEmpty(cover.tags);
+    return (
+      shouldRenderSection && (
+        <View
+          style={{
+            backgroundColor: this.state.bgColorTags,
+            height: 40,
+          }}
+        >
+          <FlatList
+            data={cover.tags}
+            renderItem={({ item }) => (
+              <Text style={{ color: this.state.fontColorTags }} key={item.slug}>
+                {item.name}
+              </Text>
+            )}
+            keyExtractor={tag => tag.slug}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+          />
+        </View>
+      )
+    );
+  }
 
   render() {
     const { cover } = this.props.navigation.state.params;
@@ -225,7 +258,6 @@ class CoverDetailsScreen extends React.PureComponent {
       duration,
       isPlaying,
       isReady,
-      bgColor,
       likesCount,
       isLiked,
     } = this.state;
@@ -297,7 +329,7 @@ class CoverDetailsScreen extends React.PureComponent {
             </Text>
           </View>
         </View>
-        <View style={[styles.tagsContainer, { backgroundColor: bgColor }]} />
+        {this.renderTagsSection()}
         <View style={styles.actionsContainer}>
           <View style={styles.actionBox}>
             <Icon
