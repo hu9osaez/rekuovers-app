@@ -6,7 +6,8 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { Icon, Text, normalize } from 'react-native-elements';
+import { Text } from '@components';
+import { Icon } from 'react-native-elements';
 import { withNavigation } from 'react-navigation';
 
 import { PRIMARY_COLOR_TEXT, SECONDARY_COLOR_TEXT } from '@core/common/colors';
@@ -33,7 +34,6 @@ const styles = StyleSheet.create({
     height: width * 0.55,
   },
   title: {
-    fontSize: normalize(12),
     color: PRIMARY_COLOR_TEXT,
     paddingLeft: 4,
   },
@@ -44,7 +44,6 @@ const styles = StyleSheet.create({
     paddingLeft: 4,
   },
   textLikes: {
-    fontSize: normalize(10),
     marginLeft: 4,
     lineHeight: 15,
     color: SECONDARY_COLOR_TEXT,
@@ -87,7 +86,12 @@ class PopularCoverCard extends React.PureComponent {
             }
           />
         </TouchableOpacity>
-        <Text style={styles.title} ellipsizeMode={'tail'} numberOfLines={1}>
+        <Text
+          size={12}
+          style={styles.title}
+          ellipsizeMode={'tail'}
+          numberOfLines={1}
+        >
           {cover.name}
         </Text>
         <View style={styles.extraContainer}>
@@ -102,7 +106,7 @@ class PopularCoverCard extends React.PureComponent {
               size={13}
               color={isLiked ? '#C62828' : PRIMARY_COLOR_TEXT}
             />
-            <Text style={styles.textLikes}>
+            <Text size={10} style={styles.textLikes}>
               {abbreviateNumber(cover.likes)}
             </Text>
           </View>

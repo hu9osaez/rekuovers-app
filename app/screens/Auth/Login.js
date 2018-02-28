@@ -1,8 +1,8 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Button, Text } from 'react-native-elements';
+import { Button } from 'react-native-elements';
 
-import { Container } from '@components';
+import { Container, Text } from '@components';
 import BackRow from './components/BackRow';
 import SocialRow from './components/SocialRow';
 import SimpleInput from './components/SimpleInput';

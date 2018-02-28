@@ -1,6 +1,8 @@
 import React from 'react';
 import { Linking, StyleSheet, TouchableOpacity, View } from 'react-native';
-import { Text, Icon, normalize } from 'react-native-elements';
+import { Icon } from 'react-native-elements';
+
+import { Text } from '@components';
 
 const styles = StyleSheet.create({
   attributionContainer: {
@@ -21,7 +23,6 @@ const styles = StyleSheet.create({
   },
   text: {
     color: '#fff',
-    fontSize: normalize(10),
   },
 });
 
@@ -37,7 +38,9 @@ const BgAttribution = () => (
         size={10}
         containerStyle={styles.iconContainer}
       />
-      <Text style={styles.text}>by @justmebreathing</Text>
+      <Text size={10} style={styles.text}>
+        by @justmebreathing
+      </Text>
     </TouchableOpacity>
   </View>
 );

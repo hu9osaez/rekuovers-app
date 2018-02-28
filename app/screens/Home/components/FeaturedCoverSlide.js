@@ -3,15 +3,14 @@ import {
   Dimensions,
   Image,
   StyleSheet,
-  Text,
   TouchableOpacity,
   View,
 } from 'react-native';
+import { Text } from '@components';
 import { Icon } from 'react-native-elements';
 
 import { withNavigation } from 'react-navigation';
 import { colorsFromUrl } from 'react-native-dominant-color';
-import { systemWeights } from 'react-native-typography';
 import { normalize } from 'react-native-elements/src/index';
 
 import { abbreviateNumber } from '@core/utils/text';
@@ -32,9 +31,7 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
   titleSection: {
-    fontFamily: 'OswaldMedium',
     color: '#ffffff',
-    fontSize: 16,
     marginLeft: 10,
     marginTop: 25,
   },
@@ -102,13 +99,15 @@ class FeaturedCoverSlide extends React.PureComponent {
         onPress={() => navigation.navigate('CoverDetails', { cover })}
         style={[styles.container, { backgroundColor: bgColor }]}
       >
-        <Text style={styles.titleSection}>FEATURED COVER</Text>
+        <Text section size={18} style={styles.titleSection}>
+          FEATURED COVER
+        </Text>
 
         <View style={styles.descriptionContainer}>
           <Text
             numberOfLines={2}
             ellipsizeMode={'tail'}
-            style={[styles.descriptionText, systemWeights.light]}
+            style={styles.descriptionText}
           >
             {cover.name}
           </Text>

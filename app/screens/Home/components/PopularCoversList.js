@@ -1,5 +1,6 @@
 import React from 'react';
-import { FlatList, Text, View } from 'react-native';
+import { FlatList, View } from 'react-native';
+import { Text } from '@components';
 import PopularCoverCard from './PopularCoverCard';
 
 import { connect } from 'react-redux';
@@ -12,7 +13,9 @@ class PopularCoversList extends React.Component {
       <View style={styles.containerSection}>
         <View style={styles.newestHeaderContainer}>
           <View style={{ flex: 1 }}>
-            <Text style={styles.newestHeader}>POPULAR</Text>
+            <Text section style={styles.newestHeader}>
+              POPULAR
+            </Text>
           </View>
           <View style={{ flex: 1 }}>
             <Text style={styles.newestSeeMore} onPress={() => alert('Pressed')}>

@@ -14,8 +14,6 @@ const styles = StyleSheet.create({
     height: 30,
   },
   newestHeader: {
-    fontFamily: 'OswaldMedium',
-    fontSize: 16,
     marginLeft: 5,
     lineHeight: 35,
   },

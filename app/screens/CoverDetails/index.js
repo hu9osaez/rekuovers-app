@@ -1,6 +1,7 @@
 import React from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
-import { Icon, Slider, Text } from 'react-native-elements';
+import { Icon, Slider } from 'react-native-elements';
+import { Text } from '@components';
 import { colorsFromUrl } from 'react-native-dominant-color';
 import YouTube from 'react-native-youtube';
 import moment from 'moment';
@@ -62,13 +63,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   metaText: {
-    fontFamily: 'OswaldBold',
-    fontSize: 12,
     color: '#cacaca',
   },
   usernameText: {
-    fontFamily: 'OswaldBold',
-    fontSize: 12,
     color: PRIMARY_COLOR,
   },
   nameText: {
@@ -94,8 +91,6 @@ const styles = StyleSheet.create({
     borderRightColor: '#f7f7f7',
   },
   likesText: {
-    fontSize: 24,
-    fontFamily: 'OswaldMedium',
     color: PRIMARY_COLOR_TEXT,
     paddingBottom: 5,
   },
@@ -238,8 +233,13 @@ class CoverDetailsScreen extends React.PureComponent {
           <FlatList
             data={cover.tags}
             renderItem={({ item }) => (
-              <Text style={{ color: this.state.fontColorTags }} key={item.slug}>
-                {item.name}
+              <Text
+                featured
+                size={16}
+                style={{ color: getFontColorByBackground(this.state.bgColorTags) }}
+                key={item.slug}
+              >
+                {item.name.toUpperCase()}
               </Text>
             )}
             keyExtractor={tag => tag.slug}
@@ -303,7 +303,7 @@ class CoverDetailsScreen extends React.PureComponent {
         </View>
         <View style={styles.detailsContainer}>
           <View style={styles.detailsRow}>
-            <Text style={styles.metaText}>
+            <Text section size={12} style={styles.metaText}>
               {'PUBLISHED '}
               {moment
                 .unix(cover.published_at)
@@ -312,11 +312,13 @@ class CoverDetailsScreen extends React.PureComponent {
               BY
             </Text>
             <Text
+              section
+              size={12}
               style={styles.usernameText}
               onPress={() => alert('Go to profile')}
             >
               {' '}
-              {cover.publisher.username.toUpperCase()}
+              {cover.publisher.name.toUpperCase()}
             </Text>
           </View>
           <View style={[styles.detailsRow, { flex: 2 }]}>
@@ -341,7 +343,9 @@ class CoverDetailsScreen extends React.PureComponent {
               }}
               onPress={this.toggleLike}
             />
-            <Text style={styles.likesText}>{abbreviateNumber(likesCount)}</Text>
+            <Text section size={24} style={styles.likesText}>
+              {abbreviateNumber(likesCount)}
+            </Text>
           </View>
           <View style={styles.actionBox}>
             <Icon

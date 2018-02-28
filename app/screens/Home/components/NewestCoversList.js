@@ -1,5 +1,6 @@
 import React from 'react';
-import { FlatList, Text, View } from 'react-native';
+import { FlatList, View } from 'react-native';
+import { Text } from '@components';
 import NewestCoverCard from './NewestCoverCard';
 import { connect } from 'react-redux';
 
@@ -12,7 +13,9 @@ class NewestCoversList extends React.PureComponent {
       <View style={styles.containerSection}>
         <View style={styles.newestHeaderContainer}>
           <View style={{ flex: 1 }}>
-            <Text style={styles.newestHeader}>NEWEST</Text>
+            <Text section style={styles.newestHeader}>
+              NEWEST
+            </Text>
           </View>
           <View style={{ flex: 1 }}>
             <Text

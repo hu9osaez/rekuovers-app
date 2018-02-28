@@ -5,19 +5,30 @@ import { normalize } from 'react-native-elements';
 const styles = StyleSheet.create({
   text: {
     fontFamily: 'OpenSansRegular',
-    fontSize: normalize(12),
+    fontSize: normalize(13),
   },
 });
 
 const Text = props => {
-  const { children, section, featured, size, ...rest } = props;
+  const {
+    children,
+    light,
+    thin,
+    section,
+    featured,
+    size,
+    style,
+    ...rest
+  } = props;
   return (
     <RNText
       style={[
         styles.text,
-        section && { fontFamily: 'OswaldMedium', fontSize: normalize(16) },
+        thin && { fontFamily: 'sans-serif-thin' },
+        light && { fontFamily: 'sans-serif-light' },
+        section && { fontFamily: 'OswaldBold', fontSize: normalize(16) },
         featured && { fontFamily: 'UbuntuBold', fontSize: normalize(20) },
-        size && { fontSize: size },
+        size && { fontSize: normalize(size) },
         style && style,
       ]}
       {...rest}

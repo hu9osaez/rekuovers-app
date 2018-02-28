@@ -6,7 +6,8 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { Icon, Text, normalize } from 'react-native-elements';
+import { Text } from '@components';
+import { Icon } from 'react-native-elements';
 
 import moment from 'moment';
 import { withNavigation } from 'react-navigation';
@@ -35,7 +36,6 @@ const styles = StyleSheet.create({
     height: width * 0.2,
   },
   title: {
-    fontSize: normalize(11),
     color: PRIMARY_COLOR_TEXT,
     paddingLeft: 3,
   },
@@ -45,13 +45,11 @@ const styles = StyleSheet.create({
     padding: 3,
   },
   textLikes: {
-    fontSize: normalize(10),
     marginLeft: 4,
     lineHeight: 15,
     color: SECONDARY_COLOR_TEXT,
   },
   textTime: {
-    fontSize: normalize(9),
     textAlign: 'right',
     lineHeight: 18,
   },
@@ -75,7 +73,12 @@ class NewestCoverCard extends React.PureComponent {
             style={styles.imageContainer}
           />
         </TouchableOpacity>
-        <Text style={styles.title} ellipsizeMode={'tail'} numberOfLines={1}>
+        <Text
+          size={11}
+          style={styles.title}
+          ellipsizeMode={'tail'}
+          numberOfLines={1}
+        >
           {cover.name}
         </Text>
         <View style={styles.extraContainer}>
@@ -90,12 +93,12 @@ class NewestCoverCard extends React.PureComponent {
               size={13}
               color={isLiked ? '#C62828' : PRIMARY_COLOR_TEXT}
             />
-            <Text style={styles.textLikes}>
+            <Text size={10} style={styles.textLikes}>
               {abbreviateNumber(cover.likes)}
             </Text>
           </View>
           <View style={{ flex: 1 }}>
-            <Text style={styles.textTime}>
+            <Text size={9} style={styles.textTime}>
               {moment.unix(cover.published_at).fromNow()}
             </Text>
           </View>

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
-import { Text } from 'react-native-elements';
 import * as Animatable from 'react-native-animatable';
 
+import { Text } from '@components';
 import { SECONDARY_COLOR } from '@core/common/colors';
 
 const styles = StyleSheet.create({
@@ -36,7 +36,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: 90,
     height: 20,
-    transform: [{ rotate: '-5deg' }],
     marginTop: -5,
     zIndex: 1,
   },
@@ -67,7 +66,9 @@ const Sign = () => (
         ))}
     </Animatable.View>
     <Animatable.View style={styles.badge} animation="bounceInDown">
-      <Text style={styles.textBadge}>ALPHA</Text>
+      <Text size={13} style={styles.textBadge}>
+        ALPHA
+      </Text>
     </Animatable.View>
   </View>
 );

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Button, Text } from 'react-native-elements';
-import { ImgBackground } from '../../components';
+import { Button } from 'react-native-elements';
+import { ImgBackground, Text } from '@components';
 
 import Heading from './components/Heading';
 import BgAttribution from './components/BgAttribution';

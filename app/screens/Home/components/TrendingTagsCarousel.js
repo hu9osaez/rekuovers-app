@@ -1,5 +1,6 @@
 import React from 'react';
-import { Dimensions, StyleSheet, Text, View } from 'react-native';
+import { Dimensions, StyleSheet, View } from 'react-native';
+import { Text } from '@components';
 import Carousel from 'react-native-banner-carousel';
 import TrendingTagItem from './TrendingTagItem';
 
@@ -16,7 +17,6 @@ const styles = StyleSheet.create({
   tagline: {
     textAlign: 'center',
     color: PRIMARY_COLOR_TEXT,
-    fontSize: 10,
     borderRadius: 10,
     borderColor: hexToRGB(PRIMARY_COLOR_TEXT, 0.6),
     borderWidth: 1,
@@ -71,7 +71,7 @@ class TrendingTagsCarousel extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.tagline}>
+        <Text light size={10} style={styles.tagline}>
           I would like listen something about...
         </Text>
         <Carousel

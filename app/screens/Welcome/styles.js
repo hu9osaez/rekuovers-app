@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
   },
   loginTextSecondary: {
     fontWeight: 'bold',
-    textDecorationLine: 'underline',
     padding: 5,
   },
 });

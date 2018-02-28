@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import { StyleSheet, TouchableHighlight, View } from 'react-native';
 import { Icon } from 'react-native-elements';
+import { Text } from '@components';
 import { withNavigation } from 'react-navigation';
 import { connect } from 'react-redux';
 import { connectWithFacebook } from '@store/auth/actions';
@@ -21,10 +22,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingLeft: 15,
   },
-  text: {
-    fontSize: 18,
-    fontFamily: 'sans-serif-light',
-  },
 });
 
 const SocialRow = ({ connectWithFacebook, navigation, text }) => (
@@ -40,7 +37,9 @@ const SocialRow = ({ connectWithFacebook, navigation, text }) => (
           type={'font-awesome'}
         />
         <View style={styles.textContainer}>
-          <Text style={styles.text}>{text}</Text>
+          <Text light size={18}>
+            {text}
+          </Text>
         </View>
       </View>
     </View>
